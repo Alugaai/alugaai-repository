@@ -1,4 +1,5 @@
-﻿using BackEndASP.DTOs.ImageDTOs;
+﻿using BackEndASP.DTOs.CordinatesDTOs;
+using BackEndASP.DTOs.ImageDTOs;
 using BackEndASP.DTOs.StudentDTOs;
 
 namespace BackEndASP.DTOs.CollegeDTOs
@@ -12,8 +13,7 @@ namespace BackEndASP.DTOs.CollegeDTOs
         public string Neighborhood { get; set; }
         public string District { get; set; }
         public string State { get; set; }
-        public string Lat { get; set; }
-        public string Long { get; set; }
+        public CordinatesDTO Position { get; set; }
         public ICollection<ImageBuidingDTO>? Images { get; set; }
 
         public CollegeResponseDTO()
@@ -30,8 +30,7 @@ namespace BackEndASP.DTOs.CollegeDTOs
             this.Neighborhood = entity.Neighborhood;
             this.District = entity.District;
             this.State = entity.State;
-            this.Lat = entity.Lat;
-            this.Long = entity.Long;
+            this.Position = new CordinatesDTO(entity.Lat, entity.Long);
         }
 
     }

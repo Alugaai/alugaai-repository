@@ -77,8 +77,8 @@ using Microsoft.EntityFrameworkCore.Storage;
                 HomeComplement = "",
                 Neighborhood = "Iporanga",
                 Number = "",
-                Lat = "-23.4440154",
-                Long = "-47.3860489"
+                Lat = "-23.469645838524144",
+                Long = "-47.42976187034831"
             }
         );
 
@@ -94,8 +94,8 @@ using Microsoft.EntityFrameworkCore.Storage;
                 HomeComplement = "Casa",
                 Neighborhood = "Centro",
                 Number = "1054",
-                Lat = "-23.4440154",
-                Long = "-47.3860489",
+                Lat = "-23.1723808873683",
+                Long = "-47.74702041600901",
                 Price = 1200.00,
                 Bathrooms = "2",
                 Bedrooms = "3",

@@ -1,1 +1,6 @@
-<p>tste</p>
+<app-feed-property-badge
+  *ngIf="isProperty"
+  [building]="propertyForDetails"
+></app-feed-property-badge>
+
+<p *ngIf="!isProperty">é um colégio</p>

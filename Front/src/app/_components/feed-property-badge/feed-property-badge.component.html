@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="img-property-container">
+    <img
+      class="img-property"
+      *ngFor="let image of buildingImages"
+      [src]="image"
+      alt=""
+    />
+  </div>
+  <div class="top-row">
+    <div class="img-user-container">
+      <img class="img" src="../../../assets/images/feedCardImage.png" alt="" />
+    </div>
+    <div class="inside-row-holder">
+      <div class="first-row">
+        <!-- Tudo isso vai vim do banco ex: {{aluno.name}}-->
+        <div class="user-information">
+          <h1 calss="base-color">{{ building?.owner?.name }}</h1>
+          <h2 class="grey-color">- Proprietário</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chip-holder">
+    <mat-chip-set>
+      <mat-chip>Quartos: {{ building?.bedrooms }} </mat-chip>
+      <mat-chip>Banheiros: {{ building?.bathrooms }}</mat-chip>
+    </mat-chip-set>
+  </div>
+</div>

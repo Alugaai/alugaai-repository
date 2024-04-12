@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FeedBadgeClickedComponent } from '../_components/feed-badge-clicked/feed-badge-clicked.component';
 import { PropertyService } from '../_services/property.service';
 import { IResponseProperty } from '../_models/IResponseProperty';
+import { CollegeService } from '../_services/college.service';
+import { ICollegeResponse } from '../_models/ICollegeResponse';
 
 @Component({
   selector: 'app-feed',
@@ -16,11 +18,13 @@ import { IResponseProperty } from '../_models/IResponseProperty';
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent implements AfterViewInit {
-  markers: IResponseProperty[] = [];
+  markersProperty: IResponseProperty[] = [];
+  markersCollege: ICollegeResponse[] = [];
 
   constructor(
     private propertyService: PropertyService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private collegeService: CollegeService
   ) {}
 
   title = 'angular-gmap';
@@ -238,19 +242,25 @@ export class FeedComponent implements AfterViewInit {
       this.mapOptions
     );
     this.filterProperty();
+    this.getColleges();
   }
 
   filterProperty() {
     this.propertyService.filterProperty().subscribe({
       next: (response) => {
         if (response.result) {
-          this.markers = response.result;
-          this.markers.forEach((property) => {
+          this.markersProperty = response.result;
+          this.markersProperty.forEach((property) => {
             if (!property.options) {
               property.options = {} as google.maps.MarkerOptions;
             }
-            property.options.label = 'R$' + property.price.toString();
-            property.options.icon = '../../assets/images/icon.svg';
+            property.options.label = {
+              text: 'R$' + property.price.toString() + ',00',
+              color: '#FFFFFF',
+              fontFamily: 'Inter',
+              fontWeight: 'bold',
+            };
+            property.options.icon = '../../assets/images/iconProperty.svg';
 
             // Criar um novo marcador para cada propriedade
             const newMarker = new google.maps.Marker({
@@ -274,10 +284,59 @@ export class FeedComponent implements AfterViewInit {
     });
   }
 
-  markerClickHandler(property: IResponseProperty) {
+  getColleges() {
+    this.collegeService.getColleges().subscribe({
+      next: (response) => {
+        if (response) {
+          this.markersCollege = response;
+          this.markersCollege.forEach((college) => {
+            if (!college.options) {
+              college.options = {} as google.maps.MarkerOptions;
+            }
+            college.options.label = {
+              text: college.name,
+              color: '#FFFFFF',
+              fontFamily: 'Inter',
+              fontWeight: 'bold',
+            };
+            college.options.icon = '../../assets/images/iconCollege.svg';
+
+            // Criar um novo marcador para cada propriedade
+            const newMarker = new google.maps.Marker({
+              position: {
+                lat: college.position.lat,
+                lng: college.position.lng,
+              },
+              map: this.map,
+              title: college.id.toString(),
+              icon: college.options.icon,
+              label: college.options.label,
+            });
+
+            // Adicionar um listener de clique para abrir o modal
+            newMarker.addListener('click', () => {
+              this.markerClickHandler(college);
+            });
+          });
+        }
+      },
+    });
+  };
+
+
+
+
+
+
+  markerClickHandler(property: IResponseProperty | ICollegeResponse) {
     this.dialog.open(FeedBadgeClickedComponent, {
       data: property,
       width: '500px',
     });
   }
+
 }
+function getColleges() {
+  throw new Error('Function not implemented.');
+}
+
