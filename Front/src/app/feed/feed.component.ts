@@ -26,14 +26,14 @@ export class FeedComponent implements AfterViewInit {
   title = 'angular-gmap';
   @ViewChild('gmapContainer', { static: false }) mapContainer?: ElementRef;
   map?: google.maps.Map;
-  lat = -23;
-  lng = -77.5946;
+  lat = -23.4709;
+  lng = -47.4851;
 
   coordinates = new google.maps.LatLng(this.lat, this.lng);
 
   mapOptions: google.maps.MapOptions = {
     center: this.coordinates,
-    zoom: 10,
+    zoom: 12,
     panControl: false,
     disableDefaultUI: true,
     zoomControl: false,
