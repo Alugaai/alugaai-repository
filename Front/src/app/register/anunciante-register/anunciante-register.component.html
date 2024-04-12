@@ -1,0 +1,41 @@
+<div class="backgroun-wrapper">
+    <div class="background-1">
+    </div>
+    <img class="background-image" src="../../../assets/images/mainRegisterBackgroundImage.png" alt="">
+</div>
+<div class="wrapper">
+    <div class="cadastrar-wrapper">
+        <div class="header-wrapper">
+            <img class="icon" src="../../../assets/images/registerIcon.png" alt="">
+            <h1>Cadastre-se e anuncie sua propriedade</h1>
+            <p>Não perca tempo, comece hoje mesmo e encontre o locatário ideal para sua propriedade.</p>
+        </div>
+        <div class="form-wrapper">
+            <form [formGroup]="anuncianteForm" (ngSubmit)="onSubmit()">
+                <label for="fullname">Nome Completo:</label><br>
+                <input class="form-input" type="text"  placeholder="Fernando Soares" formControlName = "Username"><br><br>
+              
+                <label for="email">Email:</label><br>
+                <input class="form-input" type="email" id="email"  placeholder="exemplo@gmail.com" formControlName = "Email"><br><br>
+
+                <label for="password">Senha:</label><br>
+                <input class="form-input" type="password" id="password"  placeholder="********" formControlName = "Password"><br><br>
+
+                <label for="dob">Data de Nascimento:</label><br>
+                <input class="form-input" type="date" id="dob"  placeholder="22/10/2001" formControlName = "BirthDate"><br><br>
+
+                <label for="phone">Telefone:</label><br>
+                <input class="form-input" type="tel" id="phone"  placeholder="15 99747-3903" formControlName = "PhoneNumber"><br><br>
+                <p>Form Status: {{anuncianteForm.status}}</p>
+                <div class="button-wrapper">
+                    <input class="submit-button" type="submit" value="Cadastre-se">
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="outside-content">
+        <h2 class="gray-text">“Com protocolos avançados de criptografia e autenticação, garantimos a integridade das
+            informações pessoais e acadêmicas.”</h2>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@import url('../main-register/main-register.component.scss');
+
+$borderColor: #D0D5DD;
+
+.form-wrapper{
+    width: 100%;
+    text-align: left;
+}
+.form-input{
+    padding: 20px; /* Adjust the padding as needed */
+    box-sizing: border-box; 
+    font-size: 20px;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid $borderColor;
+    outline-color: $borderColor;
+    transition: outline-color 0.3s ease;
+}
+.form-input:focus{
+    outline-color: var(--primary-orange-color);
+}
+
+.button-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+label{
+    font-weight: 500;
+}
+.submit-button{
+    background-color: var(--primary-orange-color);
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+    border: solid 1px;
+    border-radius: 5px;
+    width: 174px;
+    cursor: pointer;
+}

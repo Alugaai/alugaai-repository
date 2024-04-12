@@ -1,0 +1,70 @@
+<nav>
+  <div class="nav-container">
+    <div class="logo-primary-nav-holder">
+      <div class="logo-div">
+        <img
+          src="../../../assets/images/Logo.png"
+          class="logo-image"
+          alt="logo image"
+          routerLink=""
+        />
+      </div>
+      <div class="primary-nav">
+        <a
+          class="bold nav-font-size"
+          routerLink="home"
+          routerLinkActive="active"
+          >Home</a
+        >
+        <a
+          class="bold nav-font-size"
+          routerLink="faculdades"
+          routerLinkActive="active"
+          >Faculdades</a
+        >
+        <a
+          class="bold nav-font-size"
+          routerLink="universitarios"
+          routerLinkActive="active"
+          >Universitários</a
+        >
+        <a
+          class="bold nav-font-size"
+          routerLink="destaque-se"
+          routerLinkActive="active"
+          >Destaque-se</a
+        >
+      </div>
+    </div>
+    <div class="secundary-nav">
+      <a
+        class="bold nav-font-size"
+        routerLink="entrar"
+        *ngIf="!userLogged || (userRole && userRole.includes('Admin'))"
+        >Entrar</a
+      >
+      <a
+        class="bold nav-font-size"
+        routerLink="registrar"
+        *ngIf="!userLogged || (userRole && userRole.includes('Admin'))"
+        >Registrar-se</a
+      >
+      <a
+        class="nav-font-size anuncie-button"
+        routerLink="anuncie"
+        *ngIf="
+          userRole && (userRole.includes('Owner') || userRole.includes('Admin'))
+        "
+        >Anuncie</a
+      >
+      <div *ngIf="userLogged" class="menu-holder">
+          <div class="row-profile">
+            <mat-icon>menu</mat-icon>
+            <mat-icon>notifications</mat-icon>
+            <img class="image" src="../../../assets/images/Person image.png" alt="">
+        </div>
+    </div>
+    </div>
+  </div>
+</nav>
+

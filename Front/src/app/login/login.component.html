@@ -1,0 +1,85 @@
+<div class="backgroun-wrapper">
+  <div class="background-1"></div>
+  <img
+    class="background-image"
+    src="../../../assets/images/mainRegisterBackgroundImage.png"
+    alt=""
+  />
+</div>
+<div class="wrapper">
+  <div class="cadastrar-wrapper">
+    <div class="header-wrapper">
+      <img class="icon" src="../../../assets/images/registerIcon.png" alt="" />
+      <h1>Entre agora!</h1>
+      <p>
+        Faça parte da nossa comunidade e conecte-se com seu novo colega de
+        aluguel.
+      </p>
+    </div>
+    <div class="form-wrapper">
+      <form [formGroup]="loginForm">
+        <div>
+          <label for="email">Email:</label><br />
+          <input
+            class="form-input"
+            type="email"
+            id="email"
+            placeholder="exemplo@gmail.com"
+            formControlName="email"
+            [class.is-invalid]="
+              loginForm.get('email')?.errors && loginForm.get('email')?.touched
+            "
+          />
+          <div
+            *ngIf="loginForm.get('email')?.hasError('required')"
+            class="invalid-feedback"
+          >
+            O email é obrigatório
+          </div>
+          <div
+            *ngIf="loginForm.get('email')?.hasError('email')"
+            class="invalid-feedback"
+          >
+            O campo não é um email válido
+          </div>
+          <br /><br />
+        </div>
+
+        <div>
+          <label for="password">Senha:</label><br />
+          <input
+            class="form-input"
+            type="password"
+            id="password"
+            formControlName="password"
+            [class.is-invalid]="
+              loginForm.get('password')?.errors &&
+              loginForm.get('password')?.touched
+            "
+          />
+          <div
+            *ngIf="loginForm.get('password')?.hasError('required')"
+            class="invalid-feedback"
+          >
+            A senha é obrigatória
+          </div>
+          <br /><br />
+        </div>
+        <div class="button-wrapper">
+          <button
+            [disabled]="!loginForm.valid"
+            (click)="login()"
+          >
+            Fazer Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="outside-content">
+    <h2 class="gray-text">
+      “Com protocolos avançados de criptografia e autenticação, garantimos a
+      integridade das informações pessoais e acadêmicas.”
+    </h2>
+  </div>
+</div>
