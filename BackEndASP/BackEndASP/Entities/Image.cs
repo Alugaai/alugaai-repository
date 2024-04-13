@@ -2,7 +2,7 @@
 public class Image
 {
     public int Id { get; set; }
-    public string ImagePath { get; set; }
+    public string ImageData64 { get; set; }
     public DateTime InsertedOn { get; set; }
 
     public int? BuildingId { get; set; }

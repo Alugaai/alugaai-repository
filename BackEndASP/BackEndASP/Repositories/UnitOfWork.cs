@@ -11,12 +11,10 @@ public class UnitOfWork : IUnitOfWorkRepository
         private IUserRepository _userRepository;
 
         private SystemDbContext _dbContext;
-        private IWebHostEnvironment _environment;
 
-    public UnitOfWork(SystemDbContext dbContext, IWebHostEnvironment environment)
+    public UnitOfWork(SystemDbContext dbContext)
     {
         _dbContext = dbContext;
-        _environment = environment;
     }
 
 
@@ -24,7 +22,7 @@ public class UnitOfWork : IUnitOfWorkRepository
 
     public ICollegeRepository CollegeRepository { get { return _collegeRepository = _collegeRepository ?? new CollegeService(_dbContext); } }
 
-    public IImageRepository ImageRepository { get { return _imageRepository = _imageRepository ?? new ImageService(_dbContext, _environment); } }
+    public IImageRepository ImageRepository { get { return _imageRepository = _imageRepository ?? new ImageService(_dbContext); } }
 
     public INotificationRepository NotificationRepository => throw new NotImplementedException();
 

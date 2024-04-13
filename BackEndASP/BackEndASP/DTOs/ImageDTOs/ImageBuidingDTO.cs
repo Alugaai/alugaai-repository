@@ -4,7 +4,7 @@
     {
 
         public int Id { get; set; }
-        public string ImagePath { get; set; }
+        public string ImageData64 { get; set; }
 
 
         public ImageBuidingDTO()
@@ -15,7 +15,7 @@
         public ImageBuidingDTO(Image entity)
         {
             this.Id = entity.Id;
-            this.ImagePath = entity.ImagePath;
+            this.ImageData64 = entity.ImageData64;
         }
 
     }

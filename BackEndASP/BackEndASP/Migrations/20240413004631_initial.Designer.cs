@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEndASP.Migrations
 {
     [DbContext(typeof(SystemDbContext))]
-    [Migration("20240412153407_initial")]
+    [Migration("20240413004631_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -41,12 +41,12 @@ namespace BackEndASP.Migrations
                     b.HasData(
                         new
                         {
-                            StudentId = "2f426abc-de8e-4a62-8b01-f706a19b2888",
+                            StudentId = "696e3379-2d73-47ad-b443-47f05e44376f",
                             PropertyId = 2
                         },
                         new
                         {
-                            StudentId = "6a9131c2-be9d-461e-a1af-1535072cd2d3",
+                            StudentId = "06c6340d-2689-490c-9e03-cd90a176810d",
                             PropertyId = 2
                         });
                 });
@@ -148,7 +148,7 @@ namespace BackEndASP.Migrations
                     b.Property<int?>("BuildingId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImagePath")
+                    b.Property<string>("ImageData64")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -301,22 +301,22 @@ namespace BackEndASP.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "b3e25661-a669-4ae5-8152-ecfb06549d3f",
+                            UserId = "4bdfd212-0bb9-4b8b-b2d2-bc5f0b17e2d2",
                             RoleId = "1"
                         },
                         new
                         {
-                            UserId = "9f97f8e2-3e2f-4bf6-8d4d-2dcd7a4220a3",
+                            UserId = "dba3f6ea-405e-4d9a-9a98-6bfe66d3a0b9",
                             RoleId = "3"
                         },
                         new
                         {
-                            UserId = "6a9131c2-be9d-461e-a1af-1535072cd2d3",
+                            UserId = "06c6340d-2689-490c-9e03-cd90a176810d",
                             RoleId = "2"
                         },
                         new
                         {
-                            UserId = "2f426abc-de8e-4a62-8b01-f706a19b2888",
+                            UserId = "696e3379-2d73-47ad-b443-47f05e44376f",
                             RoleId = "2"
                         });
                 });
@@ -458,21 +458,21 @@ namespace BackEndASP.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b3e25661-a669-4ae5-8152-ecfb06549d3f",
+                            Id = "4bdfd212-0bb9-4b8b-b2d2-bc5f0b17e2d2",
                             AccessFailedCount = 0,
-                            BirthDate = new DateTimeOffset(new DateTime(2024, 4, 12, 12, 33, 57, 891, DateTimeKind.Unspecified).AddTicks(3318), new TimeSpan(0, -3, 0, 0, 0)),
-                            ConcurrencyStamp = "c92c94a4-4fa9-4620-b1dd-5515126b5c30",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 12, 15, 33, 57, 824, DateTimeKind.Unspecified).AddTicks(1457), new TimeSpan(0, 0, 0, 0, 0)),
+                            BirthDate = new DateTimeOffset(new DateTime(2024, 4, 12, 21, 46, 23, 708, DateTimeKind.Unspecified).AddTicks(411), new TimeSpan(0, -3, 0, 0, 0)),
+                            ConcurrencyStamp = "dacb9773-32b1-4335-9244-c4a59dd2c34d",
+                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 13, 0, 46, 23, 646, DateTimeKind.Unspecified).AddTicks(8233), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAENkwPJMLQLFP2/KGlHdZYiZGn5p0goZ6O2nYFCTSKXtNdh+ptH7xlWhujOv69tJjsQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK9T5dFlfCuMMtCMeLt2z2CvfVBZ9e/5yZFVsr4PajEpW7MAVmp7yPfxBz7YPr9Wkg==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = true,
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "a3f105b9-8e75-4fdb-ac97-5f855eb935fc",
+                            SecurityStamp = "dbdfb224-e56a-46da-8f12-7eb2e7261586",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -543,7 +543,7 @@ namespace BackEndASP.Migrations
                             Bathrooms = "2",
                             Bedrooms = "3",
                             Description = "Excelente casa, localizada em um excelente lugar, 2 banheiros sendo 1 suite, tres quartos, sala, cozinha e garagem que cabe 3 carros tranquilamente",
-                            OwnerId = "9f97f8e2-3e2f-4bf6-8d4d-2dcd7a4220a3",
+                            OwnerId = "dba3f6ea-405e-4d9a-9a98-6bfe66d3a0b9",
                             Price = 1200.0
                         });
                 });
@@ -557,21 +557,21 @@ namespace BackEndASP.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9f97f8e2-3e2f-4bf6-8d4d-2dcd7a4220a3",
+                            Id = "dba3f6ea-405e-4d9a-9a98-6bfe66d3a0b9",
                             AccessFailedCount = 0,
-                            BirthDate = new DateTimeOffset(new DateTime(2024, 4, 12, 12, 33, 57, 958, DateTimeKind.Unspecified).AddTicks(5423), new TimeSpan(0, -3, 0, 0, 0)),
-                            ConcurrencyStamp = "25181ce8-5ab6-4294-a307-f6f9fedde347",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 12, 15, 33, 57, 891, DateTimeKind.Unspecified).AddTicks(3628), new TimeSpan(0, 0, 0, 0, 0)),
+                            BirthDate = new DateTimeOffset(new DateTime(2024, 4, 12, 21, 46, 23, 768, DateTimeKind.Unspecified).AddTicks(9878), new TimeSpan(0, -3, 0, 0, 0)),
+                            ConcurrencyStamp = "69c3a4fa-6d6f-46ae-be6a-17953dac719e",
+                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 13, 0, 46, 23, 708, DateTimeKind.Unspecified).AddTicks(829), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "owner@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@GMAIL.COM",
                             NormalizedUserName = "OWNER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDLf5f1NADW7QqVgBvqN5KDaFxc2AbMHewhO6giBYjspeuzytiawBranESebdo2VRQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDfjpHRXFUcVxvMC2H4uIY5raAcvV2p+d61Ab5GaUH8/JM40GQuBJdgy7svXmgdFLg==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = true,
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "20a49c8f-fcf0-4b84-b490-f1eac426eacf",
+                            SecurityStamp = "4de9b541-57ce-4b56-b52c-199fce2f16e7",
                             TwoFactorEnabled = false,
                             UserName = "Owner"
                         });
@@ -600,21 +600,21 @@ namespace BackEndASP.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6a9131c2-be9d-461e-a1af-1535072cd2d3",
+                            Id = "06c6340d-2689-490c-9e03-cd90a176810d",
                             AccessFailedCount = 0,
-                            BirthDate = new DateTimeOffset(new DateTime(2024, 4, 12, 12, 33, 58, 38, DateTimeKind.Unspecified).AddTicks(1588), new TimeSpan(0, -3, 0, 0, 0)),
-                            ConcurrencyStamp = "2a080e88-7b69-41a7-831f-64dd36b735a6",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 12, 15, 33, 57, 958, DateTimeKind.Unspecified).AddTicks(5719), new TimeSpan(0, 0, 0, 0, 0)),
+                            BirthDate = new DateTimeOffset(new DateTime(2024, 4, 12, 21, 46, 23, 829, DateTimeKind.Unspecified).AddTicks(8182), new TimeSpan(0, -3, 0, 0, 0)),
+                            ConcurrencyStamp = "822c9cf9-da64-4f3a-8fc5-67f8cebfff32",
+                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 13, 0, 46, 23, 769, DateTimeKind.Unspecified).AddTicks(298), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "student@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT@GMAIL.COM",
                             NormalizedUserName = "STUDENT",
-                            PasswordHash = "AQAAAAIAAYagAAAAELRGAVrUt2WGYifxywmMhB0yYsRnFywTTmPV1luBkz9Xx0hD2ApP7psaFkD4Sq98UA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED5l1U9dtt5+juccFlbV1SB/5/Cj1WREzS90qtayUzGs/+u/MBS51MF0+eUDkVm1Kg==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = true,
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "c316ff5f-52c0-4055-b0ef-ed008470f395",
+                            SecurityStamp = "267bdbdd-6879-4f1b-a329-f85dd3c76196",
                             TwoFactorEnabled = false,
                             UserName = "Student",
                             CollegeId = 1,
@@ -624,21 +624,21 @@ namespace BackEndASP.Migrations
                         },
                         new
                         {
-                            Id = "2f426abc-de8e-4a62-8b01-f706a19b2888",
+                            Id = "696e3379-2d73-47ad-b443-47f05e44376f",
                             AccessFailedCount = 0,
-                            BirthDate = new DateTimeOffset(new DateTime(2024, 4, 12, 12, 33, 58, 106, DateTimeKind.Unspecified).AddTicks(44), new TimeSpan(0, -3, 0, 0, 0)),
-                            ConcurrencyStamp = "f55c175e-d941-4fbc-9674-a6e9c28318dc",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 12, 15, 33, 58, 38, DateTimeKind.Unspecified).AddTicks(2217), new TimeSpan(0, 0, 0, 0, 0)),
+                            BirthDate = new DateTimeOffset(new DateTime(2024, 4, 12, 21, 46, 23, 889, DateTimeKind.Unspecified).AddTicks(9076), new TimeSpan(0, -3, 0, 0, 0)),
+                            ConcurrencyStamp = "b7b235ad-838e-4425-a77a-fd87f35d4687",
+                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 13, 0, 46, 23, 829, DateTimeKind.Unspecified).AddTicks(8821), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "joao@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "JOAO@GMAIL.COM",
                             NormalizedUserName = "JOAO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIbyardEfKI2URXAEdKH6GcrZlI8E7tETArc/y2xM1H8EYFAPNJjq0/9cYTAZyFoCw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMCB+M2Xn3nrvgji/3dqOouB8MqZZYxq4+VPXinHcS8PEWDRE4WMoUm0/W9nG7lJnQ==",
                             PhoneNumber = "999999999",
                             PhoneNumberConfirmed = true,
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "411459aa-ad58-4b16-88c1-d7cf41e34579",
+                            SecurityStamp = "8147c2bc-a6ea-47f2-abec-05bc78cc4813",
                             TwoFactorEnabled = false,
                             UserName = "Joao",
                             CollegeId = 1,

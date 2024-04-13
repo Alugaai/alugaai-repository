@@ -16,59 +16,62 @@ namespace BackEndASP.Services
     {
 
         private readonly SystemDbContext _dbContext;
-        private IWebHostEnvironment _environment;
 
-        public ImageService(SystemDbContext dbContext, IWebHostEnvironment environment)
+        public ImageService(SystemDbContext dbContext)
         {
             _dbContext = dbContext;
-            _environment = environment;
         }
 
-        // salvar a imagem de usuário no banco de dados
-        public async Task InsertImageForAUser(IFormFileCollection file, string userId)
+        public async Task InsertImageForAUser(IFormFileCollection files, string userId)
         {
             User user = _dbContext.Users.AsNoTracking().FirstOrDefault(s => s.Id == userId)
-                ?? throw new ArgumentException($"This id {userId} does not exist");
+                        ?? throw new ArgumentException($"This id {userId} does not exist");
 
-            // imagem aceitando apenas essas extensões
-            string fileExtension = Path.GetExtension(file[0].FileName).ToLower();
-
-            if (!MyImageExtensionAllowed.extensions.Contains(fileExtension))
+            if (files != null && files.Count > 0)
             {
-                throw new ArgumentException($"Only JPEG, JPG, and PNG images are allowed. Your image have {fileExtension} extension");
+                // imagem aceitando apenas essas extensões
+                string fileExtension = Path.GetExtension(files[0].FileName).ToLower();
+
+                if (!MyImageExtensionAllowed.extensions.Contains(fileExtension))
+                {
+                    throw new ArgumentException(
+                        $"Only JPEG, JPG, and PNG images are allowed. Your image have {fileExtension} extension");
+                }
+
+                using (var ms = new MemoryStream())
+                {
+                    // Copia o conteúdo da imagem para a MemoryStream
+                    await files[0].CopyToAsync(ms);
+
+                    // Converte a imagem para base64
+                    string base64Image = Convert.ToBase64String(ms.ToArray());
+
+                    // Cria uma nova entidade de imagem com o conteúdo base64
+                    var image = new Image
+                    {
+                        ImageData64 = base64Image,
+                        InsertedOn = DateTime.Now,
+                        UserId = userId
+                    };
+
+                    // Adiciona a entidade ao contexto do banco de dados
+                    _dbContext.Images.Add(image);
+
+                    // Salva as alterações no banco de dados
+                    await _dbContext.SaveChangesAsync();
+
+                    // Atualiza o ID da imagem no usuário
+                    user.ImageId = image.Id;
+                    _dbContext.Users.Update(user);
+                    await _dbContext.SaveChangesAsync();
+                }
             }
-            //
-
-            // Gera um novo nome de arquivo único
-            var newFileName = "Image_" + Guid.NewGuid().ToString() + Path.GetExtension(file[0].FileName);
-
-            // Obtém o caminho completo do diretório para salvar o arquivo
-            var imagePath = Path.Combine(_environment.ContentRootPath, "Images", newFileName);
-
-            // Salva o arquivo no diretório
-            using (var stream = new FileStream(imagePath, FileMode.Create))
+            else
             {
-                await file[0].CopyToAsync(stream);
+                throw new ArgumentException("No image provided");
             }
-
-            // Cria uma nova entidade de imagem com o caminho do arquivo
-            var image = new Image
-            {
-                ImagePath = imagePath,
-                InsertedOn = DateTime.Now,
-                UserId = userId
-            };
-
-            // Adiciona a entidade ao contexto do banco de dados
-            _dbContext.Images.Add(image);
-
-
-            _dbContext.Images.Add(image);
-            await _dbContext.SaveChangesAsync();
-
-            user.ImageId = image.Id;
-            _dbContext.Users.Update(user);
         }
+
 
 
 
@@ -76,52 +79,50 @@ namespace BackEndASP.Services
         // salvar a imagem de um building no banco de dados
         public async Task InsertImageForProperty(IFormFileCollection files, string userId, int propertyId)
         {
-            Owner user = await _dbContext.Owners.Include(o => o.Properties).OfType<Owner>().FirstOrDefaultAsync(s => s.Id == userId)
-                ?? throw new ArgumentException($"User with id {userId} does not exist or is not an owner");
+            Owner user = await _dbContext.Owners.Include(o => o.Properties).OfType<Owner>()
+                             .FirstOrDefaultAsync(s => s.Id == userId)
+                         ?? throw new ArgumentException($"User with id {userId} does not exist or is not an owner");
 
             // Check if the provided propertyId exists and belongs to the user
             Property property = user.Properties.FirstOrDefault(p => p.Id == propertyId);
             if (property == null)
             {
-                throw new ArgumentException($"Property with id {propertyId} does not exist or does not belong to the user");
+                throw new ArgumentException(
+                    $"Property with id {propertyId} does not exist or does not belong to the user");
             }
 
             if (files != null && files.Count > 0)
             {
                 foreach (var file in files)
                 {
-
                     // imagem aceitando apenas essas extensões
                     string fileExtension = Path.GetExtension(file.FileName).ToLower();
 
                     if (!MyImageExtensionAllowed.extensions.Contains(fileExtension))
                     {
-                        throw new ArgumentException($"Only JPEG, JPG, and PNG images are allowed. Your image have {fileExtension} extension");
-                    }
-                    //
-
-                    // Gera um novo nome de arquivo único
-                    var newFileName = "Image_" + Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-
-                    // Obtém o caminho completo do diretório para salvar o arquivo
-                    var imagePath = Path.Combine(_environment.ContentRootPath, "Images", newFileName);
-
-                    // Salva o arquivo no diretório
-                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
+                        throw new ArgumentException(
+                            $"Only JPEG, JPG, and PNG images are allowed. Your image have {fileExtension} extension");
                     }
 
-                    // Cria uma nova entidade de imagem com o caminho do arquivo
-                    var image = new Image
+                    using (var ms = new MemoryStream())
                     {
-                        ImagePath = imagePath,
-                        InsertedOn = DateTime.Now,
-                        BuildingId = propertyId
-                    };
+                        // Copia o conteúdo da imagem para a MemoryStream
+                        await file.CopyToAsync(ms);
 
-                    // Adiciona a entidade ao contexto do banco de dados
-                    _dbContext.Images.Add(image);
+                        // Converte a imagem para base64
+                        string base64Image = Convert.ToBase64String(ms.ToArray());
+
+                        // Cria uma nova entidade de imagem com o conteúdo base64
+                        var image = new Image
+                        {
+                            ImageData64 = base64Image,
+                            InsertedOn = DateTime.Now,
+                            BuildingId = propertyId
+                        };
+
+                        // Adiciona a entidade ao contexto do banco de dados
+                        _dbContext.Images.Add(image);
+                    }
                 }
             }
 
@@ -138,38 +139,34 @@ namespace BackEndASP.Services
             {
                 foreach (var file in files)
                 {
-
                     // imagem aceitando apenas essas extensões
                     string fileExtension = Path.GetExtension(file.FileName).ToLower();
 
                     if (!MyImageExtensionAllowed.extensions.Contains(fileExtension))
                     {
-                        throw new ArgumentException($"Only JPEG, JPG, and PNG images are allowed. Your image have {fileExtension} extension");
-                    }
-                    //
-
-                    // Gera um novo nome de arquivo único
-                    var newFileName = "Image_" + Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-
-                    // Obtém o caminho completo do diretório para salvar o arquivo
-                    var imagePath = Path.Combine(_environment.ContentRootPath, "Images", newFileName);
-
-                    // Salva o arquivo no diretório
-                    using (var stream = new FileStream(imagePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
+                        throw new ArgumentException(
+                            $"Only JPEG, JPG, and PNG images are allowed. Your image have {fileExtension} extension");
                     }
 
-                    // Cria uma nova entidade de imagem com o caminho do arquivo
-                    var image = new Image
+                    using (var ms = new MemoryStream())
                     {
-                        ImagePath = imagePath,
-                        InsertedOn = DateTime.Now,
-                        BuildingId = collegeId
-                    };
+                        // Copia o conteúdo da imagem para a MemoryStream
+                        await file.CopyToAsync(ms);
 
-                    // Adiciona a entidade ao contexto do banco de dados
-                    _dbContext.Images.Add(image);
+                        // Converte a imagem para base64
+                        string base64Image = Convert.ToBase64String(ms.ToArray());
+
+                        // Cria uma nova entidade de imagem com o conteúdo base64
+                        var image = new Image
+                        {
+                            ImageData64 = base64Image,
+                            InsertedOn = DateTime.Now,
+                            BuildingId = collegeId
+                        };
+
+                        // Adiciona a entidade ao contexto do banco de dados
+                        _dbContext.Images.Add(image);
+                    }
                 }
             }
 
@@ -184,4 +181,5 @@ namespace BackEndASP.Services
 
 
 
-    
+
+
