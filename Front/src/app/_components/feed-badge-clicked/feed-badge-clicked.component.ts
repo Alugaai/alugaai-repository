@@ -4,6 +4,7 @@ import { IResponseProperty } from '../../_models/IResponseProperty';
 import { ICollegeResponse } from '../../_models/ICollegeResponse';
 import { PropertyService } from '../../_services/property.service';
 import { IFindPropertyDetailsById } from '../../_models/IFindPropertyDetailsById';
+import { CollegeService } from '../../_services/college.service';
 
 @Component({
   selector: 'app-feed-badge-clicked',
@@ -11,13 +12,15 @@ import { IFindPropertyDetailsById } from '../../_models/IFindPropertyDetailsById
   styleUrl: './feed-badge-clicked.component.scss',
 })
 export class FeedBadgeClickedComponent implements OnInit{
-  constructor(@Inject(MAT_DIALOG_DATA) public building: any, private propertyService: PropertyService) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public building: any, private propertyService: PropertyService, private collegeService: CollegeService) {}
   propertyForDetails?: IFindPropertyDetailsById;
+  collegeForDetails?: ICollegeResponse;
 
   ngOnInit(): void {
     this.verifyIsCollege();
     this.verifyIsProperty();
     this.propertyDetails();
+    this.collegeDetails();
   }
 
   isProperty: boolean = false;
@@ -42,6 +45,15 @@ export class FeedBadgeClickedComponent implements OnInit{
       this.propertyService.findPropertyDetailsById(this.building.id).subscribe((response) => {
         console.log(response);
         this.propertyForDetails = response;
+      });
+    }
+  }
+
+  collegeDetails() {
+    if (!this.isProperty) {
+      this.collegeService.getCollegeById(this.building.id).subscribe((response) => {
+        console.log(response);
+        this.collegeForDetails = response;
       });
     }
   }

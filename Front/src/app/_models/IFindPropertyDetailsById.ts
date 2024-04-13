@@ -1,4 +1,4 @@
-import { IImageBuilding } from './IImageBuilding';
+import { IImage } from './IImage';
 import { IOwner } from './IOwner';
 import { IStudentsLikes } from './IStudentsLikes';
 
@@ -11,7 +11,7 @@ export interface IFindPropertyDetailsById {
   neighborhood: string;
   district: string;
   state: string;
-  images: Array<IImageBuilding>;
+  images: Array<IImage>;
   price: number;
   bedrooms: number;
   bathrooms: number;

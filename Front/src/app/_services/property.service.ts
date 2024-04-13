@@ -52,7 +52,6 @@ export class PropertyService {
       );
   }
 
-
   findPropertyDetailsById(id: number) {
     return this.http.get(`${this.baseUrl}properties/findPropertyDetailsById/${id}`).pipe(
       map((response) => {

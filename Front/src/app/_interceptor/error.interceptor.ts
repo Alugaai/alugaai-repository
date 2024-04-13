@@ -42,7 +42,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               break;
             case 401:
               this.toastr.error(
-                err.error === null ? 'Unauthorized' : err.error,
+                err.error === null ? 'Não autorizado' : err.error,
                 err.status
               );
               break;
@@ -53,7 +53,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.toastr.error('An internal error ocurred');
               break;
             default:
-              this.toastr.error('An unexpected error occurred');
+              this.toastr.error('Erro de comunicação com o servidor');
               break;
           }
         }

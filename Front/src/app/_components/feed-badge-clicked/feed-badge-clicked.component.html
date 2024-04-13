@@ -3,4 +3,7 @@
   [building]="propertyForDetails"
 ></app-feed-property-badge>
 
-<p *ngIf="!isProperty">é um colégio</p>
+<app-feed-college-badge
+  *ngIf="!isProperty"
+  [building]="collegeForDetails"
+></app-feed-college-badge>

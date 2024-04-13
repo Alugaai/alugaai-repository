@@ -31,6 +31,7 @@ import { FeedFilterComponent } from './_components/feed-filter/feed-filter.compo
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FeedBadgeClickedComponent } from './_components/feed-badge-clicked/feed-badge-clicked.component';
 import { FeedPropertyBadgeComponent } from './_components/feed-property-badge/feed-property-badge.component';
+import { FeedCollegeBadgeComponent } from './_components/feed-college-badge/feed-college-badge.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { FeedPropertyBadgeComponent } from './_components/feed-property-badge/fe
     FeedFilterComponent,
     FeedBadgeClickedComponent,
     FeedPropertyBadgeComponent,
+    FeedCollegeBadgeComponent,
   ],
   imports: [
     BrowserModule,

@@ -31,6 +31,7 @@ namespace BackEndASP.DTOs.CollegeDTOs
             this.District = entity.District;
             this.State = entity.State;
             this.Position = new CordinatesDTO(entity.Lat, entity.Long);
+            this.Images = entity.Images != null ? entity.Images.Select(i => new ImageBuidingDTO(i)).ToList() : null;
         }
 
     }

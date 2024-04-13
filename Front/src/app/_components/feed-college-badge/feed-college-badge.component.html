@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="img-property-container">
+    <img
+      class="img-property"
+      *ngFor="let image of buildingImages"
+      [src]="image"
+      alt=""
+    />
+  </div>
+  <div class="top-row">
+    <div class="inside-row-holder">
+      <div class="first-row">
+        <div class="user-information">
+          <h1 calss="base-color">{{ building?.name }}</h1>
+          <h2 class="grey-color">- Faculdade</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
