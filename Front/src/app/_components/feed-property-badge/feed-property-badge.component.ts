@@ -12,6 +12,7 @@ export class FeedPropertyBadgeComponent implements OnChanges {
 
   @Input() building?: IFindPropertyDetailsById;
   buildingImages: SafeUrl[] = [];
+  ownerImage: SafeUrl = '';
   base64: string = 'data:image/png;base64,';
 
   ngOnChanges() {
@@ -19,6 +20,13 @@ export class FeedPropertyBadgeComponent implements OnChanges {
   }
 
   startImage() {
+    console.log(this.building);
+    if (this.building?.owner.image) {
+      let image = this.building.owner.image.imageData64;
+      this.ownerImage = this.sanitizer.bypassSecurityTrustUrl(
+        this.base64 + image
+      );
+    }
     if (this.building?.images) {
       let images = this.building.images;
       images.forEach((image) => {

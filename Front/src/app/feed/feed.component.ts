@@ -1,3 +1,4 @@
+import { IFilterStudent } from './../_models/IFilterStudent';
 import {
   AfterViewInit,
   Component,
@@ -11,21 +12,36 @@ import { PropertyService } from '../_services/property.service';
 import { IResponseProperty } from '../_models/IResponseProperty';
 import { CollegeService } from '../_services/college.service';
 import { ICollegeResponse } from '../_models/ICollegeResponse';
+import { StudentService } from '../_services/student.service';
+import { IPagination } from '../_models/IPagination';
+import { IStudent } from '../_models/IStudent';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements AfterViewInit {
+export class FeedComponent implements AfterViewInit, OnInit {
   markersProperty: IResponseProperty[] = [];
   markersCollege: ICollegeResponse[] = [];
+
+
+  pageNumber: number = 1;
+  pageSize: number = 1;
+  pagination?: IPagination;
+
+  students: Array<IStudent> = [  ];
 
   constructor(
     private propertyService: PropertyService,
     private dialog: MatDialog,
-    private collegeService: CollegeService
+    private collegeService: CollegeService,
+    private studentService: StudentService
   ) {}
+
+  ngOnInit(): void {
+    this.filterStudent();
+  }
 
   title = 'angular-gmap';
   @ViewChild('gmapContainer', { static: false }) mapContainer?: ElementRef;
@@ -43,6 +59,8 @@ export class FeedComponent implements AfterViewInit {
     zoomControl: false,
     scaleControl: false,
     mapTypeControl: false,
+    minZoom: 8,
+    scrollwheel: true,
     styles: [
       {
         elementType: 'geometry',
@@ -324,10 +342,6 @@ export class FeedComponent implements AfterViewInit {
   };
 
 
-
-
-
-
   markerClickHandler(property: IResponseProperty | ICollegeResponse) {
     this.dialog.open(FeedBadgeClickedComponent, {
       data: property,
@@ -335,8 +349,38 @@ export class FeedComponent implements AfterViewInit {
     });
   }
 
+
+  filterStudent() {
+    let filter: IFilterStudent = {
+      name: '',
+      initialAge: 0,
+      finalAge: 99,
+      ownCollege: false,
+      interests: [''],
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+    };
+
+    this.studentService.filterStudent(filter).subscribe({
+      next: (response) => {
+        console.log(response);
+        if (response.result && response.pagination) {
+          this.students = response.result;
+          this.pagination = response.pagination;
+        }
+      },
+    });
+  }
+
+
+  pageChanged(event: any) {
+    if (this.pageNumber != event.page) {
+      this.pageNumber = event.page;
+      this.filterStudent();
+    }
+  }
+
 }
-function getColleges() {
-  throw new Error('Function not implemented.');
-}
+
+
 

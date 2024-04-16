@@ -35,7 +35,8 @@ namespace BackEndASP.Controllers
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var response = await _unitOfWorkRepository.StudentRepository.FindAllStudentsAsync(pageQueryParams, userId);
-                Response.AddPaginationHeader(pageQueryParams, response);
+                Response.AddPaginationHeader(new PaginationHeader(response.CurrentPage,
+                response.PageSize, response.TotalCount, response.TotalPages));
                 return Ok(response);
             }
             catch (Exception e)

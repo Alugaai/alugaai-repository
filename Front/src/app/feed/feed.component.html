@@ -5,10 +5,24 @@
       <app-feed-filter></app-feed-filter>
     </div>
     <div class="feed-card">
-      <app-feed-card></app-feed-card>
-      <app-feed-card></app-feed-card>
-      <app-feed-card></app-feed-card>
-      <app-feed-card></app-feed-card>
+      <app-feed-card
+        *ngFor="let student of students"
+        [student]="student"
+      ></app-feed-card>
+    </div>
+    <div class="d-flex justify-content-center">
+      <pagination
+        [boundaryLinks]="true"
+        [totalItems]="pagination?.totalItems!"
+        [itemsPerPage]="pagination?.itemsPerPage!"
+        [maxSize]="10"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="&laquo;"
+        lastText="&raquo;"
+      >
+      </pagination>
     </div>
   </div>
   <div #gmapContainer id="map"></div>

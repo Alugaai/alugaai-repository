@@ -2,6 +2,7 @@
 using BackEndASP.DTOs.StudentDTOs;
 using BackEndASP.Entities;
 using BackEndASP.Interfaces;
+using BackEndASP.Utils;
 using Geocoding;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +20,7 @@ namespace BackEndASP.Services
 
 
         // busca todos o usuários com filtros de paginação, idade, faculdade, etc
-        public async Task<IEnumerable<StudentFindAllFilterDTO>> FindAllStudentsAsync(PageStudentQueryParams pageQueryParams, string userId)
+        public async Task<PagedList<StudentFindAllFilterDTO>> FindAllStudentsAsync(PageStudentQueryParams pageQueryParams, string userId)
         {
             DateTime initialAge = DateTime.Now.AddYears(-pageQueryParams.InitialAge);
             DateTime finalAge = DateTime.Now.AddYears(-pageQueryParams.FinalAge);
@@ -52,18 +53,18 @@ namespace BackEndASP.Services
 
             }
 
-            query = query.Where(s => s.BirthDate <= initialAge && s.BirthDate >= finalAge);
-
-            query = query.Skip((pageQueryParams.PageNumber - 1) * pageQueryParams.PageSize).Include(s => s.Image).Take(pageQueryParams.PageSize);
+            query = query.Where(s => s.BirthDate <= initialAge && s.BirthDate >= finalAge).Include(s => s.Image);
 
             if (userId != null)
             {
                 query = query.Where(s => s.Id != userId);
             }
 
-            List<StudentFindAllFilterDTO> result = await query.Select(s => new StudentFindAllFilterDTO(s)).ToListAsync();
+            var result = await PaginationHelper.CreateAsync(query, pageQueryParams.PageNumber, pageQueryParams.PageSize);
+            var resultDTO = result.Select(s => new StudentFindAllFilterDTO(s));
 
-            return result;
+            return new PagedList<StudentFindAllFilterDTO>(resultDTO, pageQueryParams.PageNumber, pageQueryParams.PageSize, result.TotalCount);
+
         }
 
 

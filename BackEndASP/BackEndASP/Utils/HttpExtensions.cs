@@ -6,22 +6,15 @@ namespace BackEndASP.Utils
 {
     public static class HttpExtensions
     {
-        public static void AddPaginationHeader(this HttpResponse response, PageStudentQueryParams queryParams, IEnumerable<StudentFindAllFilterDTO> data)
+        public static void AddPaginationHeader(this HttpResponse response, PaginationHeader header)
         {
             var jsonOptions = new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
 
-            var paginationHeader = new
-            {
-                totalCount = data.Count(),
-                pageSize = queryParams.PageSize,
-                currentPage = queryParams.PageNumber,
-                totalPages = (int)Math.Ceiling(data.Count() / (double)queryParams.PageSize)
-            };
 
-            response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationHeader, jsonOptions));
+            response.Headers.Add("Pagination", JsonSerializer.Serialize(header, jsonOptions));
             response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
     }

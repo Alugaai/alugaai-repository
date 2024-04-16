@@ -24,8 +24,13 @@ namespace BackEndASP.Services
 
         public async Task InsertImageForAUser(IFormFileCollection files, string userId)
         {
-            User user = _dbContext.Users.AsNoTracking().FirstOrDefault(s => s.Id == userId)
+            User user = _dbContext.Users.AsNoTracking().Include(u => u.Image).FirstOrDefault(s => s.Id == userId)
                         ?? throw new ArgumentException($"This id {userId} does not exist");
+
+            if (user.Image != null)
+            {
+                throw new ArgumentException($"This id {userId} already have a image");
+            }
 
             if (files != null && files.Count > 0)
             {

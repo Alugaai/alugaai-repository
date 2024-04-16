@@ -45,6 +45,7 @@ namespace BackEndASP.Services
             Property entity = await _dbContext.Properties
                 .Include(p => p.Images)
                 .Include(p => p.Owner)
+                .ThenInclude(o => o.Image)
                 .Include(p => p.StudentLikes)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(p => p.Id == id) ?? throw new ArgumentException("Resource not found");

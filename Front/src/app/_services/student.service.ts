@@ -30,7 +30,7 @@ export class StudentService {
 
     console.log('Params', params);
 
-    return this.http.get<any>(this.baseUrl + 'client/filter', {
+    return this.http.get<any>(this.baseUrl + 'students', {
       observe: 'response',
       params,
     }).pipe(
@@ -48,6 +48,7 @@ export class StudentService {
       })
     );
   }
+
 
 
 }
