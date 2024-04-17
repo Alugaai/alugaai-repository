@@ -1,5 +1,16 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+
+import { Router } from '@angular/router';
+import { AuthService } from '../../_services/auth.service';
+import { IRegister } from '../../_models/IRegister';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -8,15 +19,32 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrl: './anunciante-register.component.scss',
 })
 export class AnuncianteRegisterComponent {
-    anuncianteForm = this.fb.group({
-    Username: ['', [Validators.required, Validators.minLength(3)]] ,
-    Email : ['', Validators.required],
-    Password : ['', Validators.required],
-    BirthDate: ['', Validators.required],
-    PhoneNumber : [''],
-  })
+  anunciante?: IRegister;
+  anuncianteForm: FormGroup = new FormGroup({});
 
-  constructor(private fb: FormBuilder){}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private toastr: ToastrService
+  ) {}
+
+  ngOnInit(): void {
+    this.anuncianteForm = this.fb.group({
+      username: ['', [Validators.required, Validators.maxLength(250)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      birthDate: ['', Validators.required],
+      phoneNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+        ],
+      ],
+    });
+  }
 
   onSubmit(){
     console.log(this.anuncianteForm.value);

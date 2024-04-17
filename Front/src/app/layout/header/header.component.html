@@ -14,9 +14,7 @@
         *ngIf="!userLogged || (userRole && userRole.includes('Admin'))">Entrar</a>
       <a class="bold nav-font-size register-button" routerLink="registrar"
         *ngIf="!userLogged || (userRole && userRole.includes('Admin'))">Registrar-se</a>
-      <a class="nav-font-size anuncie-button" routerLink="anuncie" *ngIf="
-          userRole && (userRole.includes('Owner') || userRole.includes('Admin'))
-        ">Anuncie</a>
+      <a class="nav-font-size anuncie-button" routerLink="anuncie" *ngIf=" userRole && (userRole.includes('Owner') || userRole.includes('Admin'))">Anuncie</a>
         
       <div *ngIf="userLogged" class="menu-holder">
         <div class="row-profile">
