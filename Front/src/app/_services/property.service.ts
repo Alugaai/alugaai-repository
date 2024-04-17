@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs';
 import { IFilterProperty } from '../_models/IFilterProperty';
 import { IResponseProperty } from '../_models/IResponseProperty';
+import { IFindPropertyDetailsById } from '../_models/IFindPropertyDetailsById';
 
 @Injectable({
   providedIn: 'root',
@@ -50,4 +51,14 @@ export class PropertyService {
         })
       );
   }
+
+  findPropertyDetailsById(id: number) {
+    return this.http.get(`${this.baseUrl}properties/findPropertyDetailsById/${id}`).pipe(
+      map((response) => {
+        return response as IFindPropertyDetailsById;
+      })
+    );
+  }
+
+
 }

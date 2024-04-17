@@ -1,3 +1,4 @@
+import { IFilterStudent } from './../_models/IFilterStudent';
 import {
   AfterViewInit,
   Component,
@@ -9,19 +10,38 @@ import { MatDialog } from '@angular/material/dialog';
 import { FeedBadgeClickedComponent } from '../_components/feed-badge-clicked/feed-badge-clicked.component';
 import { PropertyService } from '../_services/property.service';
 import { IResponseProperty } from '../_models/IResponseProperty';
+import { CollegeService } from '../_services/college.service';
+import { ICollegeResponse } from '../_models/ICollegeResponse';
+import { StudentService } from '../_services/student.service';
+import { IPagination } from '../_models/IPagination';
+import { IStudent } from '../_models/IStudent';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements AfterViewInit {
-  markers: IResponseProperty[] = [];
+export class FeedComponent implements AfterViewInit, OnInit {
+  markersProperty: IResponseProperty[] = [];
+  markersCollege: ICollegeResponse[] = [];
+
+
+  pageNumber: number = 1;
+  pageSize: number = 1;
+  pagination?: IPagination;
+
+  students: Array<IStudent> = [  ];
 
   constructor(
     private propertyService: PropertyService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private collegeService: CollegeService,
+    private studentService: StudentService
   ) {}
+
+  ngOnInit(): void {
+    this.filterStudent();
+  }
 
   title = 'angular-gmap';
   @ViewChild('gmapContainer', { static: false }) mapContainer?: ElementRef;
@@ -39,6 +59,8 @@ export class FeedComponent implements AfterViewInit {
     zoomControl: false,
     scaleControl: false,
     mapTypeControl: false,
+    minZoom: 8,
+    scrollwheel: true,
     styles: [
       {
         elementType: 'geometry',
@@ -238,19 +260,25 @@ export class FeedComponent implements AfterViewInit {
       this.mapOptions
     );
     this.filterProperty();
+    this.getColleges();
   }
 
   filterProperty() {
     this.propertyService.filterProperty().subscribe({
       next: (response) => {
         if (response.result) {
-          this.markers = response.result;
-          this.markers.forEach((property) => {
+          this.markersProperty = response.result;
+          this.markersProperty.forEach((property) => {
             if (!property.options) {
               property.options = {} as google.maps.MarkerOptions;
             }
-            property.options.label = 'R$' + property.price.toString();
-            property.options.icon = '../../assets/images/icon.svg';
+            property.options.label = {
+              text: 'R$' + property.price.toString() + ',00',
+              color: '#FFFFFF',
+              fontFamily: 'Inter',
+              fontWeight: 'bold',
+            };
+            property.options.icon = '../../assets/images/iconProperty.svg';
 
             // Criar um novo marcador para cada propriedade
             const newMarker = new google.maps.Marker({
@@ -274,10 +302,85 @@ export class FeedComponent implements AfterViewInit {
     });
   }
 
-  markerClickHandler(property: IResponseProperty) {
+  getColleges() {
+    this.collegeService.getColleges().subscribe({
+      next: (response) => {
+        if (response) {
+          this.markersCollege = response;
+          this.markersCollege.forEach((college) => {
+            if (!college.options) {
+              college.options = {} as google.maps.MarkerOptions;
+            }
+            college.options.label = {
+              text: college.name,
+              color: '#FFFFFF',
+              fontFamily: 'Inter',
+              fontWeight: 'bold',
+            };
+            college.options.icon = '../../assets/images/iconCollege.svg';
+
+            // Criar um novo marcador para cada propriedade
+            const newMarker = new google.maps.Marker({
+              position: {
+                lat: college.position.lat,
+                lng: college.position.lng,
+              },
+              map: this.map,
+              title: college.id.toString(),
+              icon: college.options.icon,
+              label: college.options.label,
+            });
+
+            // Adicionar um listener de clique para abrir o modal
+            newMarker.addListener('click', () => {
+              this.markerClickHandler(college);
+            });
+          });
+        }
+      },
+    });
+  };
+
+
+  markerClickHandler(property: IResponseProperty | ICollegeResponse) {
     this.dialog.open(FeedBadgeClickedComponent, {
       data: property,
       width: '500px',
     });
   }
+
+
+  filterStudent() {
+    let filter: IFilterStudent = {
+      name: '',
+      initialAge: 0,
+      finalAge: 99,
+      ownCollege: false,
+      interests: [''],
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+    };
+
+    this.studentService.filterStudent(filter).subscribe({
+      next: (response) => {
+        console.log(response);
+        if (response.result && response.pagination) {
+          this.students = response.result;
+          this.pagination = response.pagination;
+        }
+      },
+    });
+  }
+
+
+  pageChanged(event: any) {
+    if (this.pageNumber != event.page) {
+      this.pageNumber = event.page;
+      this.filterStudent();
+    }
+  }
+
 }
+
+
+

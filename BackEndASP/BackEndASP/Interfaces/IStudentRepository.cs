@@ -1,13 +1,14 @@
 ﻿using ApiCatalogo.Pagination;
 using BackEndASP.DTOs;
 using BackEndASP.DTOs.StudentDTOs;
+using BackEndASP.Utils;
 
 namespace BackEndASP.Interfaces
 {
     public interface IStudentRepository
     {
 
-        Task<IEnumerable<StudentFindAllFilterDTO>> FindAllStudentsAsync(PageStudentQueryParams pageQueryParams, string userId);
+        Task<PagedList<StudentFindAllFilterDTO>> FindAllStudentsAsync(PageStudentQueryParams pageQueryParams, string userId);
 
         StudentsConnectionsDTO FindAllMyStudentsConnections(string userId);
         StudentsConnectionsDTO FindMyAllStudentsWhoInvitationsConnections(string userId);
