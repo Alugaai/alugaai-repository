@@ -196,5 +196,47 @@ namespace BackEndASP.Services
 
             return false;
         }
+
+        public async Task<bool> CompleteProfileStudent(string userId, StudentCompleteProfileDTO dto)
+        {
+            var student = await _dbContext.Students.FindAsync(userId)
+                ?? throw new ArgumentException($"User with id {userId} does not exist");
+
+            await InsertDTOToStudentAsync(dto, student);
+
+            _dbContext.Students.Update(student);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        private async Task InsertDTOToStudentAsync(StudentCompleteProfileDTO dto, Student student)
+        {
+            if (dto.Hobbies.Count != 0)
+            {
+                student.Hobbies.Clear();
+                foreach (string hobbie in dto.Hobbies)
+                {
+                    student.Hobbies.Add(hobbie);
+                }
+            }
+
+            if (dto.Personalitys.Count != 0)
+            {
+                student.Personalitys.Clear();
+                foreach (string personalitys in dto.Personalitys)
+                {
+                    student.Personalitys.Add(personalitys);
+                }
+            }
+
+            if (dto.CollegeId != 0)
+            {
+                College college = await _dbContext.Colleges.FirstOrDefaultAsync(c => c.Id == dto.CollegeId)
+                    ?? throw new ArgumentException("Resource not found");
+
+                student.College = college;
+            }
+        }
     }
 }

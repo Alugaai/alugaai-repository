@@ -83,5 +83,50 @@ namespace BackEndASP.Controllers
             }
         }
 
+        [HttpPut("user")]
+        [Authorize(Policy = "StudentOrOwner")]
+        public async Task<ActionResult<dynamic>> PutImageForAUser([FromForm] IFormFileCollection file)
+        {
+            try
+            {
+                if (file.Count > 1)
+                {
+                    return BadRequest("O usuário deve conter apenas uma foto");
+                }
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                await _unitOfWorkRepository.ImageRepository.PutImageForAUser(file, userId);
+                await _unitOfWorkRepository.CommitAsync();
+                return Ok("Image updated successfuly");
+
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
+        [HttpDelete("user")]
+        [Authorize(Policy = "StudentOrOwner")]
+        public async Task<ActionResult<dynamic>> DeleteImageForAUser()
+        {
+            try
+            {
+                
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                await _unitOfWorkRepository.ImageRepository.DeleteImageForAUser(userId);
+                await _unitOfWorkRepository.CommitAsync();
+                return Ok("Image removed successfuly");
+
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
     }
 }

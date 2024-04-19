@@ -287,7 +287,6 @@ export class FeedComponent implements AfterViewInit, OnInit {
                 lng: property.position.lng,
               },
               map: this.map,
-              title: property.id.toString(),
               icon: property.options.icon,
               label: property.options.label,
             });
@@ -326,7 +325,6 @@ export class FeedComponent implements AfterViewInit, OnInit {
                 lng: college.position.lng,
               },
               map: this.map,
-              title: college.id.toString(),
               icon: college.options.icon,
               label: college.options.label,
             });

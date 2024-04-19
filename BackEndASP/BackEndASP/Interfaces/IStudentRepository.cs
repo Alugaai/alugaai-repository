@@ -14,6 +14,7 @@ namespace BackEndASP.Interfaces
         StudentsConnectionsDTO FindMyAllStudentsWhoInvitationsConnections(string userId);
         Task GiveConnectionOrder(string userId, string studentForConnectionId);
         Task<bool> HandleConnection(string userId, StudentConnectionInsertDTO dto, int notificationId);
+        Task<bool> CompleteProfileStudent(string userId, StudentCompleteProfileDTO dto);
 
     }
 }
