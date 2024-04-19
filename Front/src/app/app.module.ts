@@ -34,6 +34,9 @@ import { FeedPropertyBadgeComponent } from './_components/feed-property-badge/fe
 import { FeedCollegeBadgeComponent } from './_components/feed-college-badge/feed-college-badge.component';
 import { LoadingInterceptor } from './_interceptor/loading.interceptor';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { AutoCompleteComponent } from './_components/auto-complete/auto-complete.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     FeedBadgeClickedComponent,
     FeedPropertyBadgeComponent,
     FeedCollegeBadgeComponent,
+    AutoCompleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     GoogleMapsModule,
     NgxSpinnerModule,
     CollapseModule.forRoot(),
+    MatAutocompleteModule,
+    MatInputModule
 
   ],
   providers: [

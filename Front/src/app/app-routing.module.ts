@@ -8,12 +8,19 @@ import { UniversitarioRegisterComponent } from './register/universitario-registe
 import { AnuncianteRegisterComponent } from './register/anunciante-register/anunciante-register.component';
 import { LoginComponent } from './login/login.component';
 import { FeedComponent } from './feed/feed.component';
+import { AutoCompleteComponent } from './_components/auto-complete/auto-complete.component';
+
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
   },
+  {
+    path: 'autocomplete',
+    component: AutoCompleteComponent,
+  },
+ 
   {
     path: 'card',
     component: FeedCardComponent,
