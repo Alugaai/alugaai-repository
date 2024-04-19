@@ -1,9 +1,12 @@
 <div class="body">
   <div class="esquerda">
-    <div class="filtro-interesses">
-      <p>Buscar por interesse</p>
-      <app-auto-complete></app-auto-complete>
-      <app-feed-filter></app-feed-filter>
+    <div class="search-container">
+      <app-auto-complete
+        (interessesChange)="onInteressesChange($event)"
+      ></app-auto-complete>
+      <button (click)="filterStudent()" class="search-button">
+        <i class="fas fa-search"></i>
+      </button>
     </div>
     <div class="feed-card">
       <app-feed-card

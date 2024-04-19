@@ -26,11 +26,20 @@ export class FeedComponent implements AfterViewInit, OnInit {
   markersCollege: ICollegeResponse[] = [];
 
 
-  pageNumber: number = 1;
   pageSize: number = 1;
   pagination?: IPagination;
 
   students: Array<IStudent> = [  ];
+
+  filter: IFilterStudent = {
+    name: '',
+    initialAge: 0,
+    finalAge: 99,
+    ownCollege: false,
+    interests: [''],
+    pageNumber: 1,
+    pageSize: this.pageSize,
+  };
 
   constructor(
     private propertyService: PropertyService,
@@ -349,17 +358,7 @@ export class FeedComponent implements AfterViewInit, OnInit {
 
 
   filterStudent() {
-    let filter: IFilterStudent = {
-      name: '',
-      initialAge: 0,
-      finalAge: 99,
-      ownCollege: false,
-      interests: [''],
-      pageNumber: this.pageNumber,
-      pageSize: this.pageSize,
-    };
-
-    this.studentService.filterStudent(filter).subscribe({
+    this.studentService.filterStudent(this.filter).subscribe({
       next: (response) => {
         console.log(response);
         if (response.result && response.pagination) {
@@ -371,9 +370,14 @@ export class FeedComponent implements AfterViewInit, OnInit {
   }
 
 
+  onInteressesChange(interesses: string[]) {
+    this.filter.interests = interesses;
+    console.log(this.filter.interests);
+  }
+
   pageChanged(event: any) {
-    if (this.pageNumber != event.page) {
-      this.pageNumber = event.page;
+    if (this.filter.pageNumber != event.page) {
+      this.filter.pageNumber = event.page;
       this.filterStudent();
     }
   }

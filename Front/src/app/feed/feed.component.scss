@@ -6,3 +6,21 @@
   height: 100vh;
   width: 100%;
 }
+
+.search-container {
+  padding: 20px;
+  display: flex;
+  width: 100%;
+}
+
+app-auto-complete {
+  width: 100%;
+
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
