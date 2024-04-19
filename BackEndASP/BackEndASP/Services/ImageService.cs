@@ -178,6 +178,65 @@ namespace BackEndASP.Services
             // Salva as alterações no banco de dados
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task PutImageForAUser(IFormFileCollection files, string userId)
+        {
+            User user = _dbContext.Users.AsNoTracking().Include(u => u.Image).FirstOrDefault(s => s.Id == userId)
+                        ?? throw new ArgumentException($"This id {userId} does not exist");
+
+            if (files != null && files.Count > 0)
+            {
+                // imagem aceitando apenas essas extensões
+                string fileExtension = Path.GetExtension(files[0].FileName).ToLower();
+
+                if (!MyImageExtensionAllowed.extensions.Contains(fileExtension))
+                {
+                    throw new ArgumentException(
+                        $"Only JPEG, JPG, and PNG images are allowed. Your image have {fileExtension} extension");
+                }
+
+                using (var ms = new MemoryStream())
+                {
+                    // Copia o conteúdo da imagem para a MemoryStream
+                    await files[0].CopyToAsync(ms);
+
+                    // Converte a imagem para base64
+                    string base64Image = Convert.ToBase64String(ms.ToArray());
+
+                    // Pega a imagem do usuário logado do banco de dados e atualizando as informações dela com base na nova imagem
+                    if (user.Image != null)
+                    {
+                        user.Image.ImageData64 = base64Image;
+                        user.Image.InsertedOn = DateTime.Now;
+                    }
+
+                    // Salva as alterações no banco de dados
+                    await _dbContext.SaveChangesAsync();
+
+                    _dbContext.Users.Update(user);
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+            else
+            {
+                throw new ArgumentException("No image provided");
+            }
+        }
+
+        public async Task<bool> DeleteImageForAUser(string userId)
+        {
+            User user = _dbContext.Users.AsNoTracking().Include(u => u.Image).FirstOrDefault(s => s.Id == userId)
+                       ?? throw new ArgumentException($"This id {userId} does not exist");
+
+            if (user.Image != null)
+            {
+                _dbContext.Remove(user.Image);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
     }
 }
 

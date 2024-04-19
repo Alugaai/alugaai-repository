@@ -112,5 +112,24 @@ namespace BackEndASP.Controllers
         }
 
 
+        [HttpPost("completeProfile")]
+        [Authorize(Policy = "StudentOnly")]
+        public async Task<ActionResult<dynamic>> CompleteProfile([FromBody] StudentCompleteProfileDTO dto)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var result = await _unitOfWorkRepository.StudentRepository.CompleteProfileStudent(userId, dto);
+                await _unitOfWorkRepository.CommitAsync();
+                return Ok("Student profile completed successfully");
+
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+
     }
 }
