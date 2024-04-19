@@ -34,6 +34,7 @@ import { FeedPropertyBadgeComponent } from './_components/feed-property-badge/fe
 import { FeedCollegeBadgeComponent } from './_components/feed-college-badge/feed-college-badge.component';
 import { LoadingInterceptor } from './_interceptor/loading.interceptor';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     GoogleMapsModule,
     NgxSpinnerModule,
     CollapseModule.forRoot(),
+    NgxMaskDirective,
+    NgxMaskPipe,
 
   ],
   providers: [
@@ -76,11 +79,9 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     provideAnimationsAsync(),
+    provideNgxMask()
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-function provideNgxMask(): import("@angular/core").Provider | import("@angular/core").EnvironmentProviders {
-  throw new Error('Function not implemented.');
-}
 
