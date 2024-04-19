@@ -52,6 +52,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
     FeedBadgeClickedComponent,
     FeedPropertyBadgeComponent,
     FeedCollegeBadgeComponent,
+    AutoCompleteComponent,
   ],
   imports: [
     BrowserModule,
