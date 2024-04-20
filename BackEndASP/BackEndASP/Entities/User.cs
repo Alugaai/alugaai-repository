@@ -11,6 +11,8 @@ public class User : IdentityUser
 
     public DateTimeOffset CreatedDate { get; set; } = DateTimeOffset.UtcNow;
 
+    public string? Gender {  get; set; } 
+
     public int? ImageId { get; set; }
     public Image? Image { get; set; }
 

@@ -120,13 +120,6 @@ namespace BackEndASP.Controllers
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                var userByEmail = _userManager.FindByEmailAsync(dto.Email); 
-
-                if (userByEmail != null)
-                {
-                    return BadRequest("This email already exists");
-                }
-
                 var result = await _unitOfWorkRepository.StudentRepository.CompleteProfileStudent(userId, dto);
                 await _unitOfWorkRepository.CommitAsync();
                 return Ok("Student profile completed successfully");

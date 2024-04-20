@@ -9,6 +9,7 @@ namespace BackEndASP.DTOs
         public string Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public string Gender { get; set; }
         public string PhoneNumber { get; set; }
         public ImageUserDTO Image { get; set; }
 
@@ -25,6 +26,7 @@ namespace BackEndASP.DTOs
             this.Email = entity.Email;
             this.PhoneNumber = entity.PhoneNumber;
             this.Image = entity.Image != null ? new ImageUserDTO(entity.Image) : null;
+            this.Gender = entity.Gender != null ? entity.Gender : null;
         }
     }
 }

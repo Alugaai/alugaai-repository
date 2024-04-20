@@ -217,9 +217,9 @@ namespace BackEndASP.Services
                 student.UserName = dto.Username;
             }
 
-            if (dto.Email != null)
+            if (dto.Gender != null)
             {
-                student.Email = dto.Email;
+                student.Gender = dto.Gender;
             }
 
             if (dto.BirthDate != null)

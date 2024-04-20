@@ -12,6 +12,7 @@ namespace BackEndASP.DTOs
         public string Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+        public string Gender { get; set; }
         public DateTimeOffset BirthDate { get; set; }
         public ImageUserDTO? ImageUser { get; set; }
         public ICollection<NotificationDTO>? Notification { get; set; }
@@ -29,6 +30,7 @@ namespace BackEndASP.DTOs
             this.BirthDate = entity.BirthDate;
             this.ImageUser = entity.Image != null ? new ImageUserDTO(entity.Image) : null;
             this.Notification = entity.UserNotifications != null ? entity.UserNotifications.Select(un => new NotificationDTO(un.Notification)).ToList() : null;
+            this.Gender = entity.Gender != null ? entity.Gender : null;
         }
 
     }
