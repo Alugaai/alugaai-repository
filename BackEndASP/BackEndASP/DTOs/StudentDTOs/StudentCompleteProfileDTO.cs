@@ -1,6 +1,8 @@
-﻿namespace BackEndASP.DTOs.StudentDTOs
+﻿using BackEndASP.DTOs.UserDTOs;
+
+namespace BackEndASP.DTOs.StudentDTOs
 {
-    public class StudentCompleteProfileDTO
+    public class StudentCompleteProfileDTO : UserCompleteProfileDTO
     {
 
         public List<string> Hobbies { get; set; }

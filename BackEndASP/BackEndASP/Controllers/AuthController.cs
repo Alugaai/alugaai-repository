@@ -316,8 +316,61 @@ using System.Security.Claims;
         }
 
 
-         // Método para lidar com a renovação de token
-        [HttpPost("refresh-token")]
+    // Método para lidar com a solicitação de registro de um Owner
+    [HttpPut("updatePassword")]
+    [Authorize(Policy = "StudentOrOwner")]
+    public async Task<ActionResult> UpdatePasswordOwner([FromBody] ChangePasswordDTO dto)
+    {
+        // Pegar userId
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        // pega o usuário logado
+        var userLogged = await _userManager.FindByIdAsync(userId);
+
+        // Crie um PasswordHasher
+        var passwordHasher = new PasswordHasher<IdentityUser>();
+
+        // Verifique se a senha fornecida no DTO é igual à senha armazenada no banco de dados
+        var result = passwordHasher.VerifyHashedPassword(userLogged, userLogged.PasswordHash, dto.OldPassword);
+
+        if (result == PasswordVerificationResult.Success)
+        {
+            // Verifica se a nova senha é igual à senha confirmada
+            if (dto.NewPassword == dto.ConfirmPassword)
+            {
+                // Gera o hash da nova senha
+                var hashedPassword = passwordHasher.HashPassword(userLogged, dto.ConfirmPassword);
+
+                // Atribuir o hash da senha confirmada ao usuário
+                userLogged.PasswordHash = hashedPassword;
+
+                // Atualizar o usuário no banco de dados
+                await _userManager.UpdateAsync(userLogged);
+
+                // Retornar uma resposta de sucesso
+                return StatusCode(StatusCodes.Status201Created, new ResponseDTO
+                {
+                    Status = "Success",
+                    Message = "Password changed successfully!"
+                });
+            }
+            else
+            {
+                // As senhas não coincidem, retornar BadRequest
+                return BadRequest("The passwords do not match");
+            }
+        }
+        else
+        {
+            // Senha antiga incorreta, retornar BadRequest
+            return BadRequest("Incorrect old password");
+        }
+    }
+
+
+
+    // Método para lidar com a renovação de token
+    [HttpPost("refresh-token")]
         [Authorize(Policy = "StudentOrOwner")]
         public async Task<ActionResult> RefreshToken(TokenDTO tokenDTO)
         {

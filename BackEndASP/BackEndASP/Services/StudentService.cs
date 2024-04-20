@@ -212,6 +212,26 @@ namespace BackEndASP.Services
 
         private async Task InsertDTOToStudentAsync(StudentCompleteProfileDTO dto, Student student)
         {
+            if (dto.Username != null)
+            {
+                student.UserName = dto.Username;
+            }
+
+            if (dto.Email != null)
+            {
+                student.Email = dto.Email;
+            }
+
+            if (dto.BirthDate != null)
+            {
+                student.BirthDate = dto.BirthDate;
+            }
+
+            if (dto.PhoneNumber != null)
+            {
+                student.PhoneNumber = dto.PhoneNumber;
+            }
+
             if (dto.Hobbies.Count != 0)
             {
                 student.Hobbies.Clear();
@@ -237,6 +257,8 @@ namespace BackEndASP.Services
 
                 student.College = college;
             }
+
+
         }
     }
 }
