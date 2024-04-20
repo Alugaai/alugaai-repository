@@ -2,6 +2,7 @@ import { IFilterStudent } from './../_models/IFilterStudent';
 import {
   AfterViewInit,
   Component,
+  DoCheck,
   ElementRef,
   OnInit,
   ViewChild,
@@ -15,6 +16,7 @@ import { ICollegeResponse } from '../_models/ICollegeResponse';
 import { StudentService } from '../_services/student.service';
 import { IPagination } from '../_models/IPagination';
 import { IStudent } from '../_models/IStudent';
+import { ILocationFilterCity } from '../_models/ILocationFilterCity';
 
 @Component({
   selector: 'app-feed',
@@ -25,6 +27,8 @@ export class FeedComponent implements AfterViewInit, OnInit {
   markersProperty: IResponseProperty[] = [];
   markersCollege: ICollegeResponse[] = [];
 
+  lat = -23.4709;
+  lng = -47.4851;
 
   pageSize: number = 1;
   pagination?: IPagination;
@@ -48,15 +52,18 @@ export class FeedComponent implements AfterViewInit, OnInit {
     private studentService: StudentService
   ) {}
 
+
+
+
   ngOnInit(): void {
     this.filterStudent();
   }
 
+
   title = 'angular-gmap';
   @ViewChild('gmapContainer', { static: false }) mapContainer?: ElementRef;
   map?: google.maps.Map;
-  lat = -23.4709;
-  lng = -47.4851;
+
 
   coordinates = new google.maps.LatLng(this.lat, this.lng);
 
@@ -271,6 +278,27 @@ export class FeedComponent implements AfterViewInit, OnInit {
     this.filterProperty();
     this.getColleges();
   }
+
+
+  // Função para filtrar a localização inicial
+  onInitialLocationFilter(location: ILocationFilterCity) {
+    if (location.lat) {
+      this.lat = location.lat;
+    }
+    if (location.long) {
+      this.lng = location.long;
+    }
+  }
+
+  // Função para filtrar a localização inicial
+  filterInitialLocation() {
+    this.coordinates = new google.maps.LatLng(this.lat, this.lng);
+
+    this.mapOptions.center = this.coordinates;
+
+    this.mapInitializer();
+  }
+
 
   filterProperty() {
     this.propertyService.filterProperty().subscribe({

@@ -37,6 +37,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { AutoCompleteComponent } from './_components/auto-complete/auto-complete.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { PlaceAutocompleteComponent } from './_components/place-autocomplete/place-autocomplete.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { MatIconModule } from '@angular/material/icon';
     FeedPropertyBadgeComponent,
     FeedCollegeBadgeComponent,
     AutoCompleteComponent,
+    PlaceAutocompleteComponent,
 
   ],
   imports: [
@@ -74,7 +77,9 @@ import { MatIconModule } from '@angular/material/icon';
     NgxMaskPipe,
     MatAutocompleteModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     provideClientHydration(),

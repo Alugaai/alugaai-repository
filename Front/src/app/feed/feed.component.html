@@ -28,6 +28,12 @@
       >
       </pagination>
     </div>
+    <app-place-autocomplete
+      (initialLocationFilter)="onInitialLocationFilter($event)"
+    ></app-place-autocomplete>
+    <button (click)="filterInitialLocation()" class="search-button">
+      <i class="fas fa-search"></i>
+    </button>
   </div>
   <div #gmapContainer id="map"></div>
 </div>
