@@ -21,7 +21,7 @@ export class FeedPropertyBadgeComponent implements OnChanges {
 
   startImage() {
     console.log(this.building);
-    if (this.building?.owner.image) {
+    if (this.building?.owner?.image) {
       let image = this.building.owner.image.imageData64;
       this.ownerImage = this.sanitizer.bypassSecurityTrustUrl(
         this.base64 + image

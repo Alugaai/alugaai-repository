@@ -16,6 +16,6 @@ export interface IFindPropertyDetailsById {
   bedrooms: number;
   bathrooms: number;
   description: string;
-  owner: IOwner;
+  owner?: IOwner;
   studentsLikes: Array<IStudentsLikes>;
 }

@@ -9,6 +9,8 @@ import { AnuncianteRegisterComponent } from './register/anunciante-register/anun
 import { LoginComponent } from './login/login.component';
 import { FeedComponent } from './feed/feed.component';
 import { AutoCompleteComponent } from './_components/auto-complete/auto-complete.component';
+import { StudentCompleteProfileComponent } from './complete-profile/student-complete-profile/student-complete-profile.component';
+import { authGuard } from './_guards/auth.guard';
 
 
 const routes: Routes = [
@@ -20,7 +22,7 @@ const routes: Routes = [
     path: 'autocomplete',
     component: AutoCompleteComponent,
   },
- 
+
   {
     path: 'card',
     component: FeedCardComponent,
@@ -58,6 +60,11 @@ const routes: Routes = [
     path: 'registrar/anunciante',
     component: AnuncianteRegisterComponent,
   },
+  {
+    path: 'perfil/estudante',
+    component: StudentCompleteProfileComponent,
+    canActivate: [authGuard],
+  }
 ];
 
 @NgModule({

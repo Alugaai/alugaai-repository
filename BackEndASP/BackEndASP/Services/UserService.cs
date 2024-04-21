@@ -24,13 +24,17 @@ namespace BackEndASP.Services
             if (user.GetType() == typeof(Owner))
             {
                 var owner = await _dbContext.Owners
+                    .Include(p => p.UserNotifications)
                     .Include(p => p.Properties)
+                    .Include(p => p.Image)
                     .SingleOrDefaultAsync(u => u.Email.Contains(email)) ?? throw new ArgumentException("Esse email nao existe");
                 return new OwnerResponseForFindByEmail((Owner)owner);
             }
             else if (user.GetType() == typeof(Student))
             {
                 var student = await _dbContext.Students
+                    .Include(s => s.UserNotifications)
+                    .Include(s => s.Image)
                     .Include(s => s.Connections)
                     .Include(s => s.PropertiesLikes)
                     .Include(s => s.College)

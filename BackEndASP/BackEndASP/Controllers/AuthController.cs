@@ -160,6 +160,7 @@ using System.Security.Claims;
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
                     RefreshToken = refreshToken,
                     Expiration = token.ValidTo,
+                    Email = user.Email!,
                     Role = userRoles
                 });
             }

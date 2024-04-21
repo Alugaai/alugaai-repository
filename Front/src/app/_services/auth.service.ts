@@ -5,6 +5,7 @@ import { BehaviorSubject, map } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { ILogin } from '../_models/ILogin';
 import { IRegister } from '../_models/IRegister';
+import { IUserDetailsByEmail } from '../_models/IUserDetailsByEmail';
 
 
 @Injectable({
@@ -50,6 +51,14 @@ export class AuthService {
   registerOwner(user: IRegister) {
     return this.http.post<any>(this.baseUrl + 'auth/register/owner', user).pipe(
       map((response) => {
+        return response;
+      })
+    );
+  }
+
+  userDetailsByEmail(email: string) {
+    return this.http.get<any>(this.baseUrl + `user/details/${email}`).pipe(
+      map((response: IUserDetailsByEmail) => {
         return response;
       })
     );
