@@ -46,7 +46,9 @@ builder.Services.AddScoped<IStudentRepository, StudentService>();
 builder.Services.AddScoped<IImageRepository, ImageService>();
 builder.Services.AddScoped<ICollegeRepository, CollegeService>();
 builder.Services.AddScoped<IBuildingRepository, BuildingService>();
+builder.Services.AddScoped<IOwnerRepository, OwnerService>();
 builder.Services.AddScoped<IUserRepository, UserService>();
+builder.Services.AddScoped<INotificationRepository, NotificationService>();
 
 
 

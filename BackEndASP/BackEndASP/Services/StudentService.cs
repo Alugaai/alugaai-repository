@@ -224,7 +224,7 @@ namespace BackEndASP.Services
 
             if (dto.BirthDate != null)
             {
-                student.BirthDate = dto.BirthDate;
+                student.BirthDate = (DateTimeOffset) dto.BirthDate;
             }
 
             if (dto.PhoneNumber != null)
