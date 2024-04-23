@@ -9,7 +9,21 @@
   </div>
   <div class="top-row">
     <div class="img-user-container">
-      <img class="img" [src]="ownerImage" alt="" />
+      <img
+        *ngIf="ownerImage; else defaultImage"
+        class="image"
+        [src]="ownerImage"
+        alt=""
+        style="width: 80px; height: auto; border-radius: 50%"
+      />
+      <ng-template #defaultImage>
+        <img
+          class="image"
+          src="../../../assets/images/unloadeduser.jpg"
+          alt=""
+          style="width: 80px; height: auto; border-radius: 50%"
+        />
+      </ng-template>
     </div>
     <div class="inside-row-holder">
       <div class="first-row">

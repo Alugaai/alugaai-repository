@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { IUserDetailsByEmail } from '../../_models/IUserDetailsByEmail';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -21,7 +21,7 @@ export class HeaderComponent implements AfterViewInit {
   constructor(private authService: AuthService, private sanitizer: DomSanitizer) {
     this.authService.userLoggedToken$.subscribe({
       next: (userToken) => {
-        this.userLogged = userToken !== null;
+        this.userLogged = userToken !== null ? true : false;
         if (userToken?.role) {
           this.userRole = userToken.role;
         }
@@ -31,6 +31,7 @@ export class HeaderComponent implements AfterViewInit {
       }
     });
   }
+
   ngAfterViewInit(): void {
     this.findUserDetailsByEmail();
     this.startImage();
@@ -58,6 +59,7 @@ export class HeaderComponent implements AfterViewInit {
       );
     }
   }
+
   //Função que deixa a badge invisivel (se o user clicar ela fica invisivel, seta a variavel pra true e zera o numero de notificacao)
   toggleBadgeVisibility() {
     this.badgeHidden = !this.badgeHidden;

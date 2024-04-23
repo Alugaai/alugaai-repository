@@ -62,8 +62,7 @@ const routes: Routes = [
   },
   {
     path: 'perfil/estudante',
-    component: StudentCompleteProfileComponent,
-    canActivate: [authGuard],
+    component: StudentCompleteProfileComponent
   }
 ];
 

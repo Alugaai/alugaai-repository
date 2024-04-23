@@ -1,1 +1,109 @@
+<p class="p-space">&nbsp;</p>
+<main>
+  <div class="modal">
+    <section class="sec-1">
+      <div class="div-meu-cad">
+        <h1>Meu cadastro</h1>
+        <p>Configure o seu cadastro</p>
+        <br /><br />
+        <div class="div-c">
+          <div class="div-dados">
+            <form>
+              <h2>Dados da conta</h2>
+              <br />
+              <p><b>Nome completo</b></p>
+              <input
+                type="text"
+                class="input-t"
+                placeholder="Seu nome"
+                style="background-image: url('/assets/user.png')"
+              />
+              <br /><br />
+              <p><b>E-mail</b></p>
+              <input
+                type="text"
+                class="input-t"
+                placeholder="Seu e-mail"
+                style="background-image: url('/assets/mail.png')"
+              />
+              <br /><br />
+              <p><b>Telefone</b></p>
+              <input type="text" class="input-t" placeholder="Seu telefone" />
+              <br /><br />
+              <p><b>Gênero</b></p>
+              <br />
+              <div class="div-radio">
+                <input
+                  type="radio"
+                  id="Masculino"
+                  name="Gen"
+                  value="Masculino"
+                />
+                <label for="Masculino">Masculino</label><br />
+                <input type="radio" id="Feminino" name="Gen" value="Feminino" />
+                <label for="Feminino">Feminino</label><br />
+                <input type="radio" id="Outros" name="Gen" value="Outros" />
+                <label for="Outros">Outros</label><br /><br />
+              </div>
+              <br />
+              <div class="div-tipo">
+                <input
+                  type="submit"
+                  value="Salvar alterações"
+                  class="btn-orange"
+                />
+                <p><b>Tipo de conta:</b> Estudante</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="div-adic-foto">
+        <h1>Adicionar Foto</h1>
+        <p>Complete seu perfil. Uma imagem pode fazer toda a diferença!</p>
+        <br /><br />
+        <div class="div-d">
+          <div class="div-img-perfil">
+            <h1>Imagem de Perfil</h1>
+            <img src="/assets/perfil.png" />
+            <button class="btn-foto">Carregar foto</button>
+          </div>
+          <div class="alt-senha">
+            <div class="div-senha">
+              <h3>Alteração de senha</h3>
+              <p>
+                Escolha uma senha forte que você não esteja usando em nenhum
+                outro lugar.
+              </p>
+            </div>
+            <div class="div-btn-senha">
+              <button class="btn-senha">Alterar senha</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br />
+    <hr />
+    <br /><br />
 
+    <section class="sec-2">
+      <div class="div-pers">
+        <h1>Personalidade</h1>
+        <p>
+          Destaque sua personalidade de forma autêntica, pois ela será exibida
+          como seus <span>interesses</span> no <span>feed.</span>
+        </p>
+      </div>
+      <input
+        class="div-list"
+        style="background-image: url('/assets/search.png')"
+      />
+    </section>
+    <br />
+    <section class="div-save">
+      <button class="btn-save">Salvar personalidade</button>
+    </section>
+  </div>
+</main>
+<div class="back"></div>
