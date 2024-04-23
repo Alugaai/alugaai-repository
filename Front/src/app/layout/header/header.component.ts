@@ -15,6 +15,8 @@ export class HeaderComponent implements AfterViewInit {
   userDetails?: IUserDetailsByEmail;
   userImage: SafeUrl = '';
   base64: string = 'data:image/png;base64,';
+  notificationCounter: number = 10; //Puxar a notificação do banco e zerar todas vez q o user abrir elas
+  badgeHidden: boolean = false;
 
   constructor(private authService: AuthService, private sanitizer: DomSanitizer) {
     this.authService.userLoggedToken$.subscribe({
@@ -56,7 +58,10 @@ export class HeaderComponent implements AfterViewInit {
       );
     }
   }
-
+  //Função que deixa a badge invisivel (se o user clicar ela fica invisivel, seta a variavel pra true e zera o numero de notificacao)
+  toggleBadgeVisibility() {
+    this.badgeHidden = !this.badgeHidden;
+  }
 
 }
 

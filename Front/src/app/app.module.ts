@@ -40,6 +40,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PlaceAutocompleteComponent } from './_components/place-autocomplete/place-autocomplete.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { StudentCompleteProfileComponent } from './complete-profile/student-complete-profile/student-complete-profile.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { StudentCompleteProfileComponent } from './complete-profile/student-comp
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatBadgeModule
   ],
   providers: [
     provideClientHydration(),

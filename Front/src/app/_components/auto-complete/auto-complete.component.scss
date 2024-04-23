@@ -1,4 +1,12 @@
 
+.mat-mdc-form-field-subscript-wrapper{
+  display: none !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align::before {
+  display: none !important;
+}
+
 .example-chip-list {
   width: 100%;
 }
@@ -10,9 +18,9 @@
   --mdc-chip-disabled-label-text-color: #ffffff;
   --mdc-chip-elevated-container-color: #F79009;
   --mdc-chip-label-text-color: #ffffff;
-
-
 }
+
+
 
 .mat-mdc-form-field-infix{
 --mdc-filled-text-field-focus-active-indicator-color: red;

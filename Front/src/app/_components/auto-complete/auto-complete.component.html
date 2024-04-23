@@ -3,11 +3,7 @@
     <mat-label style="font-size: 20px">Pesquisar por interesses</mat-label>
     <mat-chip-grid #chipGrid aria-label="interesse selection">
       @for (interesse of interesses; track interesse) {
-      <mat-chip-row
-        *ngIf="interesse && interesse.trim() != ''"
-        class="teste"
-        (removed)="remove(interesse)"
-      >
+      <mat-chip-row *ngIf="interesse && interesse.trim() != ''" class="teste" (removed)="remove(interesse)">
         {{ interesse }}
         <button matChipRemove [attr.aria-label]="'remove ' + interesse">
           <mat-icon class="white">cancel</mat-icon>
@@ -15,19 +11,10 @@
       </mat-chip-row>
       }
     </mat-chip-grid>
-    <input
-      placeholder="Novo Interesse..."
-      #interesseInput
-      [formControl]="interesseCtrl"
-      [matChipInputFor]="chipGrid"
-      [matAutocomplete]="auto"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      (matChipInputTokenEnd)="add($event)"
-    />
-    <mat-autocomplete
-      #auto="matAutocomplete"
-      (optionSelected)="selected($event)"
-    >
+    <input placeholder="Novo Interesse..." #interesseInput [formControl]="interesseCtrl" [matChipInputFor]="chipGrid"
+      [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)" />
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
       @for (interesse of filteredInteresses | async; track interesse) {
       <mat-option [value]="interesse">{{ interesse }}</mat-option>
       }

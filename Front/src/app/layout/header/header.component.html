@@ -2,61 +2,26 @@
   <div class="nav-container">
     <div class="logo-primary-nav-holder">
       <div class="logo-div">
-        <img
-          src="../../../assets/images/Logo.png"
-          class="logo-image"
-          alt="logo image"
-          routerLink=""
-        />
+        <img src="../../../assets/images/Logo.png" class="logo-image" alt="logo image" routerLink="" />
       </div>
-      <a class="bold nav-font-size" routerLink="home" routerLinkActive="active"
-        >Home</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="faculdades"
-        routerLinkActive="active"
-        >Faculdades</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="universitarios"
-        routerLinkActive="active"
-        >Universitários</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="destaque-se"
-        routerLinkActive="active"
-        >Destaque-se</a
-      >
+      <a class="bold nav-font-size" routerLink="home" routerLinkActive="active">Home</a>
+      <a class="bold nav-font-size" routerLink="faculdades" routerLinkActive="active">Faculdades</a>
+      <a class="bold nav-font-size" routerLink="universitarios" routerLinkActive="active">Universitários</a>
+      <a class="bold nav-font-size" routerLink="destaque-se" routerLinkActive="active">Destaque-se</a>
     </div>
     <div class="secundary-nav">
-      <a
-        class="bold nav-font-size"
-        routerLink="entrar"
-        *ngIf="!userLogged || (userRole && userRole.includes('Admin'))"
-        >Entrar</a
-      >
-      <a
-        class="bold nav-font-size register-button"
-        routerLink="registrar"
-        *ngIf="!userLogged || (userRole && userRole.includes('Admin'))"
-        >Registrar-se</a
-      >
-      <a
-        class="nav-font-size anuncie-button"
-        routerLink="anuncie"
-        *ngIf="
+      <a class="bold nav-font-size" routerLink="entrar"
+        *ngIf="!userLogged || (userRole && userRole.includes('Admin'))">Entrar</a>
+      <a class="bold nav-font-size register-button" routerLink="registrar"
+        *ngIf="!userLogged || (userRole && userRole.includes('Admin'))">Registrar-se</a>
+      <a class="nav-font-size anuncie-button" routerLink="anuncie" *ngIf="
           userRole && (userRole.includes('Owner') || userRole.includes('Admin'))
-        "
-        >Anuncie</a
-      >
+        ">Anuncie</a>
 
       <div *ngIf="userLogged" class="menu-holder">
         <div class="row-profile">
           <mat-icon>menu</mat-icon>
-          <mat-icon>notifications</mat-icon>
+          <mat-icon matBadge="{{notificationCounter}}" matBadgeSize="small" matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="badgeHidden" (click)="toggleBadgeVisibility()">notifications</mat-icon>
           <img class="image" [src]="userImage" alt="" />
         </div>
       </div>
