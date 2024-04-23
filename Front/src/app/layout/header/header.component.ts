@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { IUserDetailsByEmail } from '../../_models/IUserDetailsByEmail';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent implements AfterViewInit {
   notificationCounter: number = 10; //Puxar a notificação do banco e zerar todas vez q o user abrir elas
   badgeHidden: boolean = false;
 
-  constructor(private authService: AuthService, private sanitizer: DomSanitizer) {
+  constructor(private authService: AuthService, private sanitizer: DomSanitizer, private router: Router) {
     this.authService.userLoggedToken$.subscribe({
       next: (userToken) => {
         this.userLogged = userToken !== null ? true : false;
@@ -63,6 +64,10 @@ export class HeaderComponent implements AfterViewInit {
   //Função que deixa a badge invisivel (se o user clicar ela fica invisivel, seta a variavel pra true e zera o numero de notificacao)
   toggleBadgeVisibility() {
     this.badgeHidden = !this.badgeHidden;
+  }
+
+  goToPerfil() {
+    this.router.navigateByUrl('/perfil/estudante', {});
   }
 
 }
