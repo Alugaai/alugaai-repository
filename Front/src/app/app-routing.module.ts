@@ -11,12 +11,17 @@ import { FeedComponent } from './feed/feed.component';
 import { AutoCompleteComponent } from './_components/auto-complete/auto-complete.component';
 import { StudentCompleteProfileComponent } from './complete-profile/student-complete-profile/student-complete-profile.component';
 import { authGuard } from './_guards/auth.guard';
+import { NotificationsCardComponent } from './_components/notifications-card/notifications-card.component';
 
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'notifications',
+    component: NotificationsCardComponent,
   },
   {
     path: 'autocomplete',

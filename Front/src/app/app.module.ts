@@ -42,6 +42,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { StudentCompleteProfileComponent } from './complete-profile/student-complete-profile/student-complete-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatMenuModule} from '@angular/material/menu';
+import { NotificationsCardComponent } from './_components/notifications-card/notifications-card.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {MatMenuModule} from '@angular/material/menu';
     AutoCompleteComponent,
     PlaceAutocompleteComponent,
     StudentCompleteProfileComponent,
+    NotificationsCardComponent,
 
   ],
   imports: [
