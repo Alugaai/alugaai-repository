@@ -18,6 +18,7 @@ export class HeaderComponent implements AfterViewInit {
   base64: string = 'data:image/png;base64,';
   notificationCounter: number = 10; //Puxar a notificação do banco e zerar todas vez q o user abrir elas
   badgeHidden: boolean = false;
+  isMenuOpen: boolean = false;
 
   constructor(private authService: AuthService, private sanitizer: DomSanitizer, private router: Router) {
     this.authService.userLoggedToken$.subscribe({
@@ -68,6 +69,18 @@ export class HeaderComponent implements AfterViewInit {
 
   goToPerfil() {
     this.router.navigateByUrl('/perfil/estudante', {});
+  }
+
+  onMenuOpened() {
+    this.isMenuOpen = true;
+  }
+
+  onMenuClosed() {
+    this.isMenuOpen = false;
+  }
+
+  onMenuItemClick() {
+    this.isMenuOpen = true;
   }
 
 }

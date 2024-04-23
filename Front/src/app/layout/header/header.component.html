@@ -25,8 +25,9 @@
           </button>
           <mat-menu #menu="matMenu">
             <!-- Add menu items here -->
-            <div style="width: 240px;"></div>
-            <div class="menu-user-information-container">
+            <div class="menu-stop-propagation" (click)="$event.stopPropagation()">
+              <div style="width: 240px;"></div>
+            <div class="menu-user-information-container" >
               <p class="gray-color">Nome: {{ userDetails?.username }}</p>
               <p>Email: {{ userDetails?.email }}</p>
             </div>
@@ -46,6 +47,8 @@
             </button>
             <hr style="margin-top: 5px; margin-bottom: 5px" />
             <button mat-menu-item>Sair</button>
+            </div>
+            
           </mat-menu>
           <button class="menu-button" [matMenuTriggerFor]="menuNotification">
             <mat-icon matBadge="{{ notificationCounter }}" matBadgeSize="small" matBadgePosition="after"
@@ -54,10 +57,9 @@
           </button>
           <!-- menu notification-->
           <mat-menu #menuNotification="matMenu">
-            <div class="card-holder">
+            <div class="card-holder" (opened)="onMenuOpened()">
               <app-notifications-card></app-notifications-card>
-              <app-notifications-card></app-notifications-card>
-              <app-notifications-card></app-notifications-card>
+              
             </div>
           </mat-menu>
           
