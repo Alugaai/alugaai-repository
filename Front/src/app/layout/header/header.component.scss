@@ -75,10 +75,29 @@ nav{
     justify-content: space-around;
     height: inherit;
 }
+.mat-mdc-menu-content{
+    width: 240px !important;
+}
+
+.menu-button{
+    width: fit-content;
+    height: 24px;
+    border: 0;
+    background-color: white;
+    padding: 0;
+
+}
 mat-icon{
     padding: 0;
 }
 
+.menu-user-information-container{
+    padding: 20px;
+
+    p{
+        margin-bottom: 0;
+    }
+}
 //other code
 
 .image{
@@ -90,6 +109,11 @@ mat-icon{
 
 
 //reusable
+
+.gray-color{
+    color: var(--nav-text-color);
+    font-weight: 500;
+}
 
 .bold{
     font-weight: 500;

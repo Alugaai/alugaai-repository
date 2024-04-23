@@ -2,81 +2,49 @@
   <div class="nav-container">
     <div class="logo-primary-nav-holder">
       <div class="logo-div">
-        <img
-          src="../../../assets/images/Logo.png"
-          class="logo-image"
-          alt="logo image"
-          routerLink=""
-        />
+        <img src="../../../assets/images/Logo.png" class="logo-image" alt="logo image" routerLink="" />
       </div>
-      <a class="bold nav-font-size" routerLink="home" routerLinkActive="active"
-        >Home</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="faculdades"
-        routerLinkActive="active"
-        >Faculdades</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="universitarios"
-        routerLinkActive="active"
-        >Universitários</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="destaque-se"
-        routerLinkActive="active"
-        >Destaque-se</a
-      >
+      <a class="bold nav-font-size" routerLink="home" routerLinkActive="active">Home</a>
+      <a class="bold nav-font-size" routerLink="faculdades" routerLinkActive="active">Faculdades</a>
+      <a class="bold nav-font-size" routerLink="universitarios" routerLinkActive="active">Universitários</a>
+      <a class="bold nav-font-size" routerLink="destaque-se" routerLinkActive="active">Destaque-se</a>
     </div>
     <div class="secundary-nav">
-      <a
-        class="bold nav-font-size"
-        routerLink="entrar"
-        *ngIf="userLogged == false || userRole.includes('Admin')"
-        >Entrar</a
-      >
-      <a
-        class="bold nav-font-size register-button"
-        routerLink="registrar"
-        *ngIf="userLogged == false || userRole.includes('Admin')"
-        >Registrar-se</a
-      >
-      <a
-        class="nav-font-size anuncie-button"
-        routerLink="anuncie"
-        *ngIf="
+      <a class="bold nav-font-size" routerLink="entrar"
+        *ngIf="userLogged == false || userRole.includes('Admin')">Entrar</a>
+      <a class="bold nav-font-size register-button" routerLink="registrar"
+        *ngIf="userLogged == false || userRole.includes('Admin')">Registrar-se</a>
+      <a class="nav-font-size anuncie-button" routerLink="anuncie" *ngIf="
           userRole && (userRole.includes('Owner') || userRole.includes('Admin'))
-        "
-        >Anuncie</a
-      >
+        ">Anuncie</a>
 
       <div *ngIf="userLogged" class="menu-holder">
         <div class="row-profile">
-          <mat-icon>menu</mat-icon>
-          <mat-icon
-            matBadge="{{ notificationCounter }}"
-            matBadgeSize="small"
-            matBadgePosition="after"
-            matBadgeColor="warn"
-            [matBadgeHidden]="badgeHidden"
-            (click)="toggleBadgeVisibility()"
-            >notifications</mat-icon
-          >
-          <img
-            *ngIf="userImage; else defaultImage"
-            class="image"
-            [src]="userImage"
-            alt=""
-          />
+          <button class="menu-button"[matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <!-- Add menu items here -->
+            <div class="menu-user-information-container">
+              <p class="gray-color">João Silveira</p>
+              <p>joaosilveira&#64;gmail.com</p>
+              
+            </div>
+            <hr style="margin-top: 5px; margin-bottom: 5px;">
+           
+            <button mat-menu-item><span class="gray-color">Perfil</span></button>
+            <button mat-menu-item><span class="gray-color">Faculdade</span></button>
+            <button mat-menu-item><span class="gray-color">Conexão</span></button>
+            <button mat-menu-item><span class="gray-color">Suporte</span></button>
+            <hr style="margin-top: 5px; margin-bottom: 5px;">
+            <button mat-menu-item>Sair</button>
+          </mat-menu>
+          <mat-icon matBadge="{{ notificationCounter }}" matBadgeSize="small" matBadgePosition="after"
+            matBadgeColor="warn" [matBadgeHidden]="badgeHidden"
+            (click)="toggleBadgeVisibility()">notifications</mat-icon>
+          <img *ngIf="userImage; else defaultImage" class="image" [src]="userImage" alt="" />
           <ng-template #defaultImage>
-            <img
-              class="image"
-              src="../../../assets/images/unloadeduser.jpg"
-              alt=""
-            />
+            <img class="image" src="../../../assets/images/unloadeduser.jpg" alt="" />
           </ng-template>
         </div>
       </div>
