@@ -6,11 +6,16 @@
   height: 100vh;
   width: 100%;
 }
+.esquerda{
+  min-width: 665px;
+  width: fit-content;
+}
 
 .search-container {
   padding: 20px;
   display: flex;
   width: 100%;
+  min-width: 100%;
 }
 
 app-auto-complete {
@@ -18,7 +23,20 @@ app-auto-complete {
 
 }
 
+::ng-deep .active > .page-link, .page-link.active {
+  z-index: 3;
+  color: white;
+  background-color: var(--primary-orange-color);
+  border-color: var(--primary-orange-color);
+}
 
+
+::ng-deep .page-link {
+
+  color: var(--nav-text-color);
+  text-decoration: none;
+  
+}
 .search-button {
   background: none;
   border: none;
@@ -28,5 +46,7 @@ app-auto-complete {
   border-radius: 0 10px 10px 0;
   height: inherit;
 }
+
+
 
 

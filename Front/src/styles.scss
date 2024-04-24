@@ -3,36 +3,66 @@
 //@import "tailwindcss/utilities";
 //@import "tailwindcss/components";
 
-:root{
+:root {
     --primary-orange-color: #F79009;
     --nav-text-color: #344054;
     --teste: red;
 }
 
-body{
+body {
     width: 100vw;
     overflow-x: hidden;
 }
+
 html,
-body, p, h1, h2, h3, h4{
+body,
+p,
+h1,
+h2,
+h3,
+h4 {
     margin: 0;
     padding: 0;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
 }
 
-html,body, app-root{
+html,
+body,
+app-root {
     height: 100%;
 }
 
-app-root{
+app-root {
     display: flex;
     flex-direction: column;
 }
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+
 
 //useful classes
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.inter-font {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "slnt" 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
