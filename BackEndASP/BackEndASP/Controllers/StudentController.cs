@@ -56,7 +56,7 @@ namespace BackEndASP.Controllers
 
         [HttpGet("/myinvitationsforconnection")]
         [Authorize(Policy = "StudentOnly")]
-        public async Task<ActionResult<StudentsConnectionsDTO>> FindMyAllStudentsWhoInvitationsConnections()
+        public async Task<ActionResult<IEnumerable<StudentResponseNotification>>> FindMyAllStudentsWhoInvitationsConnections()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return Ok(_unitOfWorkRepository.StudentRepository.FindMyAllStudentsWhoInvitationsConnections(userId));

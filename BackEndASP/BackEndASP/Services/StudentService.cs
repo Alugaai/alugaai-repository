@@ -5,6 +5,7 @@ using BackEndASP.Interfaces;
 using BackEndASP.Utils;
 using Geocoding;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BackEndASP.Services
 {
@@ -84,12 +85,29 @@ namespace BackEndASP.Services
         
 
         //busca todas as solicitações que eu tenho pendente
-        public StudentsConnectionsDTO FindMyAllStudentsWhoInvitationsConnections(string userId)
+        public async Task<IEnumerable<StudentResponseNotification>> FindMyAllStudentsWhoInvitationsConnections(string userId)
         {
-            Student student = _dbContext.Students.AsNoTracking().FirstOrDefault(s => s.Id == userId)
-                ?? throw new ArgumentException($"This id {userId} does not exist");
-            
-            return new StudentsConnectionsDTO(student.PendentsConnectionsId);
+            Student user = _dbContext.Students.AsNoTracking().FirstOrDefault(s => s.Id == userId)
+                           ?? throw new ArgumentException($"This id {userId} does not exist");
+
+            var userNotificationIds = _dbContext.UserNotifications
+                .Where(un => un.UserId == userId)
+                .Select(un => un.NotificationId)
+                .ToList();
+
+            var studentsWithPendentConnections = new List<Student>();
+
+            if (user.PendentsConnectionsId.Any())
+            {
+                // Filtra os estudantes com base nos IDs pendentes de conexão do usuário
+                studentsWithPendentConnections = _dbContext.Students
+                    .Where(s => user.PendentsConnectionsId.Contains(s.Id))
+                    .Include(s => s.Image)
+                    .Include(s => s.College)
+                    .ToList();
+            }
+
+            return studentsWithPendentConnections.Select(s => new StudentResponseNotification(s, userNotificationIds)).ToList();
         }
 
 
@@ -143,7 +161,7 @@ namespace BackEndASP.Services
             {
                 actualStudent.PendentsConnectionsId.Remove(dto.ConnectionWhyIHandle);
 
-                if (dto.Action)
+                if (dto.Action == true)
                 {
                     // Se a ação for verdadeira, a conexão é aceita
                     UserConnection userConnection = new UserConnection

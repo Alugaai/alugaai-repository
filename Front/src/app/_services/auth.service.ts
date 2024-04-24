@@ -5,11 +5,10 @@ import { BehaviorSubject, map } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { ILogin } from '../_models/ILogin';
 import { IRegister } from '../_models/IRegister';
-import { IUserDetailsByEmail } from '../_models/IUserDetailsByEmail';
-
+import { IUserDetails } from '../_models/IUserDetails';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   baseUrl: string = environment.apiUrl;
@@ -41,11 +40,13 @@ export class AuthService {
   }
 
   registerStudent(user: IRegister) {
-    return this.http.post<any>(this.baseUrl + 'auth/register/student', user).pipe(
-      map((response) => {
-        return response;
-      })
-    );
+    return this.http
+      .post<any>(this.baseUrl + 'auth/register/student', user)
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
   }
 
   registerOwner(user: IRegister) {
@@ -58,10 +59,17 @@ export class AuthService {
 
   userDetailsByEmail(email: string) {
     return this.http.get<any>(this.baseUrl + `user/details/${email}`).pipe(
-      map((response: IUserDetailsByEmail) => {
+      map((response: IUserDetails) => {
         return response;
       })
     );
   }
 
+  userDetailsById() {
+    return this.http.get(`http://localhost:8002/user/details/detailsById`).pipe(
+      map((response) => {
+        console.log(response, 'userDetails');
+      })
+    );
+  }
 }

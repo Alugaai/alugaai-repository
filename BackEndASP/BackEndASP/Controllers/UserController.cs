@@ -1,6 +1,7 @@
 ﻿using BackEndASP.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BackEndASP.Controllers
 {
@@ -26,6 +27,20 @@ namespace BackEndASP.Controllers
             catch (ArgumentException e)
             {
                 return BadRequest("Email não encontrado");
+            }
+        }
+
+        [HttpGet("detailsById")]
+        public async Task<ActionResult<dynamic>> FindUserById()
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                return Ok(await _unitOfWork.UserRepository.FindUserById(userId));
+            }
+            catch (ArgumentException e)
+            {
+                return Ok(null);
             }
         }
     }

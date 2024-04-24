@@ -1,46 +1,49 @@
 <div class="wrapper" (click)="$event.stopPropagation()">
-    <div class="top-row">
-      <div class="img-container">
+  <div class="top-row">
+    <div class="img-container">
+      <img
+        *ngIf="userImage; else defaultImage"
+        class="image"
+        [src]="userImage"
+        alt=""
+        style="width: 80px; height: auto; border-radius: 50%"
+      />
+      <ng-template #defaultImage>
         <img
-          *ngIf="userImage; else defaultImage"
           class="image"
-          [src]="userImage"
+          src="../../../assets/images/unloadeduser.jpg"
           alt=""
-          style="width: 80px; height: auto; border-radius: 50%"
+          style="width: 40px; height: auto; border-radius: 50%"
         />
-        <ng-template #defaultImage>
-          <img
-            class="image"
-            src="../../../assets/images/unloadeduser.jpg"
-            alt=""
-            style="width: 40px; height: auto; border-radius: 50%"
-          />
-        </ng-template>
-      </div>
-      <div class="inside-row-holder">
-        <div class="first-row">
-          <!-- Tudo isso vai vim do banco ex: {{aluno.name}}-->
-          <div class="user-information">
-            <h3 class="grey-color">Lucas Finno</h3>
-            <h3 class="base-color">
-              - FACENS
-            </h3>
-          </div>
+      </ng-template>
+    </div>
+    <div class="inside-row-holder">
+      <div class="first-row">
+        <!-- Tudo isso vai vim do banco ex: {{aluno.name}}-->
+        <div class="user-information">
+          <h3 class="grey-color">
+            {{ studentsWhoInvitationsConnections?.username | uppercase }}
+          </h3>
+          <h3 class="base-color">
+            - {{ studentsWhoInvitationsConnections?.college | uppercase }}
+          </h3>
         </div>
-        <div class="second-row">
-          <h3 style="margin: 0px; margin-top: -10px;"class="base-color">Quer se conectar com você!</h3>
-          <div class="button-holder">
-            <div class="button-aceitar">
-                <h1 style="font-size: 12px;">Aceitar</h1>
-              </div>
-              <div class="button-rejeitar">
-                <h1 style="font-size: 12px;">Rejeitar</h1>
-              </div>
+      </div>
+      <div class="second-row">
+        <h3 style="margin: 0px; margin-top: -10px" class="base-color">
+          Quer se conectar com você!
+        </h3>
+        <div class="button-holder">
+          <div class="button-aceitar">
+            <h1 style="font-size: 12px">
+              <button (click)="accept()">Aceitar</button>
+            </h1>
           </div>
-          
+          <div class="button-rejeitar">
+            <h1 style="font-size: 12px">Rejeitar</h1>
+          </div>
         </div>
       </div>
     </div>
-   
   </div>
-  
+</div>

@@ -1,4 +1,5 @@
-﻿using BackEndASP.DTOs;
+﻿using AngleSharp.Attributes;
+using BackEndASP.DTOs;
 using BackEndASP.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,16 @@ namespace BackEndASP.Services
             var notification = await _dbContext.Notifications.AsNoTracking().FirstOrDefaultAsync(n => n.Id == notificationId) ?? throw new ArgumentException("This notification id does not exists");
             notification.Read = true;
             _dbContext.Notifications.Update(notification);
+        }
+
+        public async Task<int> CountNotificationNotRead(string userId)
+        {
+            var count = await _dbContext.Notifications
+                .Where(n => n.UserNotifications.Any(un => un.UserId == userId && !un.Notification.Read))
+                .CountAsync();
+
+            return count;
+
         }
     }
 }
