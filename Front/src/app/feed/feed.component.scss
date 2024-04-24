@@ -6,11 +6,16 @@
   height: 100vh;
   width: 100%;
 }
+.esquerda{
+  min-width: 665px;
+  width: fit-content;
+}
 
 .search-container {
   padding: 20px;
   display: flex;
   width: 100%;
+  min-width: 100%;
 }
 
 app-auto-complete {
