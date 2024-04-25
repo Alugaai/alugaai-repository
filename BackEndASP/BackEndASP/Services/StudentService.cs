@@ -245,14 +245,14 @@ namespace BackEndASP.Services
             return true;
         }
 
-        public async Task<bool> CompleteProfileStudentPersonalityes(string userId, StudentCompleteProfilePersonalityes dto)
+        public async Task<bool> CompleteProfileStudentPersonalityes(string userId, StudentCompleteProfilePersonalities dto)
         {
             var student = await _dbContext.Students.FindAsync(userId)
                 ?? throw new ArgumentException($"User with id {userId} does not exist");
 
-            if (dto.Personalitys.Count != 0)
+            if (dto.Personalities.Count != 0)
             {
-                foreach (string personality in dto.Personalitys)
+                foreach (string personality in dto.Personalities)
                 {
                     student.Personalitys.Add(personality);
                 }

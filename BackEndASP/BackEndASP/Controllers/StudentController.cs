@@ -152,7 +152,7 @@ namespace BackEndASP.Controllers
 
         [HttpPost("completeProfile/personalityes")]
         [Authorize(Policy = "StudentOnly")]
-        public async Task<ActionResult<dynamic>> CompleteProfilePersonalityes([FromBody] StudentCompleteProfilePersonalityes dto)
+        public async Task<ActionResult<dynamic>> CompleteProfilePersonalityes([FromBody] StudentCompleteProfilePersonalities dto)
         {
             try
             {

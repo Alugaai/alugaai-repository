@@ -16,7 +16,7 @@ namespace BackEndASP.Interfaces
         Task<bool> HandleConnection(string userId, StudentConnectionInsertDTO dto, int notificationId);
         Task<bool> CompleteProfileStudent(string userId, StudentCompleteProfileDTO dto);
         Task<bool> CompleteProfileStudentHobbies(string userId, StudentCompleteProfileHobbies dto);
-        Task<bool> CompleteProfileStudentPersonalityes(string userId, StudentCompleteProfilePersonalityes dto);
+        Task<bool> CompleteProfileStudentPersonalityes(string userId, StudentCompleteProfilePersonalities dto);
 
     }
 }
