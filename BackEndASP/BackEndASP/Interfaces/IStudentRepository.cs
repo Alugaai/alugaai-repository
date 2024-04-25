@@ -11,7 +11,7 @@ namespace BackEndASP.Interfaces
         Task<PagedList<StudentFindAllFilterDTO>> FindAllStudentsAsync(PageStudentQueryParams pageQueryParams, string userId);
 
         StudentsConnectionsDTO FindAllMyStudentsConnections(string userId);
-        StudentsConnectionsDTO FindMyAllStudentsWhoInvitationsConnections(string userId);
+        Task<IEnumerable<StudentResponseNotification>> FindMyAllStudentsWhoInvitationsConnections(string userId);
         Task GiveConnectionOrder(string userId, string studentForConnectionId);
         Task<bool> HandleConnection(string userId, StudentConnectionInsertDTO dto, int notificationId);
         Task<bool> CompleteProfileStudent(string userId, StudentCompleteProfileDTO dto);

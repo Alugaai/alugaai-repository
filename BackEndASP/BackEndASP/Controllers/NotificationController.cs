@@ -21,7 +21,7 @@ namespace BackEndASP.Controllers
 
 
         [HttpGet]
-        [Authorize(Policy = "StudentOrOwner")]
+        [Authorize(Policy = "StudentOnly")]
         public async Task<ActionResult<IEnumerable<NotificationDTO>>> GetNotifications()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -29,6 +29,27 @@ namespace BackEndASP.Controllers
 
 
         }
+
+        [HttpGet("count")]
+        [Authorize(Policy = "StudentOnly")]
+        public async Task<ActionResult<dynamic>> CountNotificationsNotRead()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var number = await _unitOfWorkRepository.NotificationRepository.CountNotificationNotRead(userId);
+            return Ok(number);
+
+        }
+
+        [HttpGet("{userWhoSendConnection}")]
+        [Authorize(Policy = "StudentOnly")]
+        public async Task<ActionResult<dynamic>> GetNotificationByUser(string userWhoSendConnection)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var number = await _unitOfWorkRepository.NotificationRepository.FindNotificationByUserId(userId, userWhoSendConnection);
+            return Ok(number);
+
+        }
+
 
         [HttpPut("{notificationId}")]
         public async Task<dynamic> ReadNotification(int notificationId)
@@ -43,6 +64,8 @@ namespace BackEndASP.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
 
     }
 }

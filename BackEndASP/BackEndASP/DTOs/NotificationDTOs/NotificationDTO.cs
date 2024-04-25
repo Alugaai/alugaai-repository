@@ -9,6 +9,8 @@
         public DateTimeOffset Moment { get; set; } = DateTimeOffset.Now;
 
         public bool Read { get; set; } = false;
+        public string UserWhoSend { get; set; }
+        public string UserWhoReceived { get; set; }
 
         public NotificationDTO() { }
 
@@ -18,6 +20,8 @@
             this.Text = entity.Text;    
             this.Moment = entity.Moment;
             this.Read = entity.Read;
+            this.UserWhoSend = entity.UserIdWhoSendNotification;
+            this.UserWhoReceived = entity.User.Id;
         }
 
     }

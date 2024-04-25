@@ -4,6 +4,7 @@
     {
 
         Task<dynamic> FindUserByEmail(string email);
+        Task<dynamic> FindUserById(string userId);
 
     }
 }
