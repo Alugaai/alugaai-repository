@@ -226,6 +226,44 @@ namespace BackEndASP.Services
             return true;
         }
 
+        public async Task<bool> CompleteProfileStudentHobbie(string userId, StudentCompleteProfileHobbies dto)
+        {
+            var student = await _dbContext.Students.FindAsync(userId)
+                ?? throw new ArgumentException($"User with id {userId} does not exist");
+
+            if (dto.Hobbies.Count != 0)
+            {
+                foreach(string hobbie in dto.Hobbies)
+                {
+                    student.Hobbies.Add(hobbie);
+                }
+            }
+
+            _dbContext.Students.Update(student);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> CompleteProfileStudentPersonalityes(string userId, StudentCompleteProfilePersonalityes dto)
+        {
+            var student = await _dbContext.Students.FindAsync(userId)
+                ?? throw new ArgumentException($"User with id {userId} does not exist");
+
+            if (dto.Personalitys.Count != 0)
+            {
+                foreach (string personality in dto.Personalitys)
+                {
+                    student.Personalitys.Add(personality);
+                }
+            }
+
+            _dbContext.Students.Update(student);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
         private async Task InsertDTOToStudentAsync(StudentCompleteProfileDTO dto, Student student)
         {
             if (dto.Username != null)
@@ -246,24 +284,6 @@ namespace BackEndASP.Services
             if (dto.PhoneNumber != null)
             {
                 student.PhoneNumber = dto.PhoneNumber;
-            }
-
-            if (dto.Hobbies.Count != 0)
-            {
-                student.Hobbies.Clear();
-                foreach (string hobbie in dto.Hobbies)
-                {
-                    student.Hobbies.Add(hobbie);
-                }
-            }
-
-            if (dto.Personalitys.Count != 0)
-            {
-                student.Personalitys.Clear();
-                foreach (string personalitys in dto.Personalitys)
-                {
-                    student.Personalitys.Add(personalitys);
-                }
             }
 
             if (dto.CollegeId != 0)

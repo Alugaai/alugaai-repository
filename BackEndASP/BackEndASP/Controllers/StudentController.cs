@@ -122,7 +122,45 @@ namespace BackEndASP.Controllers
 
                 var result = await _unitOfWorkRepository.StudentRepository.CompleteProfileStudent(userId, dto);
                 await _unitOfWorkRepository.CommitAsync();
-                return Ok("Student profile completed successfully");
+                return Ok(new ResponseForStringMessagesInControllerDTO() { Message = "Perfil do estudante atualizado com sucesso" });
+
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPost("completeProfile/hobbies")]
+        [Authorize(Policy = "StudentOnly")]
+        public async Task<ActionResult<dynamic>> CompleteProfileHobbies([FromBody] StudentCompleteProfileHobbies dto)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                var result = await _unitOfWorkRepository.StudentRepository.CompleteProfileStudentHobbies(userId, dto);
+                await _unitOfWorkRepository.CommitAsync();
+                return Ok(new ResponseForStringMessagesInControllerDTO() { Message = "Hobbies adicionados com sucesso" });
+
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPost("completeProfile/personalityes")]
+        [Authorize(Policy = "StudentOnly")]
+        public async Task<ActionResult<dynamic>> CompleteProfilePersonalityes([FromBody] StudentCompleteProfilePersonalityes dto)
+        {
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                var result = await _unitOfWorkRepository.StudentRepository.CompleteProfileStudentPersonalityes(userId, dto);
+                await _unitOfWorkRepository.CommitAsync();
+                return Ok(new ResponseForStringMessagesInControllerDTO() { Message = "Personalidades adicionadas com sucesso"});
 
             }
             catch (ArgumentException ex)
