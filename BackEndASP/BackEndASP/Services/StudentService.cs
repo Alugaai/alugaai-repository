@@ -90,13 +90,13 @@ namespace BackEndASP.Services
             Student user = _dbContext.Students.AsNoTracking().FirstOrDefault(s => s.Id == userId)
                            ?? throw new ArgumentException($"This id {userId} does not exist");
 
-            var userNotificationIds = _dbContext.UserNotifications
-                .Where(un => un.UserId == userId)
-                .Select(un => un.NotificationId)
+            var userNotificationIds = _dbContext.Notifications
+                .Include(n => n.User)
+                .Where(n => n.User.Id == userId)
+                .Select(n => n.Id)
                 .ToList();
 
             var studentsWithPendentConnections = new List<Student>();
-
             if (user.PendentsConnectionsId.Any())
             {
                 // Filtra os estudantes com base nos IDs pendentes de conexão do usuário
@@ -115,25 +115,30 @@ namespace BackEndASP.Services
         // adicionando o ID de um estudante como pedido de conexão
         public async Task GiveConnectionOrder(string userId, string studentForConnectionId)
         {
-            Student studentForConnection = await _dbContext.Students.FindAsync(studentForConnectionId)
+            Student studentForConnection = await _dbContext.Students.Include(u => u.Notifications).FirstOrDefaultAsync(u => u.Id == studentForConnectionId)
                 ?? throw new ArgumentException($"User with id {studentForConnectionId} does not exist");
 
-            var user = await _dbContext.Users.FindAsync(userId)
+            var user = await _dbContext.Students.Include(u => u.Notifications).FirstOrDefaultAsync(u => u.Id == userId)
                 ?? throw new ArgumentException($"User with id {userId} does not exist");
 
-            var userNotification = new UserNotifications
+            // Verificar se o usuário que está enviando o pedido já está salvo nas notificações do usuário receptor
+            if (studentForConnection.Notifications.Any(n => n.UserIdWhoSendNotification == userId && !n.Read))
             {
+                throw new ArgumentException($"You already have send connection for this user, await");
+            }
+
+
+            Notification notification = new Notification
+            {
+                UserIdWhoSendNotification = user.Id,
                 User = user,
-                Notification = new Notification
-                {
-                    Moment = DateTimeOffset.Now,
-                    Read = false,
-                    Text = $"O usuário {user.UserName.ToUpper()} enviou a você um pedido de conexão!"
-                }
+                Moment = DateTimeOffset.Now,
+                Read = false,
+                Text = $"O usuário {user.UserName.ToUpper()} enviou a você um pedido de conexão!"
             };
 
             // Add the UserNotification to the appropriate collections
-            studentForConnection.UserNotifications.Add(userNotification);
+            studentForConnection.Notifications.Add(notification);
             studentForConnection.PendentsConnectionsId.Add(userId);
             _dbContext.Update(studentForConnection);
         }
@@ -144,7 +149,7 @@ namespace BackEndASP.Services
         {
             // Encontrar o estudante atual
             Student actualStudent = await _dbContext.Students
-                .Include(s => s.UserNotifications)
+                .Include(s => s.Notifications)
                 .FirstOrDefaultAsync(s => s.Id == userId)
                 ?? throw new ArgumentException($"This id {userId} does not exist");
 
@@ -161,7 +166,7 @@ namespace BackEndASP.Services
             {
                 actualStudent.PendentsConnectionsId.Remove(dto.ConnectionWhyIHandle);
 
-                if (dto.Action == true)
+                if (dto.Action)
                 {
                     // Se a ação for verdadeira, a conexão é aceita
                     UserConnection userConnection = new UserConnection
@@ -170,9 +175,16 @@ namespace BackEndASP.Services
                         OtherStudentId = dto.ConnectionWhyIHandle
                     };
 
+                    // Adicionar a notificação ao conjunto de notificações do outro estudante
+                    Student otherStudent = await _dbContext.Students
+                                               .FirstOrDefaultAsync(s => s.Id == dto.ConnectionWhyIHandle)
+                                           ?? throw new ArgumentException($"This id {userId} does not exist");
+
                     // Criar a notificação
                     Notification sendNotificationForUser = new Notification
                     {
+                        UserIdWhoSendNotification = actualStudent.Id,
+                        User = otherStudent,
                         Moment = DateTimeOffset.Now,
                         Read = false,
                         Text = $"O usuário {actualStudent.UserName.ToUpper()} aceitou o seu pedido de conexão!"
@@ -183,20 +195,6 @@ namespace BackEndASP.Services
 
                     // Salvar as alterações para obter o ID da notificação atribuído automaticamente
                     await _dbContext.SaveChangesAsync();
-
-                    // Criar o relacionamento entre o usuário e a notificação
-                    var userNotification = new UserNotifications
-                    {
-                        UserId = dto.ConnectionWhyIHandle,
-                        NotificationId = sendNotificationForUser.Id // Usar o ID atribuído da nova notificação
-                    };
-
-                    // Adicionar a notificação ao conjunto de notificações do outro estudante
-                    Student otherStudent = await _dbContext.Students
-                        .FirstOrDefaultAsync(s => s.Id == dto.ConnectionWhyIHandle)
-                        ?? throw new ArgumentException($"This id {userId} does not exist");
-
-                    otherStudent.UserNotifications.Add(userNotification);
 
                     // Adicionar a nova conexão ao contexto do banco de dados
                     await _dbContext.UserConnections.AddAsync(userConnection);

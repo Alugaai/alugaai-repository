@@ -42,7 +42,6 @@ using Microsoft.EntityFrameworkCore.Storage;
         public DbSet<User> Users { get; set; }
         public DbSet<PropertyStudentLikes> StudentPropertiesLikes { get; set; }
         public DbSet<UserConnection> UserConnections { get; set; }
-        public DbSet<UserNotifications> UserNotifications { get; set; }
 
 
     [Obsolete]
@@ -251,21 +250,9 @@ using Microsoft.EntityFrameworkCore.Storage;
             .OnDelete(DeleteBehavior.Restrict);
 
 
-
-        modelBuilder.Entity<UserNotifications>()
-            .HasKey(un => new { un.UserId, un.NotificationId });
-
-
         modelBuilder.Entity<User>()
-            .HasMany(u => u.UserNotifications)
-            .WithOne(un => un.User);
-
-        modelBuilder.Entity<Notification>()
-            .HasMany(n => n.UserNotifications)
-            .WithOne(us => us.Notification);
-
-
-
+            .HasMany(u => u.Notifications)
+            .WithOne(n => n.User);
     }
 
 }

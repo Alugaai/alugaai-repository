@@ -17,7 +17,7 @@ namespace BackEndASP.Services
 
         public async Task<IEnumerable<NotificationDTO>> GetNotifications(string userId)
         {
-            var notifications = await _dbContext.Notifications.Include(n => n.UserNotifications.Where(un => un.UserId == userId)).AsNoTracking().ToListAsync();
+            var notifications = await _dbContext.Notifications.Include(n => n.User).Where(n => n.User.Id == userId).AsNoTracking().ToListAsync();
             return notifications.Select(n => new NotificationDTO(n)).ToList();
         }
 
@@ -31,11 +31,19 @@ namespace BackEndASP.Services
         public async Task<int> CountNotificationNotRead(string userId)
         {
             var count = await _dbContext.Notifications
-                .Where(n => n.UserNotifications.Any(un => un.UserId == userId && !un.Notification.Read))
+                .Include(n => n.User)
+                .Where(n => n.User.Id == userId && !n.Read)
                 .CountAsync();
 
             return count;
 
+        }
+
+
+        public async Task<NotificationDTO> FindNotificationByUserId(string userId, string userWhoSendConnection)
+        {
+            var notification = await _dbContext.Notifications.Include(n => n.User).FirstOrDefaultAsync(n => n.User.Id == userId && !n.Read && n.UserIdWhoSendNotification == userWhoSendConnection);
+            return new NotificationDTO(notification);
         }
     }
 }

@@ -24,8 +24,7 @@ namespace BackEndASP.Services
             if (user.GetType() == typeof(Owner))
             {
                 var owner = await _dbContext.Owners
-                    .Include(p => p.UserNotifications)
-                    .ThenInclude(un => un.Notification)
+                    .Include(p => p.Notifications)
                     .Include(p => p.Properties)
                     .Include(p => p.Image)
                     .SingleOrDefaultAsync(u => u.Email.Contains(email)) ?? throw new ArgumentException("Esse email nao existe");
@@ -34,8 +33,7 @@ namespace BackEndASP.Services
             else if (user.GetType() == typeof(Student))
             {
                 var student = await _dbContext.Students
-                    .Include(s => s.UserNotifications)
-                    .ThenInclude(un => un.Notification)
+                    .Include(s => s.Notifications)
                     .Include(s => s.Image)
                     .Include(s => s.Connections)
                     .Include(s => s.PropertiesLikes)
@@ -56,8 +54,7 @@ namespace BackEndASP.Services
             if (user.GetType() == typeof(Owner))
             {
                 var owner = await _dbContext.Owners
-                    .Include(p => p.UserNotifications)
-                    .ThenInclude(un => un.Notification)
+                    .Include(p => p.Notifications)
                     .Include(p => p.Properties)
                     .Include(p => p.Image)
                     .SingleOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException("Esse id nao existe");
@@ -66,8 +63,7 @@ namespace BackEndASP.Services
             else if (user.GetType() == typeof(Student))
             {
                 var student = await _dbContext.Students
-                    .Include(s => s.UserNotifications)
-                    .ThenInclude(un => un.Notification)
+                    .Include(s => s.Notifications)
                     .Include(s => s.Image)
                     .Include(s => s.Connections)
                     .Include(s => s.PropertiesLikes)

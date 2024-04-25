@@ -40,6 +40,15 @@ namespace BackEndASP.Controllers
 
         }
 
+        [HttpGet("{userWhoSendConnection}")]
+        [Authorize(Policy = "StudentOnly")]
+        public async Task<ActionResult<dynamic>> GetNotificationByUser(string userWhoSendConnection)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var number = await _unitOfWorkRepository.NotificationRepository.FindNotificationByUserId(userId, userWhoSendConnection);
+            return Ok(number);
+
+        }
 
 
         [HttpPut("{notificationId}")]
@@ -55,6 +64,8 @@ namespace BackEndASP.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
 
     }
 }

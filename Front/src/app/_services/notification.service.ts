@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { IStudentsWhoInvitationsConnections } from '../_models/IStudentsWhoInvitationsConnections';
+import { INotification } from '../_models/INotification';
 
 @Injectable({
   providedIn: 'root',
@@ -25,17 +26,25 @@ export class NotificationService {
       .pipe(map((response) => response));
   }
 
-  acceptConnection(
+  getNotificationWhoStudentSendConnection(userWhoSendConnection: string) {
+    return this.http
+      .get<INotification>(
+        `${this.baseUrl}notifications/${userWhoSendConnection}`
+      )
+      .pipe(map((response) => response));
+  }
+
+  acceptNotification(
     notificationId: number,
     acceptConnection: IAcceptConnection
   ) {
     return this.http
-      .post<IAcceptConnection>(`${this.baseUrl}students/${notificationId}`, {
-        acceptConnection,
-      })
-      .pipe(map((response) => {
-        console.log(response);
-        return response;
-      }));
+      .post<any>(`${this.baseUrl}students/${notificationId}`, acceptConnection)
+      .pipe(
+        map((response) => {
+          console.log(response.message);
+          return response;
+        })
+      );
   }
 }

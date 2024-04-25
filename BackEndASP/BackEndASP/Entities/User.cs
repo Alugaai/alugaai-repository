@@ -16,6 +16,6 @@ public class User : IdentityUser
     public int? ImageId { get; set; }
     public Image? Image { get; set; }
 
-    public ICollection<UserNotifications>? UserNotifications { get; set; } = new List<UserNotifications>();
+    public ICollection<Notification>? Notifications { get; set; } = new List<Notification>();
 
 }

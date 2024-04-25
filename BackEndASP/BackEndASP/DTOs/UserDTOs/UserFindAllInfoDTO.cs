@@ -29,7 +29,7 @@ namespace BackEndASP.DTOs
             this.Email = entity.Email;
             this.BirthDate = entity.BirthDate;
             this.ImageUser = entity.Image != null ? new ImageUserDTO(entity.Image) : null;
-            this.Notification = entity.UserNotifications != null ? entity.UserNotifications.Select(un => new NotificationDTO(un.Notification)).ToList() : null;
+            this.Notification = entity.Notifications != null ? entity.Notifications.Select(n => new NotificationDTO(n)).ToList() : null;
             this.Gender = entity.Gender != null ? entity.Gender : null;
         }
 

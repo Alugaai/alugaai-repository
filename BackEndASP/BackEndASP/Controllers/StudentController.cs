@@ -101,9 +101,9 @@ namespace BackEndASP.Controllers
                 await _unitOfWorkRepository.CommitAsync();
                 if (!result)
                 {
-                    return BadRequest("Connection refused");
+                    return BadRequest(new ResponseForStringMessagesInControllerDTO() {Message = "Conexão recusada!"});
                 }
-                return Ok("Connection accepted");
+                return Ok(new ResponseForStringMessagesInControllerDTO() {Message = "Conexão aceita com sucesso!"});
                 
             } catch (ArgumentException ex)
             {

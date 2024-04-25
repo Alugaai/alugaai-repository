@@ -10,7 +10,8 @@ public class Notification
         public DateTimeOffset Moment { get; set; } = DateTimeOffset.Now;
 
         public bool Read { get; set; } = false;
+        public string UserIdWhoSendNotification { get; set; }
 
-        public ICollection<UserNotifications>? UserNotifications { get; set; } = new List<UserNotifications>();
+        public User User { get; set; }
 }
 

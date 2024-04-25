@@ -1,29 +1,32 @@
 import { NotificationService } from './../../_services/notification.service';
-import { Component, Input } from '@angular/core';
-import { IStudent } from '../../_models/IStudent';
+import { Component, Input, DoCheck, OnChanges, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { IStudentsWhoInvitationsConnections } from '../../_models/IStudentsWhoInvitationsConnections';
+import { INotification } from '../../_models/INotification';
+import { ToastrService } from 'ngx-toastr';
+import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-notifications-card',
   templateUrl: './notifications-card.component.html',
   styleUrl: './notifications-card.component.scss',
 })
-export class NotificationsCardComponent {
+export class NotificationsCardComponent implements OnInit {
   @Input()
   studentsWhoInvitationsConnections?: IStudentsWhoInvitationsConnections;
+  notification?: INotification;
   constructor(
     private sanitizer: DomSanitizer,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private toastr: ToastrService
   ) {}
+  ngOnInit(): void {
+    this.getNotification();
+    this.startImage();
+  }
 
   userImage: SafeUrl = '';
   base64: string = 'data:image/png;base64,';
-
-  ngOnChanges() {
-    this.startImage();
-    console.log(this.studentsWhoInvitationsConnections);
-  }
 
   startImage() {
     if (this.studentsWhoInvitationsConnections?.imageUser) {
@@ -34,22 +37,31 @@ export class NotificationsCardComponent {
     }
   }
 
+  getNotification() {
+    this.notificationService
+      .getNotificationWhoStudentSendConnection(
+        this.studentsWhoInvitationsConnections!.id
+      )
+      .subscribe({
+        next: (response) => {
+          this.notification = response;
+          console.log(this.notification);
+        },
+      });
+  }
+
   accept() {
-    if (this.studentsWhoInvitationsConnections) {
-      const notificationId =
-        this.studentsWhoInvitationsConnections.notificationsIds?.[0];
-      if (notificationId) {
-        this.notificationService
-          .acceptConnection(notificationId, {
-            connectionWhyIHandle: this.studentsWhoInvitationsConnections.id,
-            action: true,
-          })
-          .subscribe({
-            next: (response) => {
-              this.studentsWhoInvitationsConnections = undefined;
-            },
-          });
-      }
-    }
+    this.notificationService
+      .acceptNotification(this.notification!.id, {
+        connectionWhyIHandle: this.notification!.userWhoSend,
+        action: true,
+      })
+      .subscribe({
+        next: (response) => {
+          if (response.message) {
+            this.toastr.success(response.message);
+          }
+        },
+      });
   }
 }
