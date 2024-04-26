@@ -17,6 +17,7 @@ import { StudentService } from '../_services/student.service';
 import { IPagination } from '../_models/IPagination';
 import { IStudent } from '../_models/IStudent';
 import { ILocationFilterCity } from '../_models/ILocationFilterCity';
+import { IAges } from '../_components/range-slider-filter/range-slider-filter.component';
 
 @Component({
   selector: 'app-feed',
@@ -290,16 +291,17 @@ export class FeedComponent implements AfterViewInit, OnInit {
     }
   }
 
-  // Função para filtrar a localização inicial
-  filterInitialLocation() {
-    this.coordinates = new google.maps.LatLng(this.lat, this.lng);
-
-    this.mapOptions.center = this.coordinates;
-
-    this.mapInitializer();
+  // Função para filtrar a idade
+  onAgeChangeFilter(ages: IAges) {
+    if (ages.initialAge) {
+      this.filter.initialAge = ages.initialAge;
+    }
+    if (ages.finalAge) {
+      this.filter.finalAge = ages.finalAge;
+    }
   }
 
-
+  // Função para filtrar as proriedades
   filterProperty() {
     this.propertyService.filterProperty().subscribe({
       next: (response) => {
@@ -386,9 +388,11 @@ export class FeedComponent implements AfterViewInit, OnInit {
 
 
   filterStudent() {
+    this.coordinates = new google.maps.LatLng(this.lat, this.lng);
+    this.mapOptions.center = this.coordinates;
+    this.mapInitializer();
     this.studentService.filterStudent(this.filter).subscribe({
       next: (response) => {
-        console.log(response);
         if (response.result && response.pagination) {
           this.students = response.result;
           this.pagination = response.pagination;
@@ -397,10 +401,8 @@ export class FeedComponent implements AfterViewInit, OnInit {
     });
   }
 
-
   onInteressesChange(interesses: string[]) {
     this.filter.interests = interesses;
-    console.log(this.filter.interests);
   }
 
   pageChanged(event: any) {

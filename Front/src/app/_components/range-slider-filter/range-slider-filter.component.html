@@ -1,8 +1,8 @@
 <div class="filter-wrapper">
-    <p style="font-size: 16px; font-weight: 500;">Filtrar por idade</p>
-    <!-- Add more menu items here if needed -->
-    <mat-slider min="0" max="100" discrete (input)="onInputChange($event)">
-        <input value={{startValue}} matSliderStartThumb>
-        <input value={{endValue}} matSliderEndThumb>
-    </mat-slider>
+  <p style="font-size: 16px; font-weight: 500">Filtrar por idade</p>
+  <!-- Add more menu items here if needed -->
+  <mat-slider min="0" max="100" discrete (input)="onInputChange($event)">
+    <input value="{{ age.initialAge }}" matSliderStartThumb />
+    <input value="{{ age.finalAge }}" matSliderEndThumb />
+  </mat-slider>
 </div>
