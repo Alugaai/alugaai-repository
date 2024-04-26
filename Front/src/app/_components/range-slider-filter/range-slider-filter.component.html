@@ -1,0 +1,24 @@
+<div class="filter-wrapper">
+    <div class="idade-row">
+        <p><b>Idade</b></p>
+        <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
+
+    </div>
+
+    <mat-menu  #menu="matMenu" yPosition="below" xPosition="before" disableRipple>
+        <div class="stop-propagation" (click)="$event.stopPropagation()">
+            <!-- Add more menu items here if needed -->
+            <p>Intervalo de Idade</p>   
+            <mat-slider min="0" max="100" discrete [disableRipple]="null" (input)="onInputChange($event)">
+                <input value={{startValue}}  matSliderStartThumb>
+                <input value={{endValue}}  matSliderEndThumb>
+            </mat-slider>
+
+            <p>{{startValue}}</p>
+            <p>{{endValue}}</p>
+        </div>
+    </mat-menu>
+
+
+
+</div>

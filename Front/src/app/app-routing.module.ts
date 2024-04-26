@@ -12,6 +12,8 @@ import { AutoCompleteComponent } from './_components/auto-complete/auto-complete
 import { StudentCompleteProfileComponent } from './complete-profile/student-complete-profile/student-complete-profile.component';
 import { authGuard } from './_guards/auth.guard';
 import { NotificationsCardComponent } from './_components/notifications-card/notifications-card.component';
+import { RangeSliderFilterComponent } from './_components/range-slider-filter/range-slider-filter.component';
+
 
 
 const routes: Routes = [
@@ -68,7 +70,12 @@ const routes: Routes = [
   {
     path: 'perfil/estudante',
     component: StudentCompleteProfileComponent
-  }
+  },
+  {
+    path: 'rangeslider',
+    component: RangeSliderFilterComponent
+  },
+
 ];
 
 @NgModule({

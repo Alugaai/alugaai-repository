@@ -1,20 +1,11 @@
 <div class="wrapper">
   <div class="top-row">
     <div class="img-container">
-      <img
-        *ngIf="userImage; else defaultImage"
-        class="image"
-        [src]="userImage"
-        alt=""
-        style="width: 80px; height: auto; border-radius: 50%"
-      />
+      <img *ngIf="userImage; else defaultImage" class="image" [src]="userImage" alt=""
+        style="width: 80px; height: auto; border-radius: 50%" />
       <ng-template #defaultImage>
-        <img
-          class="image"
-          src="../../../assets/images/unloadeduser.jpg"
-          alt=""
-          style="width: 80px; height: auto; border-radius: 50%"
-        />
+        <img class="image" src="../../../assets/images/unloadeduser.jpg" alt=""
+          style="width: 80px; height: auto; border-radius: 50%" />
       </ng-template>
     </div>
     <div class="inside-row-holder">

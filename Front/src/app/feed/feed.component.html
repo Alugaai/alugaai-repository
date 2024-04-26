@@ -7,7 +7,12 @@
       <button (click)="filterStudent()" class="search-button">
         <i class="fas fa-search"></i>
       </button>
+      
     </div>
+    <div class="range-slider">
+      <app-range-slider-filter></app-range-slider-filter>
+    </div>
+    
     <div class="feed-card">
       <app-feed-card
         *ngFor="let student of students"
