@@ -12,23 +12,7 @@
               <h2>Dados da conta</h2>
               <br />
               <p><b>Nome completo</b></p>
-              <div>
-                <label for="fullname">Nome Completo:</label><br />
-                <input
-                  class="form-input"
-                  type="text"
-                  placeholder="{{ user?.username }}"
-                  formControlName="username"
-                  [class.is-invalid]="studentForm.get('username')?.errors"
-                  value="{{ user?.username }}"
-                />
-                <div
-                  *ngIf="studentForm.get('username')?.hasError('maxlength')"
-                  class="invalid-feedback"
-                >
-                  O nome deve ter no máximo 250 caracteres
-                </div>
-              </div>
+              <input type="text" class="input-t" placeholder="Seu Nome" />
               <br /><br />
               <p><b>E-mail</b></p>
               <input type="text" class="input-t" placeholder="Seu telefone" />

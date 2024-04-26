@@ -226,7 +226,7 @@ namespace BackEndASP.Services
             return true;
         }
 
-        public async Task<bool> CompleteProfileStudentHobbie(string userId, StudentCompleteProfileHobbies dto)
+        public async Task<bool> CompleteProfileStudentHobbies(string userId, StudentCompleteProfileHobbies dto)
         {
             var student = await _dbContext.Students.FindAsync(userId)
                 ?? throw new ArgumentException($"User with id {userId} does not exist");
@@ -245,7 +245,7 @@ namespace BackEndASP.Services
             return true;
         }
 
-        public async Task<bool> CompleteProfileStudentPersonalityes(string userId, StudentCompleteProfilePersonalities dto)
+        public async Task<bool> CompleteProfileStudentPersonalities(string userId, StudentCompleteProfilePersonalities dto)
         {
             var student = await _dbContext.Students.FindAsync(userId)
                 ?? throw new ArgumentException($"User with id {userId} does not exist");

@@ -150,15 +150,15 @@ namespace BackEndASP.Controllers
             }
         }
 
-        [HttpPost("completeProfile/personalityes")]
+        [HttpPost("completeProfile/personalities")]
         [Authorize(Policy = "StudentOnly")]
-        public async Task<ActionResult<dynamic>> CompleteProfilePersonalityes([FromBody] StudentCompleteProfilePersonalities dto)
+        public async Task<ActionResult<dynamic>> CompleteProfilePersonalities([FromBody] StudentCompleteProfilePersonalities dto)
         {
             try
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-                var result = await _unitOfWorkRepository.StudentRepository.CompleteProfileStudentPersonalityes(userId, dto);
+                var result = await _unitOfWorkRepository.StudentRepository.CompleteProfileStudentPersonalities(userId, dto);
                 await _unitOfWorkRepository.CommitAsync();
                 return Ok(new ResponseForStringMessagesInControllerDTO() { Message = "Personalidades adicionadas com sucesso"});
 
