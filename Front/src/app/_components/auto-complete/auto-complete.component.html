@@ -1,6 +1,6 @@
 <form>
   <mat-form-field class="example-chip-list">
-    <mat-label style="font-size: 20px">Pesquisar por interesses</mat-label>
+    <mat-label style="font-size: 20px">Filtrar por interesses</mat-label>
     <mat-chip-grid #chipGrid aria-label="interesse selection">
       @for (interesse of interesses; track interesse) {
       <mat-chip-row *ngIf="interesse && interesse.trim() != ''" class="teste" (removed)="remove(interesse)">

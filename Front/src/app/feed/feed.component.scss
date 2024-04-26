@@ -12,7 +12,6 @@
 }
 
 .search-container {
-  padding: 20px;
   display: flex;
   width: 100%;
   min-width: 100%;
@@ -46,8 +45,34 @@ app-auto-complete {
   border-radius: 0 10px 10px 0;
   height: inherit;
 }
-.range-slider{
+
+.filter-holder{
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+}
+
+.autocomplete-place{
+  width: fit-content;
+  height: 56px
+}
+.rangeSlider-Autocomplete-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-button{
+  background-color: var(--primary-orange-color);
+  color: white;
+  font-size: 20px;
+  padding: 15px;
+  border: solid 1px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: fit-content;
 }
 
 

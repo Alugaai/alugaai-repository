@@ -10,7 +10,7 @@ export class PlaceAutocompleteComponent implements AfterViewInit{
 
   @ViewChild('inputField') inputField?: ElementRef;
 
-  @Input() placeholder = '';
+  @Input() placeholder = 'Filtrar por local';
 
   @Output() initialLocationFilter = new EventEmitter<ILocationFilterCity>();
 

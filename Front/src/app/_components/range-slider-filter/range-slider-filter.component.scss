@@ -4,19 +4,17 @@ p{
 .idade-row{
     display: flex;
     justify-content: space-between;
-    width: 100px;
+    width: 150px;
 }
 .filter-wrapper{
     width: fit-content;
-    background-color: rgb(238, 238, 238);
-    padding: 10px;
+    flex-direction: column;
+    display: flex;
 }
 
-.stop-propagation{
-    padding: 20px;
-}
+
 mat-slider {
-    width: 150px;
+    width: 300px;
   }
 
 ::ng-deep html{

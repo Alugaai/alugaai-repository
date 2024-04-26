@@ -1,44 +1,31 @@
 <div class="body">
   <div class="esquerda">
-    <div class="search-container">
-      <app-auto-complete
-        (interessesChange)="onInteressesChange($event)"
-      ></app-auto-complete>
-      <button (click)="filterStudent()" class="search-button">
-        <i class="fas fa-search"></i>
-      </button>
-      
+    <div class="filter-holder">
+      <div class="search-container">
+        <app-auto-complete (interessesChange)="onInteressesChange($event)"></app-auto-complete>
+
+      </div>
+      <div class="rangeSlider-Autocomplete-row">
+        <div class="range-slider">
+          <app-range-slider-filter></app-range-slider-filter>
+        </div>
+
+        <div class="autocomplete-place">
+          <app-place-autocomplete (initialLocationFilter)="onInitialLocationFilter($event)"></app-place-autocomplete>
+        </div>
+      </div>
+      <button class="search-button">Filtrar</button>
     </div>
-    <div class="range-slider">
-      <app-range-slider-filter></app-range-slider-filter>
-    </div>
-    
     <div class="feed-card">
-      <app-feed-card
-        *ngFor="let student of students"
-        [student]="student"
-      ></app-feed-card>
+      <app-feed-card *ngFor="let student of students" [student]="student"></app-feed-card>
     </div>
     <div class="d-flex justify-content-center">
-      <pagination
-        [boundaryLinks]="true"
-        [totalItems]="pagination?.totalItems!"
-        [itemsPerPage]="pagination?.itemsPerPage!"
-        [maxSize]="10"
-        (pageChanged)="pageChanged($event)"
-        previousText="&lsaquo;"
-        nextText="&rsaquo;"
-        firstText="&laquo;"
-        lastText="&raquo;"
-      >
+      <pagination [boundaryLinks]="true" [totalItems]="pagination?.totalItems!"
+        [itemsPerPage]="pagination?.itemsPerPage!" [maxSize]="10" (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
       </pagination>
     </div>
-    <app-place-autocomplete
-      (initialLocationFilter)="onInitialLocationFilter($event)"
-    ></app-place-autocomplete>
-    <button (click)="filterInitialLocation()" class="search-button">
-      <i class="fas fa-search"></i>
-    </button>
+
   </div>
   <div #gmapContainer id="map"></div>
 </div>

@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './range-slider-filter.component.scss'
 })
 export class RangeSliderFilterComponent {
-  startValue: number = 25;
-  endValue: number = 75;
+  startValue: number = 0;
+  endValue: number = 50;
 
   onInputChange(event: Event) {
     // Cast the event target to HTMLInputElement

@@ -46,6 +46,7 @@ import { NotificationsCardComponent } from './_components/notifications-card/not
 import {MatSliderModule} from '@angular/material/slider';
 import { RangeSliderFilterComponent } from './_components/range-slider-filter/range-slider-filter.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +92,7 @@ import { RangeSliderFilterComponent } from './_components/range-slider-filter/ra
     MatInputModule,
     MatBadgeModule,
     MatMenuModule,
-    MatSliderModule
+    MatSliderModule,
   ],
   providers: [
     provideClientHydration(),
