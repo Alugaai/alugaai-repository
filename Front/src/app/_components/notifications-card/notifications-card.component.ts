@@ -1,5 +1,13 @@
 import { NotificationService } from './../../_services/notification.service';
-import { Component, Input, DoCheck, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  Input,
+  DoCheck,
+  OnChanges,
+  OnInit,
+  Output,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { IStudentsWhoInvitationsConnections } from '../../_models/IStudentsWhoInvitationsConnections';
 import { INotification } from '../../_models/INotification';
@@ -17,8 +25,7 @@ export class NotificationsCardComponent implements OnInit {
   notification?: INotification;
   constructor(
     private sanitizer: DomSanitizer,
-    private notificationService: NotificationService,
-    private toastr: ToastrService
+    private notificationService: NotificationService
   ) {}
   ngOnInit(): void {
     this.getNotification();
@@ -50,17 +57,15 @@ export class NotificationsCardComponent implements OnInit {
       });
   }
 
-  accept() {
+  acceptOrResuce(condition: boolean) {
     this.notificationService
       .acceptNotification(this.notification!.id, {
         connectionWhyIHandle: this.notification!.userWhoSend,
-        action: true,
+        action: condition,
       })
       .subscribe({
         next: (response) => {
-          if (response.message) {
-            this.toastr.success(response.message);
-          }
+          console.log(response);
         },
       });
   }

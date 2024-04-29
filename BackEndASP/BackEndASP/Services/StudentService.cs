@@ -27,8 +27,32 @@ namespace BackEndASP.Services
             DateTime finalAge = DateTime.Now.AddYears(-pageQueryParams.FinalAge);
 
 
-            IQueryable<Student> query = _dbContext.Students.Include(s => s.College).AsNoTracking();
+            IQueryable<Student> query = _dbContext.Students.Include(s => s.College)
+                .Include(s => s.Connections)
+                .Include(s => s.Notifications);
 
+
+            // controle do conectar
+            var userInPendents = _dbContext.Students.ToList();
+
+            List<string> userInPendentsId = new List<string>();
+
+            foreach (var user in userInPendents)
+            {
+                if (user.PendentsConnectionsId.Any())
+                {
+                    foreach (var id in user.PendentsConnectionsId)
+                    {
+                        userInPendentsId.Add(id);
+                    }
+                }
+            }
+
+            // controle do conectar
+            query = query.Where(s =>
+                !s.PendentsConnectionsId.Any(p => userInPendentsId.Contains(p)) &&
+                !(s.Notifications.Any(n => userInPendentsId.Contains(n.UserIdWhoSendNotification) && !n.Read)) &&
+                !s.Connections.Any(c => c.StudentId == userId && c.OtherStudentId == userId));
 
             if (pageQueryParams.OwnCollege)
             {

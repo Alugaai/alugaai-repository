@@ -75,7 +75,10 @@ namespace BackEndASP.Controllers
                 await _unitOfWorkRepository.CommitAsync();
 
                 // QUANDO TIVER O GETBYID REFATORAR AQUI PARA CREATEDATACTION
-                return Ok("Order sent successfully");
+                return Ok(new ResponseForStringMessagesInControllerDTO()
+                {
+                    Message = "Order sent successfully"
+                });
             }
             catch (ArgumentException ex)
             {

@@ -11,7 +11,7 @@ import { IStudentsWhoInvitationsConnections } from '../../_models/IStudentsWhoIn
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements AfterViewInit {
+export class HeaderComponent implements AfterViewInit, OnInit {
   [x: string]: any;
   userLogged: boolean = false;
   userRole: Array<string> = [];
@@ -42,6 +42,12 @@ export class HeaderComponent implements AfterViewInit {
         }
       },
     });
+  }
+  ngOnInit(): void {
+    this.findUserDetails();
+    if (this.userLogged) {
+      this.getStudentsWhoInvitationsConnections();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -94,6 +100,11 @@ export class HeaderComponent implements AfterViewInit {
         console.log(error);
       },
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/auth/login', {});
   }
 
   //Função que deixa a badge invisivel (se o user clicar ela fica invisivel, seta a variavel pra true e zera o numero de notificacao)

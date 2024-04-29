@@ -46,7 +46,7 @@
                 <span class="gray-color">Suporte</span>
               </button>
               <hr style="margin-top: 5px; margin-bottom: 5px" />
-              <button mat-menu-item>Sair</button>
+              <button (click)="logout()" mat-menu-item>Sair</button>
             </div>
           </mat-menu>
           <button class="menu-button" [matMenuTriggerFor]="menuNotification">

@@ -5,14 +5,16 @@ import { IUserToken } from './_models/IUserToken';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit{
-
+export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   setUserLogged() {
-    const userString = localStorage.getItem('user');
+    let userString;
+    if (typeof localStorage != 'undefined') {
+      userString = localStorage.getItem('user');
+    }
     if (!userString) {
       return;
     }

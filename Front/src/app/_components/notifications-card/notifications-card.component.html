@@ -36,14 +36,20 @@
         <div class="button-holder">
           <button
             class="button-aceitar"
-            style="font-size: 12px; border: none;"
-            (click)="accept()"
+            style="font-size: 12px; border: none"
+            (click)="acceptOrResuce(true)"
           >
             Aceitar
           </button>
 
           <div class="button-rejeitar">
-            <h1 style="font-size: 12px">Rejeitar</h1>
+            <button
+              class="button-aceitar"
+              style="font-size: 12px; border: none"
+              (click)="acceptOrResuce(false)"
+            >
+              Recusar
+            </button>
           </div>
         </div>
       </div>

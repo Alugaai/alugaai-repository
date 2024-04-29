@@ -1,3 +1,4 @@
+import { NotificationService } from './../_services/notification.service';
 import { IFilterStudent } from './../_models/IFilterStudent';
 import {
   AfterViewInit,
@@ -18,15 +19,18 @@ import { IPagination } from '../_models/IPagination';
 import { IStudent } from '../_models/IStudent';
 import { ILocationFilterCity } from '../_models/ILocationFilterCity';
 import { IAges } from '../_components/range-slider-filter/range-slider-filter.component';
+import { IStudentsWhoInvitationsConnections } from '../_models/IStudentsWhoInvitationsConnections';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements AfterViewInit, OnInit {
+export class FeedComponent implements AfterViewInit {
   markersProperty: IResponseProperty[] = [];
   markersCollege: ICollegeResponse[] = [];
+  studentsWhoInvitationsConnections: Array<IStudentsWhoInvitationsConnections> =
+    [];
 
   lat = -23.4709;
   lng = -47.4851;
@@ -34,7 +38,7 @@ export class FeedComponent implements AfterViewInit, OnInit {
   pageSize: number = 1;
   pagination?: IPagination;
 
-  students: Array<IStudent> = [  ];
+  students: Array<IStudent> = [];
 
   filter: IFilterStudent = {
     name: '',
@@ -50,21 +54,13 @@ export class FeedComponent implements AfterViewInit, OnInit {
     private propertyService: PropertyService,
     private dialog: MatDialog,
     private collegeService: CollegeService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private notificationService: NotificationService
   ) {}
-
-
-
-
-  ngOnInit(): void {
-    this.filterStudent();
-  }
-
 
   title = 'angular-gmap';
   @ViewChild('gmapContainer', { static: false }) mapContainer?: ElementRef;
   map?: google.maps.Map;
-
 
   coordinates = new google.maps.LatLng(this.lat, this.lng);
 
@@ -269,7 +265,28 @@ export class FeedComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.mapInitializer();
+    this.filterStudent();
+    this.getMyInvitationsForConnections();
   }
+
+  // filtrar pedidos de conexão
+  // pega todos os pedidos de conexão que o usuário logado recebeu, para que eu possa não mostrar ele mesmo na lista de estudantes
+  getMyInvitationsForConnections() {
+    this.notificationService.getStudentsWhoInvitationsConnections().subscribe({
+      next: (response) => {
+        this.studentsWhoInvitationsConnections = response.result;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  isStudentInInvitationsConnections(studentId: string): boolean {
+    return this.studentsWhoInvitationsConnections.some(
+      (connection) => connection.id === studentId
+    );
+  }
+  ///
 
   mapInitializer() {
     this.map = new google.maps.Map(
@@ -279,7 +296,6 @@ export class FeedComponent implements AfterViewInit, OnInit {
     this.filterProperty();
     this.getColleges();
   }
-
 
   // Função para filtrar a localização inicial
   onInitialLocationFilter(location: ILocationFilterCity) {
@@ -376,8 +392,7 @@ export class FeedComponent implements AfterViewInit, OnInit {
         }
       },
     });
-  };
-
+  }
 
   markerClickHandler(property: IResponseProperty | ICollegeResponse) {
     this.dialog.open(FeedBadgeClickedComponent, {
@@ -385,7 +400,6 @@ export class FeedComponent implements AfterViewInit, OnInit {
       width: '500px',
     });
   }
-
 
   filterStudent() {
     this.coordinates = new google.maps.LatLng(this.lat, this.lng);
@@ -411,8 +425,4 @@ export class FeedComponent implements AfterViewInit, OnInit {
       this.filterStudent();
     }
   }
-
 }
-
-
-
