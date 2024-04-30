@@ -5,13 +5,14 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../_services/notification.service';
 import { IStudentsWhoInvitationsConnections } from '../../_models/IStudentsWhoInvitationsConnections';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements AfterViewInit, OnInit {
+export class HeaderComponent implements OnInit {
   [x: string]: any;
   userLogged: boolean = false;
   userRole: Array<string> = [];
@@ -25,37 +26,44 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   badgeHidden: boolean = false;
   isMenuOpen: boolean = false;
 
+
+  private userTokenSubscription: Subscription | undefined;
+  private notificationSubscription: Subscription | undefined;
+
   constructor(
     private authService: AuthService,
     private sanitizer: DomSanitizer,
     private router: Router,
     private notificationServer: NotificationService
   ) {
-    this.authService.userLoggedToken$.subscribe({
-      next: (userToken) => {
-        this.userLogged = userToken !== null ? true : false;
-        if (userToken?.role) {
-          this.userRole = userToken.role;
-        }
-        if (userToken?.email) {
-          this.email = userToken.email;
-        }
-      },
-    });
+
   }
   ngOnInit(): void {
-    this.findUserDetails();
-    if (this.userLogged) {
-      this.getStudentsWhoInvitationsConnections();
+    this.userTokenSubscription = this.authService.userLoggedToken$.subscribe(userToken => {
+      this.userLogged = !!userToken;
+      if (userToken) {
+        this.email = userToken.email;
+        this.findUserDetails();
+        this.countNotifications();
+      } else {
+        this.clearUserData();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userTokenSubscription) {
+      this.userTokenSubscription.unsubscribe();
     }
   }
 
-  ngAfterViewInit(): void {
-    this.findUserDetails();
-    if (this.userLogged) {
-      this.getStudentsWhoInvitationsConnections();
-    }
+  clearUserData(): void {
+    this.userDetails = undefined; // reset user details
+    this.userImage = ''; // Reset user image
+    this.email = ''; // Reset email
   }
+
+
 
   findUserDetails() {
     this.authService.userDetailsByEmail(this.email).subscribe({
