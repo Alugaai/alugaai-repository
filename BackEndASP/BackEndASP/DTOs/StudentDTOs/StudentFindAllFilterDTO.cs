@@ -1,4 +1,5 @@
 ﻿using BackEndASP.DTOs.ImageDTOs;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BackEndASP.DTOs.StudentDTOs
 {
@@ -8,7 +9,7 @@ namespace BackEndASP.DTOs.StudentDTOs
         public string Name { get; set; }
         public string Email { get; set; }
         public int Age { get; set; }
-        public string College { get; set; }
+        public string College { get; set; } = "";
         public ImageUserDTO Image { get; set; }
         public List<string> Hobbies { get; set; } = new List<string>();
         public List<string> Personalitys { get; set; } = new List<string>();
@@ -27,7 +28,7 @@ namespace BackEndASP.DTOs.StudentDTOs
             this.Name = entity.UserName.ToUpper();
             this.Email = entity.Email;
             this.Age = CalcAge(entity.BirthDate, DateTimeOffset.Now);
-            this.College = entity.College.Name ?? "";
+            this.College = entity.College == null ? "" : entity.College.Name;
             this.Image = entity.Image != null ? new ImageUserDTO(entity.Image) : null;
             this.Hobbies = entity.Hobbies.ToList();
             this.Personalitys = entity.Personalitys.ToList();
