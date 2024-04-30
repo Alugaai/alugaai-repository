@@ -40,7 +40,7 @@
       <mat-chip *ngFor="let hobbie of student?.hobbies">{{ hobbie }}</mat-chip>
     </mat-chip-set>
   </div>
-  <div *ngIf="userLogged" class="button">
-    <button (click)="connect()">Conectar</button>
+  <div *ngIf="userLogged">
+    <button class="button"(click)="connect()">Conectar</button>
   </div>
 </div>

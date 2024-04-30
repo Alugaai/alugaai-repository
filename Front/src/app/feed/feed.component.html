@@ -19,7 +19,9 @@
           ></app-place-autocomplete>
         </div>
       </div>
-      <button (click)="filterStudent()" class="search-button">Filtrar</button>
+      <div class="button-wrapper">
+        <button (click)="filterStudent()" class="search-button">Filtrar</button>
+      </div>
     </div>
     <div class="feed-card">
       <ng-container *ngFor="let student of students">

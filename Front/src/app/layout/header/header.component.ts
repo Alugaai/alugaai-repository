@@ -84,7 +84,8 @@ export class HeaderComponent implements OnInit {
     this.userImage = ''; // Reset user image
     this.email = ''; // Reset email
     this.notificationCounter = 0; // Reset notification counter
-  this.studentsWhoInvitationsConnections = []; // Reset connections
+    this.studentsWhoInvitationsConnections = []; // Reset connections
+    this.userRole = [];
   }
 
 

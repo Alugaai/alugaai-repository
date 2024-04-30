@@ -36,15 +36,7 @@ app-auto-complete {
   text-decoration: none;
   
 }
-.search-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  background-color: var(--primary-orange-color);
-  color: white;
-  border-radius: 0 10px 10px 0;
-  height: inherit;
-}
+
 
 .filter-holder{
   padding: 20px;
@@ -68,11 +60,16 @@ app-auto-complete {
   background-color: var(--primary-orange-color);
   color: white;
   font-size: 20px;
-  padding: 15px;
+  padding: 20px;
   border: solid 1px;
   border-radius: 5px;
   cursor: pointer;
   width: fit-content;
+}
+
+.button-wrapper{
+  display: flex;
+  justify-content: end;
 }
 
 
