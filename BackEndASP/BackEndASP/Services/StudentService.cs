@@ -49,10 +49,13 @@ namespace BackEndASP.Services
             }
 
             // controle do conectar
-            query = query.Where(s =>
+            if (userId != null)
+            {
+                query = query.Where(s =>
                 !s.PendentsConnectionsId.Any(p => userInPendentsId.Contains(p)) &&
                 !(s.Notifications.Any(n => userInPendentsId.Contains(n.UserIdWhoSendNotification) && !n.Read)) &&
                 !s.Connections.Any(c => c.StudentId == userId && c.OtherStudentId == userId));
+            }
 
             if (pageQueryParams.OwnCollege)
             {

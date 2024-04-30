@@ -14,6 +14,7 @@ import { INotification } from '../../_models/INotification';
 import { ToastrService } from 'ngx-toastr';
 import { EventEmitter } from 'stream';
 import { ComponentUpdateService } from '../../_services/component-update.service';
+import { NotificationUpdateService } from '../../_services/notification-update.service';
 
 @Component({
   selector: 'app-notifications-card',
@@ -27,7 +28,8 @@ export class NotificationsCardComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private notificationService: NotificationService,
-    private componentUpdate: ComponentUpdateService
+    private notificationUpdateService: NotificationUpdateService,
+    private componentUpdateService: ComponentUpdateService
   ) {}
   ngOnInit(): void {
     this.getNotification();
@@ -59,7 +61,7 @@ export class NotificationsCardComponent implements OnInit {
       });
   }
 
-  acceptOrResuce(condition: boolean) {
+  acceptOrRescue(condition: boolean) {
     this.notificationService
       .acceptNotification(this.notification!.id, {
         connectionWhyIHandle: this.notification!.userWhoSend,
@@ -68,9 +70,18 @@ export class NotificationsCardComponent implements OnInit {
       .subscribe({
         next: (response) => {
           console.log(response);
-          // comunicação com o pai
-          this.componentUpdate.triggerConnectUpdate();
+          // Comunicação com o serviço de atualização de notificações
+          this.notificationUpdateService.triggerConnectUpdate();
+
+          // Se a notificação foi recusada, atualize o feed novamente
+          if (condition == false) {
+            this.componentUpdateService.triggerConnectUpdate();
+          }
+        },
+        error: (error) => {
+          console.log(error);
         },
       });
   }
+
 }

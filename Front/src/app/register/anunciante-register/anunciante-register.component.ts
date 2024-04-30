@@ -46,9 +46,19 @@ export class AnuncianteRegisterComponent {
     });
   }
 
-  onSubmit(){
-    console.log(this.anuncianteForm.value);
-    this.anuncianteForm.reset();
+  register() {
+    if (this.anuncianteForm.valid) {
+      this.anunciante = this.anuncianteForm.value;
+      if (this.anunciante) {
+        this.authService.registerOwner(this.anunciante).subscribe({
+          next: (response: any) => {
+            console.log(response);
+            this.toastr.success('Anunciante criado com sucesso!');
+            this.router.navigate(['/entrar']);
+          },
+        });
+      }
+    }
   }
 
 }

@@ -157,7 +157,11 @@
           <br /><br />
         </div>
         <div class="button-wrapper">
-          <button class="submit-button" [disabled]="!anuncianteForm.valid">
+          <button
+            class="submit-button"
+            [disabled]="!anuncianteForm.valid"
+            (click)="register()"
+          >
             Cadastre-se
           </button>
         </div>

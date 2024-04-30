@@ -76,9 +76,10 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
         this.getMyInvitationsForConnections();
       }
   });
-    this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
-      this.filterStudent(); // Atualize a lista de estudantes
-    });
+  this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
+    this.filterStudent(); // Atualize a lista de estudantes
+  });
+
   }
 
   ngOnDestroy(): void {

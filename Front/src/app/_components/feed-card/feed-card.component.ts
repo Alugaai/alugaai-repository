@@ -1,22 +1,31 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { IStudent } from '../../_models/IStudent';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { StudentService } from '../../_services/student.service';
 import { NotificationService } from '../../_services/notification.service';
 import { ComponentUpdateService } from '../../_services/component-update.service';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-feed-card',
   templateUrl: './feed-card.component.html',
   styleUrl: './feed-card.component.scss',
 })
-export class FeedCardComponent {
+export class FeedCardComponent implements OnInit{
   @Input() student?: IStudent;
+  userLogged: boolean = false;
   constructor(
     private sanitizer: DomSanitizer,
     private studentService: StudentService,
-    private componentUpdate: ComponentUpdateService
+    private componentUpdate: ComponentUpdateService,
+    private authService: AuthService
   ) {}
+
+  ngOnInit(): void {
+    this.authService.userLoggedToken$.subscribe((userToken) => {
+      this.userLogged = !!userToken;
+    });
+  }
 
   userImage: SafeUrl = '';
   base64: string = 'data:image/png;base64,';
@@ -35,11 +44,13 @@ export class FeedCardComponent {
   }
 
   connect() {
-    this.studentService.connect(this.student!.id).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.componentUpdate.triggerConnectUpdate(); // Dispara a atualização no FeedComponent
-      },
-    });
+    if (this.userLogged) {
+      this.studentService.connect(this.student!.id).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.componentUpdate.triggerConnectUpdate(); // Dispara a atualização no FeedComponent
+        },
+      });
+    }
   }
 }

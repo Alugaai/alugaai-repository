@@ -7,6 +7,7 @@ import { NotificationService } from '../../_services/notification.service';
 import { IStudentsWhoInvitationsConnections } from '../../_models/IStudentsWhoInvitationsConnections';
 import { Subscription } from 'rxjs';
 import { ComponentUpdateService } from '../../_services/component-update.service';
+import { NotificationUpdateService } from '../../_services/notification-update.service';
 
 @Component({
   selector: 'app-header',
@@ -29,9 +30,8 @@ export class HeaderComponent implements OnInit {
 
 
   private userTokenSubscription: Subscription | undefined;
-
   // atualização dinamica escutando o filho
-  private componentUpdateSubscription: Subscription | undefined;
+  private noticatonUpdateSubscription: Subscription | undefined;
 
 
   constructor(
@@ -39,6 +39,7 @@ export class HeaderComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private router: Router,
     private notificationServer: NotificationService,
+    private noticatonUpdateService: NotificationUpdateService,
     private componentUpdateService: ComponentUpdateService
   ) {
   }
@@ -46,15 +47,22 @@ export class HeaderComponent implements OnInit {
     this.userTokenSubscription = this.authService.userLoggedToken$.subscribe(userToken => {
       this.userLogged = !!userToken;
       if (userToken) {
-        this.countNotifications();
+        this.userRole = userToken.role;
+        if (this.userRole.includes('Student' || 'Admin')) {
+          this.countNotifications();
         this.getStudentsWhoInvitationsConnections();
+        }
         this.email = userToken.email;
-        this.findUserDetails();
+        if (this.userRole.includes('Student' || 'Owner')) {
+          this.findUserDetails();
+        }
         // atualização dinamica escutando o filho
-        this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
-        this.countNotifications();
-        this.getStudentsWhoInvitationsConnections();
-        });
+        if (this.userRole.includes('Student' || 'Admin')) {
+          this.noticatonUpdateSubscription = this.noticatonUpdateService.notificationUpdate$.subscribe(() => {
+            this.countNotifications();
+            this.getStudentsWhoInvitationsConnections();
+          });
+        }
         //
       } else {
         this.clearUserData();
@@ -67,15 +75,18 @@ export class HeaderComponent implements OnInit {
       this.userTokenSubscription.unsubscribe();
     }
     // atualização dinamica escutando o filho, destruindo a comunicação
-    if (this.componentUpdateSubscription) {
-      this.componentUpdateSubscription.unsubscribe();
+    if (this.noticatonUpdateSubscription) {
+      this.noticatonUpdateSubscription.unsubscribe();
     }
+
   }
 
   clearUserData(): void {
     this.userDetails = undefined; // reset user details
     this.userImage = ''; // Reset user image
     this.email = ''; // Reset email
+    this.notificationCounter = 0; // Reset notification counter
+  this.studentsWhoInvitationsConnections = []; // Reset connections
   }
 
 
@@ -91,6 +102,7 @@ export class HeaderComponent implements OnInit {
       },
     });
   }
+
 
   startImage() {
     if (this.userDetails?.imageUser) {
@@ -127,7 +139,8 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigateByUrl('/auth/login', {});
+    this.userLogged = false; // Atualiza o estado de autenticação após o logout
+    this.componentUpdateService.triggerConnectUpdate(); // Dispara a atualização no FeedComponent
   }
 
   //Função que deixa a badge invisivel (se o user clicar ela fica invisivel, seta a variavel pra true e zera o numero de notificacao)
