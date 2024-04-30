@@ -202,31 +202,35 @@ namespace BackEndASP.Services
                         OtherStudentId = dto.ConnectionWhyIHandle
                     };
 
+
                     // Adicionar a notificação ao conjunto de notificações do outro estudante
                     Student otherStudent = await _dbContext.Students
                                                .FirstOrDefaultAsync(s => s.Id == dto.ConnectionWhyIHandle)
-                                           ?? throw new ArgumentException($"This id {userId} does not exist");
+                                          ?? throw new ArgumentException($"This id {userId} does not exist");
+
 
                     // Criar a notificação
-                    Notification sendNotificationForUser = new Notification
-                    {
-                        UserIdWhoSendNotification = actualStudent.Id,
-                        User = otherStudent,
-                        Moment = DateTimeOffset.Now,
-                        Read = false,
-                        Text = $"O usuário {actualStudent.UserName.ToUpper()} aceitou o seu pedido de conexão!"
-                    };
+                    // Notification sendNotificationForUser = new Notification
+                    //{
+                    //    UserIdWhoSendNotification = actualStudent.Id,
+                     //   User = otherStudent,
+                     //   Moment = DateTimeOffset.Now,
+                    //    Read = false,
+                     //   Text = $"O usuário {actualStudent.UserName.ToUpper()} aceitou o seu pedido de conexão!"
+                    //};
 
                     // Adicionar a notificação ao contexto do banco de dados
-                    _dbContext.Notifications.Add(sendNotificationForUser);
+                    //_dbContext.Notifications.Add(sendNotificationForUser);
 
                     // Salvar as alterações para obter o ID da notificação atribuído automaticamente
-                    await _dbContext.SaveChangesAsync();
 
                     // Adicionar a nova conexão ao contexto do banco de dados
                     await _dbContext.UserConnections.AddAsync(userConnection);
                     _dbContext.Students.Update(otherStudent);
+                    await _dbContext.SaveChangesAsync();
                 }
+
+                
 
                 // Atualizar o estudante atual no contexto do banco de dados
                 _dbContext.Students.Update(actualStudent);

@@ -24,6 +24,7 @@ import { IStudentsWhoInvitationsConnections } from '../_models/IStudentsWhoInvit
 import { Subscription } from 'rxjs';
 import { ComponentUpdateService } from '../_services/component-update.service';
 import { AuthService } from '../_services/auth.service';
+import { IUserDetails } from '../_models/IUserDetails';
 
 @Component({
   selector: 'app-feed',
@@ -41,6 +42,8 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
 
   pageSize: number = 1;
   pagination?: IPagination;
+
+  userDetails?: IUserDetails;
 
   students: Array<IStudent> = [];
 
@@ -74,6 +77,11 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
       this.userLogged = !!userToken;
       if (userToken) {
         this.getMyInvitationsForConnections();
+        this.authService.userDetailsByEmail(userToken.email).subscribe({
+          next: (response) => {
+            this.userDetails = response;
+          },
+        });
       }
   });
   this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
@@ -442,11 +450,36 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
     this.studentService.filterStudent(this.filter).subscribe({
       next: (response) => {
         if (response.result && response.pagination) {
-          this.students = response.result;
+          const filteredStudents = response.result.filter(student => {
+            // Verificar se o estudante não está nas conexões do usuário logado
+            return !this.isStudentInConnections(student.id);
+          });
+
+          if (this.userLogged) {
+            // Adicionar apenas os estudantes que não estão nas conexões do usuário logado
+            this.students = filteredStudents;
+          } else {
+            // Se o usuário não estiver logado, adiciona todos os estudantes filtrados
+            this.students = response.result;
+          }
+
           this.pagination = response.pagination;
         }
       },
+      error: (error) => {
+        console.log(error);
+      },
     });
+  }
+
+  // Método para verificar se o estudante está nas conexões do usuário logado
+  isStudentInConnections(studentId: string): boolean {
+    if (this.userDetails?.connections) {
+      return this.userDetails.connections.some(
+        (connection) => connection.otherStudentId === studentId
+      );
+    }
+    return false;
   }
 
   onInteressesChange(interesses: string[]) {
