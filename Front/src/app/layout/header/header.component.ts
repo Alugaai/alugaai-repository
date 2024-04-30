@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { IUserDetails } from '../../_models/IUserDetails';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -28,15 +28,13 @@ export class HeaderComponent implements OnInit {
 
 
   private userTokenSubscription: Subscription | undefined;
-  private notificationSubscription: Subscription | undefined;
 
   constructor(
     private authService: AuthService,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private notificationServer: NotificationService
+    private notificationServer: NotificationService,
   ) {
-
   }
   ngOnInit(): void {
     this.userTokenSubscription = this.authService.userLoggedToken$.subscribe(userToken => {

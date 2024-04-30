@@ -45,6 +45,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { NotificationsCardComponent } from './_components/notifications-card/notifications-card.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { RangeSliderFilterComponent } from './_components/range-slider-filter/range-slider-filter.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { RangeSliderFilterComponent } from './_components/range-slider-filter/ra
     StudentCompleteProfileComponent,
     NotificationsCardComponent,
     RangeSliderFilterComponent,
+
 
   ],
   imports: [
@@ -93,6 +95,7 @@ import { RangeSliderFilterComponent } from './_components/range-slider-filter/ra
     MatBadgeModule,
     MatMenuModule,
     MatSliderModule,
+    MatRadioModule,
   ],
   providers: [
     provideClientHydration(),

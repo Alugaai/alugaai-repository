@@ -29,3 +29,11 @@ $borderColor: #D0D5DD;
 label{
     font-weight: 500;
 }
+.submit-button{
+    background-color: var(--primary-orange-color);
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 70%;
+    border-radius: 5px;
+}
