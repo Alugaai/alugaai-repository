@@ -161,7 +161,8 @@ using System.Security.Claims;
                     RefreshToken = refreshToken,
                     Expiration = token.ValidTo,
                     Email = user.Email!,
-                    Role = userRoles
+                    Role = userRoles,
+                    Id = user.Id
                 });
             }
 

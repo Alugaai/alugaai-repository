@@ -53,9 +53,7 @@ export class HeaderComponent implements OnInit {
         this.getStudentsWhoInvitationsConnections();
         }
         this.email = userToken.email;
-        if (this.userRole.includes('Student' || 'Owner')) {
-          this.findUserDetails();
-        }
+        this.findUserDetails();
         // atualização dinamica escutando o filho
         if (this.userRole.includes('Student' || 'Admin')) {
           this.noticatonUpdateSubscription = this.noticatonUpdateService.notificationUpdate$.subscribe(() => {
@@ -102,7 +100,6 @@ export class HeaderComponent implements OnInit {
       },
     });
   }
-
 
   startImage() {
     if (this.userDetails?.imageUser) {

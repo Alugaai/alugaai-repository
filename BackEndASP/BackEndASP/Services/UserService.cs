@@ -40,8 +40,12 @@ namespace BackEndASP.Services
                     .Include(s => s.College)
                     .SingleOrDefaultAsync(u => u.Email.Contains(email)) ?? throw new ArgumentException("Esse email nao existe");
                 return new StudentResponseForFindByEmail((Student)student);
+            } else if (user.Email == "admin@gmail.com")
+            {
+                return new UserFindAllInfoDTO(user);
             }
             
+
 
             throw new ArgumentException("Esse email nao existe");
         }
