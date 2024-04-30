@@ -68,6 +68,7 @@ export class NotificationsCardComponent implements OnInit {
       .subscribe({
         next: (response) => {
           console.log(response);
+          // comunicação com o pai
           this.componentUpdate.triggerConnectUpdate();
         },
       });

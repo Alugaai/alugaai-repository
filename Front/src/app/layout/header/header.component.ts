@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit {
 
 
   private userTokenSubscription: Subscription | undefined;
+
+  // atualização dinamica escutando o filho
   private componentUpdateSubscription: Subscription | undefined;
 
 
@@ -48,10 +50,12 @@ export class HeaderComponent implements OnInit {
         this.getStudentsWhoInvitationsConnections();
         this.email = userToken.email;
         this.findUserDetails();
+        // atualização dinamica escutando o filho
         this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
         this.countNotifications();
         this.getStudentsWhoInvitationsConnections();
         });
+        //
       } else {
         this.clearUserData();
       }
@@ -62,6 +66,7 @@ export class HeaderComponent implements OnInit {
     if (this.userTokenSubscription) {
       this.userTokenSubscription.unsubscribe();
     }
+    // atualização dinamica escutando o filho, destruindo a comunicação
     if (this.componentUpdateSubscription) {
       this.componentUpdateSubscription.unsubscribe();
     }
