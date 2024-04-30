@@ -23,6 +23,7 @@ import { IAges } from '../_components/range-slider-filter/range-slider-filter.co
 import { IStudentsWhoInvitationsConnections } from '../_models/IStudentsWhoInvitationsConnections';
 import { Subscription } from 'rxjs';
 import { ComponentUpdateService } from '../_services/component-update.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-feed',
@@ -53,7 +54,10 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
     pageSize: this.pageSize,
   };
 
+  userLogged: boolean = false;
+
   private componentUpdateSubscription: Subscription | undefined;
+  private userTokenSubscription: Subscription | undefined;
 
   constructor(
     private propertyService: PropertyService,
@@ -61,10 +65,17 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
     private collegeService: CollegeService,
     private studentService: StudentService,
     private notificationService: NotificationService,
-    private componentUpdateService: ComponentUpdateService
+    private componentUpdateService: ComponentUpdateService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.userTokenSubscription = this.authService.userLoggedToken$.subscribe(userToken => {
+      this.userLogged = !!userToken;
+      if (userToken) {
+        this.getMyInvitationsForConnections();
+      }
+  });
     this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
       this.filterStudent(); // Atualize a lista de estudantes
     });
@@ -73,6 +84,9 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.componentUpdateSubscription) {
       this.componentUpdateSubscription.unsubscribe();
+    }
+    if (this.userTokenSubscription) {
+      this.userTokenSubscription.unsubscribe();
     }
   }
 
@@ -285,7 +299,7 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   ngAfterViewInit() {
     this.mapInitializer();
     this.filterStudent();
-    this.getMyInvitationsForConnections();
+    console.log(this.students);
   }
 
   // filtrar pedidos de conexão
