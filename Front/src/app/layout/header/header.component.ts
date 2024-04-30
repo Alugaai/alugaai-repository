@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, DoCheck } from '@angular/core';
+import { AfterViewInit, Component, OnInit, DoCheck , ChangeDetectorRef} from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
 import { IUserDetails } from '../../_models/IUserDetails';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -29,7 +29,8 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     private authService: AuthService,
     private sanitizer: DomSanitizer,
     private router: Router,
-    private notificationServer: NotificationService
+    private notificationServer: NotificationService,
+    private cd: ChangeDetectorRef
   ) {
     this.authService.userLoggedToken$.subscribe({
       next: (userToken) => {
@@ -39,6 +40,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
         }
         if (userToken?.email) {
           this.email = userToken.email;
+          this.cd.detectChanges()
         }
       },
     });
