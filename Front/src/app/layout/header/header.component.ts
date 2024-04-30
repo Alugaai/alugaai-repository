@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../../_services/notification.service';
 import { IStudentsWhoInvitationsConnections } from '../../_models/IStudentsWhoInvitationsConnections';
 import { Subscription } from 'rxjs';
+import { ComponentUpdateService } from '../../_services/component-update.service';
 
 @Component({
   selector: 'app-header',
@@ -28,21 +29,29 @@ export class HeaderComponent implements OnInit {
 
 
   private userTokenSubscription: Subscription | undefined;
+  private componentUpdateSubscription: Subscription | undefined;
+
 
   constructor(
     private authService: AuthService,
     private sanitizer: DomSanitizer,
     private router: Router,
     private notificationServer: NotificationService,
+    private componentUpdateService: ComponentUpdateService
   ) {
   }
   ngOnInit(): void {
     this.userTokenSubscription = this.authService.userLoggedToken$.subscribe(userToken => {
       this.userLogged = !!userToken;
       if (userToken) {
+        this.countNotifications();
+        this.getStudentsWhoInvitationsConnections();
         this.email = userToken.email;
         this.findUserDetails();
+        this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
         this.countNotifications();
+        this.getStudentsWhoInvitationsConnections();
+        });
       } else {
         this.clearUserData();
       }
@@ -52,6 +61,9 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy(): void {
     if (this.userTokenSubscription) {
       this.userTokenSubscription.unsubscribe();
+    }
+    if (this.componentUpdateSubscription) {
+      this.componentUpdateSubscription.unsubscribe();
     }
   }
 

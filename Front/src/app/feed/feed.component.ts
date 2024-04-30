@@ -5,6 +5,7 @@ import {
   Component,
   DoCheck,
   ElementRef,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -20,13 +21,15 @@ import { IStudent } from '../_models/IStudent';
 import { ILocationFilterCity } from '../_models/ILocationFilterCity';
 import { IAges } from '../_components/range-slider-filter/range-slider-filter.component';
 import { IStudentsWhoInvitationsConnections } from '../_models/IStudentsWhoInvitationsConnections';
+import { Subscription } from 'rxjs';
+import { ComponentUpdateService } from '../_services/component-update.service';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements AfterViewInit {
+export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   markersProperty: IResponseProperty[] = [];
   markersCollege: ICollegeResponse[] = [];
   studentsWhoInvitationsConnections: Array<IStudentsWhoInvitationsConnections> =
@@ -50,13 +53,29 @@ export class FeedComponent implements AfterViewInit {
     pageSize: this.pageSize,
   };
 
+  private componentUpdateSubscription: Subscription | undefined;
+
   constructor(
     private propertyService: PropertyService,
     private dialog: MatDialog,
     private collegeService: CollegeService,
     private studentService: StudentService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private componentUpdateService: ComponentUpdateService
   ) {}
+
+  ngOnInit(): void {
+    this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
+      this.filterStudent(); // Atualize a lista de estudantes
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.componentUpdateSubscription) {
+      this.componentUpdateSubscription.unsubscribe();
+    }
+  }
+
 
   title = 'angular-gmap';
   @ViewChild('gmapContainer', { static: false }) mapContainer?: ElementRef;

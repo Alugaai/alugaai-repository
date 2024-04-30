@@ -13,6 +13,7 @@ import { IStudentsWhoInvitationsConnections } from '../../_models/IStudentsWhoIn
 import { INotification } from '../../_models/INotification';
 import { ToastrService } from 'ngx-toastr';
 import { EventEmitter } from 'stream';
+import { ComponentUpdateService } from '../../_services/component-update.service';
 
 @Component({
   selector: 'app-notifications-card',
@@ -25,7 +26,8 @@ export class NotificationsCardComponent implements OnInit {
   notification?: INotification;
   constructor(
     private sanitizer: DomSanitizer,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private componentUpdate: ComponentUpdateService
   ) {}
   ngOnInit(): void {
     this.getNotification();
@@ -66,6 +68,7 @@ export class NotificationsCardComponent implements OnInit {
       .subscribe({
         next: (response) => {
           console.log(response);
+          this.componentUpdate.triggerConnectUpdate();
         },
       });
   }
