@@ -107,8 +107,9 @@ namespace BackEndASP.Migrations
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageId = table.Column<int>(type: "int", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
-                    Personalitys = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Personalities = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Hobbies = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdsPersonsIConnect = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PendentsConnectionsId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CollegeId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -222,7 +223,7 @@ namespace BackEndASP.Migrations
                         column: x => x.OtherStudentId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserConnections_AspNetUsers_StudentId",
                         column: x => x.StudentId,
@@ -289,8 +290,8 @@ namespace BackEndASP.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "BirthDate", "ConcurrencyStamp", "CreatedDate", "Discriminator", "Email", "EmailConfirmed", "Gender", "ImageId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "4fd5fa77-9638-4ff9-995d-1bda0a03d6f6", 0, new DateTimeOffset(new DateTime(2024, 4, 28, 22, 39, 17, 841, DateTimeKind.Unspecified).AddTicks(5386), new TimeSpan(0, -3, 0, 0, 0)), "6d6e6358-1248-4d38-b1fe-8da3d999f2f0", new DateTimeOffset(new DateTime(2024, 4, 29, 1, 39, 17, 780, DateTimeKind.Unspecified).AddTicks(9857), new TimeSpan(0, 0, 0, 0, 0)), "Owner", "owner@gmail.com", true, null, null, false, null, "OWNER@GMAIL.COM", "OWNER", "AQAAAAIAAYagAAAAEN5KrcH8BYpL4l1FaLb5B7KJD+wFW7LXs99MVVSmtQNG+H8VIyA7H+Ca5YIR2OTVJA==", "999999999", true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "cb055240-107f-4e60-8233-f59c38db1ed0", false, "Owner" },
-                    { "706c6c0a-0674-46f0-8b62-b838925dd39b", 0, new DateTimeOffset(new DateTime(2024, 4, 28, 22, 39, 17, 780, DateTimeKind.Unspecified).AddTicks(9461), new TimeSpan(0, -3, 0, 0, 0)), "f245e1be-58d6-4cf8-8ff8-eb057c634397", new DateTimeOffset(new DateTime(2024, 4, 29, 1, 39, 17, 721, DateTimeKind.Unspecified).AddTicks(4822), new TimeSpan(0, 0, 0, 0, 0)), "User", "admin@gmail.com", true, null, null, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAENj67RyyIyFRaIL1UU01Ko4IFqWz8YX/Bzd992EMh2Q2tE+IDu6ek963NWaBm4N0CQ==", "999999999", true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ef2feafc-761d-40ff-84c9-521d60f8eb15", false, "Admin" }
+                    { "1a9ccd1f-4180-4d62-834a-db1ddc6c797b", 0, new DateTimeOffset(new DateTime(2024, 4, 30, 21, 57, 17, 496, DateTimeKind.Unspecified).AddTicks(7007), new TimeSpan(0, -3, 0, 0, 0)), "9ce4962c-a10a-4aa3-b0f1-cd9a7ea31a6f", new DateTimeOffset(new DateTime(2024, 5, 1, 0, 57, 17, 422, DateTimeKind.Unspecified).AddTicks(6379), new TimeSpan(0, 0, 0, 0, 0)), "User", "admin@gmail.com", true, null, null, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEPWvleBYA+KjhURcUSuITZdiDX0+BDkqUjOBQoGCKo1wf+lysWdyN8ZX0vXJMuzqdg==", "999999999", true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "3a976124-6507-47bd-9da1-8c9de53ffc27", false, "Admin" },
+                    { "41135ae2-9320-4dd2-b975-4a6959c32b29", 0, new DateTimeOffset(new DateTime(2024, 4, 30, 21, 57, 17, 561, DateTimeKind.Unspecified).AddTicks(1081), new TimeSpan(0, -3, 0, 0, 0)), "6eb3ba07-4b8e-4938-b93f-34d0a70fe293", new DateTimeOffset(new DateTime(2024, 5, 1, 0, 57, 17, 496, DateTimeKind.Unspecified).AddTicks(7446), new TimeSpan(0, 0, 0, 0, 0)), "Owner", "owner@gmail.com", true, null, null, false, null, "OWNER@GMAIL.COM", "OWNER", "AQAAAAIAAYagAAAAEJR3Hwuom34h8PfJjYgN6o/yiLDEuLV5nyRSidS0vZPHTfeg7scV9pC3SdGfLhrTiA==", "999999999", true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "8cdd432c-0d1d-4974-90d4-ab03ef483611", false, "Owner" }
                 });
 
             migrationBuilder.InsertData(
@@ -303,31 +304,31 @@ namespace BackEndASP.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "3", "4fd5fa77-9638-4ff9-995d-1bda0a03d6f6" },
-                    { "1", "706c6c0a-0674-46f0-8b62-b838925dd39b" }
+                    { "1", "1a9ccd1f-4180-4d62-834a-db1ddc6c797b" },
+                    { "3", "41135ae2-9320-4dd2-b975-4a6959c32b29" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "BirthDate", "CollegeId", "ConcurrencyStamp", "CreatedDate", "Discriminator", "Email", "EmailConfirmed", "Gender", "Hobbies", "ImageId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PendentsConnectionsId", "Personalitys", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "BirthDate", "CollegeId", "ConcurrencyStamp", "CreatedDate", "Discriminator", "Email", "EmailConfirmed", "Gender", "Hobbies", "IdsPersonsIConnect", "ImageId", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PendentsConnectionsId", "Personalities", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "0abdcd6f-4776-491d-9791-759c1245f858", 0, new DateTimeOffset(new DateTime(2024, 4, 28, 22, 39, 17, 968, DateTimeKind.Unspecified).AddTicks(3593), new TimeSpan(0, -3, 0, 0, 0)), 1, "cd181665-d14f-43ec-8388-524243672ff1", new DateTimeOffset(new DateTime(2024, 4, 29, 1, 39, 17, 908, DateTimeKind.Unspecified).AddTicks(814), new TimeSpan(0, 0, 0, 0, 0)), "Student", "joao@gmail.com", true, null, "[\"League of Legends\",\"Pop\",\"Carros\"]", null, false, null, "JOAO@GMAIL.COM", "JOAO", "AQAAAAIAAYagAAAAEGkI8owIsh3p3ekBToGwmCJUWgZk6E3nzDgDDFb0HXomrsIYECUbD4RLDBfSmVCkiA==", "[]", "[\"Timido\",\"Quieto\",\"Amigavel\"]", "999999999", true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "00e699d2-e869-485e-b2d9-9f5ea670554c", false, "Joao" },
-                    { "9232d8f6-2469-4097-9735-1591b9f20c32", 0, new DateTimeOffset(new DateTime(2024, 4, 28, 22, 39, 17, 908, DateTimeKind.Unspecified).AddTicks(145), new TimeSpan(0, -3, 0, 0, 0)), 1, "4addbe7e-5c1a-4887-988f-6e08d975eba1", new DateTimeOffset(new DateTime(2024, 4, 29, 1, 39, 17, 841, DateTimeKind.Unspecified).AddTicks(5783), new TimeSpan(0, 0, 0, 0, 0)), "Student", "student@gmail.com", true, null, "[]", null, false, null, "STUDENT@GMAIL.COM", "STUDENT", "AQAAAAIAAYagAAAAEFrpQ4xj7BgvlFXgPtTNF8Q+QOHZOJBL2M1kixpkUr+er575ec2NtMadBwamlhRf+w==", "[]", "[]", "999999999", true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "338dd97b-ebf5-4458-9392-c73495462f51", false, "Student" }
+                    { "5393923e-69e7-4439-ae9b-2482eb96b68b", 0, new DateTimeOffset(new DateTime(2024, 4, 30, 21, 57, 17, 687, DateTimeKind.Unspecified).AddTicks(2176), new TimeSpan(0, -3, 0, 0, 0)), 1, "a75f0483-717d-4a21-a75e-913345ef6018", new DateTimeOffset(new DateTime(2024, 5, 1, 0, 57, 17, 626, DateTimeKind.Unspecified).AddTicks(2924), new TimeSpan(0, 0, 0, 0, 0)), "Student", "joao@gmail.com", true, null, "[\"League of Legends\",\"Pop\",\"Carros\"]", "[]", null, false, null, "JOAO@GMAIL.COM", "JOAO", "AQAAAAIAAYagAAAAEOSJKPozSFBKY/A6Mri/YM3vEEt6CVDGDCJzI1VcKwziYvOXx+M7hNHsENAr9wBshA==", "[]", "[\"Timido\",\"Quieto\",\"Amigavel\"]", "999999999", true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ec79b853-3e93-499e-a36c-08886d1e7c04", false, "Joao" },
+                    { "6880ac66-b5fc-4593-a1b9-f55de657790f", 0, new DateTimeOffset(new DateTime(2024, 4, 30, 21, 57, 17, 626, DateTimeKind.Unspecified).AddTicks(2254), new TimeSpan(0, -3, 0, 0, 0)), 1, "fc1acada-ba43-469d-a67c-e7081815049d", new DateTimeOffset(new DateTime(2024, 5, 1, 0, 57, 17, 561, DateTimeKind.Unspecified).AddTicks(1452), new TimeSpan(0, 0, 0, 0, 0)), "Student", "student@gmail.com", true, null, "[]", "[]", null, false, null, "STUDENT@GMAIL.COM", "STUDENT", "AQAAAAIAAYagAAAAEPAOhitn7mQ/2dhkBY+ETcPeV26lloqcNmgp6BPg1tWgtchNTMF5vRDz3/YG9SphxQ==", "[]", "[]", "999999999", true, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ffe0fe2d-0977-4491-9955-7d10389926e4", false, "Student" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Buildings",
                 columns: new[] { "Id", "Address", "Bathrooms", "Bedrooms", "Description", "Discriminator", "District", "HomeComplement", "Lat", "Long", "Name", "Neighborhood", "Number", "OwnerId", "Price", "State" },
-                values: new object[] { 2, "Rua Achiles Audi", "2", "3", "Excelente casa, localizada em um excelente lugar, 2 banheiros sendo 1 suite, tres quartos, sala, cozinha e garagem que cabe 3 carros tranquilamente", "Property", "Cerquilho", "Casa", "-23.1723808873683", "-47.74702041600901", "Casa de aluguel", "Centro", "1054", "4fd5fa77-9638-4ff9-995d-1bda0a03d6f6", 1200.0, "SP" });
+                values: new object[] { 2, "Rua Achiles Audi", "2", "3", "Excelente casa, localizada em um excelente lugar, 2 banheiros sendo 1 suite, tres quartos, sala, cozinha e garagem que cabe 3 carros tranquilamente", "Property", "Cerquilho", "Casa", "-23.1723808873683", "-47.74702041600901", "Casa de aluguel", "Centro", "1054", "41135ae2-9320-4dd2-b975-4a6959c32b29", 1200.0, "SP" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "2", "0abdcd6f-4776-491d-9791-759c1245f858" },
-                    { "2", "9232d8f6-2469-4097-9735-1591b9f20c32" }
+                    { "2", "5393923e-69e7-4439-ae9b-2482eb96b68b" },
+                    { "2", "6880ac66-b5fc-4593-a1b9-f55de657790f" }
                 });
 
             migrationBuilder.InsertData(
@@ -335,8 +336,8 @@ namespace BackEndASP.Migrations
                 columns: new[] { "PropertyId", "StudentId" },
                 values: new object[,]
                 {
-                    { 2, "0abdcd6f-4776-491d-9791-759c1245f858" },
-                    { 2, "9232d8f6-2469-4097-9735-1591b9f20c32" }
+                    { 2, "5393923e-69e7-4439-ae9b-2482eb96b68b" },
+                    { 2, "6880ac66-b5fc-4593-a1b9-f55de657790f" }
                 });
 
             migrationBuilder.CreateIndex(

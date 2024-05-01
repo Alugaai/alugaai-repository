@@ -32,6 +32,9 @@ namespace BackEndASP.Services
             }
             else if (user.GetType() == typeof(Student))
             {
+
+                var teste = await _dbContext.Students.Include(s => s.Connections).ToListAsync();
+
                 var student = await _dbContext.Students
                     .Include(s => s.Notifications)
                     .Include(s => s.Image)

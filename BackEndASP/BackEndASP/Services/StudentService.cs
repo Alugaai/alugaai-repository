@@ -35,6 +35,7 @@ namespace BackEndASP.Services
             // controle do conectar
             var userInPendents = _dbContext.Students.ToList();
 
+            List<string> personsIConnectedId = new List<string>();
             List<string> userInPendentsId = new List<string>();
 
             foreach (var user in userInPendents)
@@ -46,6 +47,14 @@ namespace BackEndASP.Services
                         userInPendentsId.Add(id);
                     }
                 }
+
+                if (user.IdsPersonsIConnect.Any())
+                {
+                    foreach (var id in user.IdsPersonsIConnect)
+                    {
+                        personsIConnectedId.Add(id);
+                    }
+                }
             }
 
             // controle do conectar
@@ -54,7 +63,7 @@ namespace BackEndASP.Services
                 query = query.Where(s =>
                 !s.PendentsConnectionsId.Any(p => userInPendentsId.Contains(p)) &&
                 !(s.Notifications.Any(n => userInPendentsId.Contains(n.UserIdWhoSendNotification) && !n.Read)) &&
-                !s.Connections.Any(c => c.StudentId == userId && c.OtherStudentId == userId));
+                !s.IdsPersonsIConnect.Any(c => personsIConnectedId.Contains(c)));
             }
 
             if (pageQueryParams.OwnCollege)
@@ -76,7 +85,7 @@ namespace BackEndASP.Services
                 query = query.Where(s =>
                 pageQueryParams.Interests.Any(interest =>
                 s.Hobbies.Any(hobby => hobby.Contains(interest)) ||
-                s.Personalitys.Any(personality => personality.Contains(interest)))
+                s.Personalities.Any(personality => personality.Contains(interest)))
                 );
 
             }
@@ -188,6 +197,11 @@ namespace BackEndASP.Services
             // Marcar a notificação como lida
             notification.Read = true;
 
+         
+            Student otherStudent = await _dbContext.Students
+                                       .FirstOrDefaultAsync(s => s.Id == dto.ConnectionWhyIHandle)
+                                   ?? throw new ArgumentException($"This id {userId} does not exist");
+
             // Remover a conexão de PendentsConnectionsId
             if (actualStudent.PendentsConnectionsId != null && actualStudent.PendentsConnectionsId.Contains(dto.ConnectionWhyIHandle))
             {
@@ -203,11 +217,9 @@ namespace BackEndASP.Services
                     };
 
 
-                    // Adicionar a notificação ao conjunto de notificações do outro estudante
-                    Student otherStudent = await _dbContext.Students
-                                               .FirstOrDefaultAsync(s => s.Id == dto.ConnectionWhyIHandle)
-                                          ?? throw new ArgumentException($"This id {userId} does not exist");
+                    otherStudent.IdsPersonsIConnect.Add(userId);
 
+                    _dbContext.Students.Update(otherStudent);
 
                     // Criar a notificação
                     // Notification sendNotificationForUser = new Notification
@@ -226,13 +238,13 @@ namespace BackEndASP.Services
 
                     // Adicionar a nova conexão ao contexto do banco de dados
                     await _dbContext.UserConnections.AddAsync(userConnection);
-                    _dbContext.Students.Update(otherStudent);
                     await _dbContext.SaveChangesAsync();
                 }
 
                 
 
                 // Atualizar o estudante atual no contexto do banco de dados
+                actualStudent.IdsPersonsIConnect.Add(dto.ConnectionWhyIHandle);
                 _dbContext.Students.Update(actualStudent);
 
                 // Salvar as alterações no banco de dados
@@ -285,7 +297,7 @@ namespace BackEndASP.Services
             {
                 foreach (string personality in dto.Personalities)
                 {
-                    student.Personalitys.Add(personality);
+                    student.Personalities.Add(personality);
                 }
             }
 

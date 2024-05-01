@@ -31,7 +31,7 @@ namespace BackEndASP.DTOs.StudentDTOs
             this.College = entity.College == null ? "" : entity.College.Name;
             this.Image = entity.Image != null ? new ImageUserDTO(entity.Image) : null;
             this.Hobbies = entity.Hobbies.ToList();
-            this.Personalitys = entity.Personalitys.ToList();
+            this.Personalitys = entity.Personalities.ToList();
         }
 
 

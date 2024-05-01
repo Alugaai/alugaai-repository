@@ -176,7 +176,7 @@ using Microsoft.EntityFrameworkCore.Storage;
                 PhoneNumberConfirmed = true,
                 NormalizedEmail = "JOAO@GMAIL.COM",
                 BirthDate = DateTimeOffset.Now,
-                Personalitys = new List<string> 
+                Personalities = new List<string> 
                 {
                     "Timido",
                     "Quieto",
@@ -243,12 +243,6 @@ using Microsoft.EntityFrameworkCore.Storage;
             .OnDelete(DeleteBehavior.Restrict);
 
         //
-        modelBuilder.Entity<UserConnection>()
-            .HasOne(uc => uc.OtherStudent)
-            .WithMany()
-            .HasForeignKey(uc => uc.OtherStudentId)
-            .OnDelete(DeleteBehavior.Restrict);
-
 
         modelBuilder.Entity<User>()
             .HasMany(u => u.Notifications)

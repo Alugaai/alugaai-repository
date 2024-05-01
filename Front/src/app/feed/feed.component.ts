@@ -43,8 +43,6 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   pageSize: number = 1;
   pagination?: IPagination;
 
-  userDetails?: IUserDetails;
-
   students: Array<IStudent> = [];
 
   filter: IFilterStudent = {
@@ -73,21 +71,18 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.userTokenSubscription = this.authService.userLoggedToken$.subscribe(userToken => {
-      this.userLogged = !!userToken;
-      if (userToken) {
-        this.getMyInvitationsForConnections();
-        this.authService.userDetailsByEmail(userToken.email).subscribe({
-          next: (response) => {
-            this.userDetails = response;
-          },
-        });
+    this.userTokenSubscription = this.authService.userLoggedToken$.subscribe(
+      (userToken) => {
+        this.userLogged = !!userToken;
+        if (userToken) {
+          this.getMyInvitationsForConnections();
+        }
       }
-  });
-  this.componentUpdateSubscription = this.componentUpdateService.updateComponent$.subscribe(() => {
-    this.filterStudent(); // Atualize a lista de estudantes
-  });
-
+    );
+    this.componentUpdateSubscription =
+      this.componentUpdateService.updateComponent$.subscribe(() => {
+        this.filterStudent(); // Atualize a lista de estudantes
+      });
   }
 
   ngOnDestroy(): void {
@@ -98,7 +93,6 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
       this.userTokenSubscription.unsubscribe();
     }
   }
-
 
   title = 'angular-gmap';
   @ViewChild('gmapContainer', { static: false }) mapContainer?: ElementRef;
@@ -450,19 +444,7 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
     this.studentService.filterStudent(this.filter).subscribe({
       next: (response) => {
         if (response.result && response.pagination) {
-          const filteredStudents = response.result.filter(student => {
-            // Verificar se o estudante não está nas conexões do usuário logado
-            return !this.isStudentInConnections(student.id);
-          });
-
-          if (this.userLogged) {
-            // Adicionar apenas os estudantes que não estão nas conexões do usuário logado
-            this.students = filteredStudents;
-          } else {
-            // Se o usuário não estiver logado, adiciona todos os estudantes filtrados
-            this.students = response.result;
-          }
-
+          this.students = response.result;
           this.pagination = response.pagination;
         }
       },
@@ -470,16 +452,6 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
         console.log(error);
       },
     });
-  }
-
-  // Método para verificar se o estudante está nas conexões do usuário logado
-  isStudentInConnections(studentId: string): boolean {
-    if (this.userDetails?.connections) {
-      return this.userDetails.connections.some(
-        (connection) => connection.otherStudentId === studentId
-      );
-    }
-    return false;
   }
 
   onInteressesChange(interesses: string[]) {
