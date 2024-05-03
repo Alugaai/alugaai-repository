@@ -6,7 +6,7 @@ namespace BackEndASP.DTOs.StudentDTOs
     {
         public string Id { get; set; }
         public List<int> NotificationIds { get; set; } // Lista de IDs de notificação
-        public string Username { get; set; }
+        public string Name { get; set; }
         public string College { get; set; }
         public ImageUserDTO Image { get; set; }
 
@@ -19,7 +19,7 @@ namespace BackEndASP.DTOs.StudentDTOs
         {
             Id = entity.Id;
             NotificationIds = notificationIds; // Atribui os IDs de notificação
-            Username = entity.UserName;
+            Name = entity.Name;
             College = entity.College?.Name ?? "";
             Image = entity.Image != null ? new ImageUserDTO(entity.Image) : null;
         }

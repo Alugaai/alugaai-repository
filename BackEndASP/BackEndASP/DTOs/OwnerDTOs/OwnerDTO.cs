@@ -22,7 +22,7 @@ namespace BackEndASP.DTOs
         public OwnerDTO(Owner entity)
         {
             this.Id = entity.Id;
-            this.Name = entity.UserName;
+            this.Name = entity.Name;
             this.Email = entity.Email;
             this.PhoneNumber = entity.PhoneNumber;
             this.Image = entity.Image != null ? new ImageUserDTO(entity.Image) : null;

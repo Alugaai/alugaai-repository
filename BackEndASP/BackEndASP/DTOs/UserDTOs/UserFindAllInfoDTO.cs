@@ -10,7 +10,7 @@ namespace BackEndASP.DTOs
     public class UserFindAllInfoDTO
     {
         public string Id { get; set; }
-        public string Username { get; set; }
+        public string Name { get; set; }
         public string Email { get; set; }
         public string Gender { get; set; }
         public DateTimeOffset BirthDate { get; set; }
@@ -25,7 +25,7 @@ namespace BackEndASP.DTOs
         public UserFindAllInfoDTO(User entity)
         {
             this.Id = entity.Id;
-            this.Username = entity.UserName;
+            this.Name = entity.Name;
             this.Email = entity.Email;
             this.BirthDate = entity.BirthDate;
             this.ImageUser = entity.Image != null ? new ImageUserDTO(entity.Image) : null;

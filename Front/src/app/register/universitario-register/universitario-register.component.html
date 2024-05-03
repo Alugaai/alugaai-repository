@@ -24,20 +24,19 @@
             class="form-input"
             type="text"
             placeholder="Fernando Soares"
-            formControlName="username"
+            formControlName="name"
             [class.is-invalid]="
-              userForm.get('username')?.errors &&
-              userForm.get('username')?.touched
+              userForm.get('name')?.errors && userForm.get('name')?.touched
             "
           />
           <div
-            *ngIf="userForm.get('username')?.hasError('required')"
+            *ngIf="userForm.get('name')?.hasError('required')"
             class="invalid-feedback"
           >
             O nome é obrigatório
           </div>
           <div
-            *ngIf="userForm.get('username')?.hasError('maxlength')"
+            *ngIf="userForm.get('name')?.hasError('maxlength')"
             class="invalid-feedback"
           >
             O nome deve ter no máximo 250 caracteres

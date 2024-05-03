@@ -77,7 +77,7 @@ namespace BackEndASP.Services
 
             if (!string.IsNullOrEmpty(pageQueryParams.Name))
             {
-                query = query.Where(s => s.UserName.ToUpper().Contains(pageQueryParams.Name.ToUpper()));
+                query = query.Where(s => s.Name.ToUpper().Contains(pageQueryParams.Name.ToUpper()));
             }
 
             if (pageQueryParams.Interests.Any(interest => !string.IsNullOrWhiteSpace(interest)))
@@ -170,7 +170,7 @@ namespace BackEndASP.Services
                 User = user,
                 Moment = DateTimeOffset.Now,
                 Read = false,
-                Text = $"O usuário {user.UserName.ToUpper()} enviou a você um pedido de conexão!"
+                Text = $"O usuário {user.Name.ToUpper()} enviou a você um pedido de conexão!"
             };
 
             // Add the UserNotification to the appropriate collections
@@ -309,9 +309,9 @@ namespace BackEndASP.Services
 
         private async Task InsertDTOToStudentAsync(StudentCompleteProfileDTO dto, Student student)
         {
-            if (dto.Username != null)
+            if (dto.Name != null)
             {
-                student.UserName = dto.Username;
+                student.Name = dto.Name;
             }
 
             if (dto.Gender != null)

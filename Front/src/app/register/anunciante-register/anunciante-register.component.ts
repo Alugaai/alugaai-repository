@@ -31,7 +31,7 @@ export class AnuncianteRegisterComponent {
 
   ngOnInit(): void {
     this.anuncianteForm = this.fb.group({
-      username: ['', [Validators.required, Validators.maxLength(250)]],
+      name: ['', [Validators.required, Validators.maxLength(250)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       birthDate: ['', Validators.required],

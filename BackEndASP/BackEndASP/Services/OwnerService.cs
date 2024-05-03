@@ -29,9 +29,9 @@ namespace BackEndASP.Services
 
         private void InsertDTOToOwnerAsync(UserCompleteProfileDTO dto, Owner owner)
         {
-            if (dto.Username != null)
+            if (dto.Name != null)
             {
-                owner.UserName = dto.Username;
+                owner.Name = dto.Name;
             }
 
             if (dto.Gender != null)

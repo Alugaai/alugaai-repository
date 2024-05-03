@@ -3,7 +3,7 @@ import { IImage } from './IImage';
 export interface IStudentsWhoInvitationsConnections {
   id: string;
   notificationsIds: number[];
-  username: string;
+  name: string;
   college?: string;
   imageUser?: IImage;
 }

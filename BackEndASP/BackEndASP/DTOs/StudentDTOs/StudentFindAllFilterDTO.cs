@@ -25,7 +25,7 @@ namespace BackEndASP.DTOs.StudentDTOs
         public StudentFindAllFilterDTO(Student entity)
         {
             this.Id = entity.Id;
-            this.Name = entity.UserName.ToUpper();
+            this.Name = entity.Name.ToUpper();
             this.Email = entity.Email;
             this.Age = CalcAge(entity.BirthDate, DateTimeOffset.Now);
             this.College = entity.College == null ? "" : entity.College.Name;

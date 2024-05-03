@@ -1,5 +1,5 @@
 export interface IUserCompleteProfile {
-  username: string;
+  name: string;
   gender: string;
   birthDate: Date | string;
   phoneNumber: string;

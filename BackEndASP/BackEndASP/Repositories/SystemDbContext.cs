@@ -118,6 +118,7 @@ using Microsoft.EntityFrameworkCore.Storage;
             {
                 Id = adminId,
                 Email = "admin@gmail.com",
+                Name = "Admin",
                 UserName = "Admin",
                 NormalizedUserName = "ADMIN",
                 PasswordHash = new PasswordHasher<User>().HashPassword(null, "Senha#123"),
@@ -134,6 +135,7 @@ using Microsoft.EntityFrameworkCore.Storage;
             {
                 Id = ownerId,
                 Email = "owner@gmail.com",
+                Name = "Owner",
                 UserName = "Owner",
                 NormalizedUserName = "OWNER",
                 PasswordHash = new PasswordHasher<Owner>().HashPassword(null, "Senha#123"), 
@@ -150,6 +152,7 @@ using Microsoft.EntityFrameworkCore.Storage;
             {
                 Id = studentId,
                 Email = "student@gmail.com",
+                Name = "Student",
                 UserName = "Student",
                 NormalizedUserName = "STUDENT",
                 PasswordHash = new PasswordHasher<Student>().HashPassword(null, "Senha#123"), 
@@ -169,6 +172,7 @@ using Microsoft.EntityFrameworkCore.Storage;
                 Id = joaoId,
                 Email = "joao@gmail.com",
                 UserName = "Joao",
+                Name = "Joao",
                 NormalizedUserName = "JOAO",
                 PasswordHash = new PasswordHasher<Student>().HashPassword(null, "Senha#123"),
                 EmailConfirmed = true,

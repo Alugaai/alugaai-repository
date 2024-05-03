@@ -6,7 +6,7 @@
         [Required(ErrorMessage = "User name is required")]
         [MinLength(3)]
         [MaxLength(255)]
-        public string Username { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [MinLength(4)]

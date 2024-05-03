@@ -7,7 +7,7 @@ import { IStudentPropertyLikes } from './IStudentPropertyLikes';
 
 export interface IUserDetails {
   id: string;
-  username: string;
+  name: string;
   email: string;
   gender?: string;
   birthDate: Date | string;

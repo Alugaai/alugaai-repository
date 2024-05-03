@@ -129,7 +129,7 @@ using System.Security.Claims;
                 var authClaims = new List<Claim>
                 {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName!),
+                new Claim(ClaimTypes.Name, user.Name!),
                 new Claim(ClaimTypes.Email, user.Email!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
@@ -220,13 +220,17 @@ using System.Security.Claims;
                 });
             }
 
+        // Criar um UserName aleatório com base no nome
+        string randomUserName = GenerateRandomUserName(registerDTO.Name);
 
-            // Cria uma nova instância de ApplicationUser com os dados fornecidos
-            Student user = new()
+
+        // Cria uma nova instância de ApplicationUser com os dados fornecidos
+        Student user = new()
             {
                 Email = registerDTO.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = registerDTO.Username,
+                UserName = randomUserName,
+                Name = registerDTO.Name,
                 PhoneNumber = registerDTO.PhoneNumber,
                 PhoneNumberConfirmed = false,
                 BirthDate = registerDTO.BirthDate
@@ -269,7 +273,7 @@ using System.Security.Claims;
 
 
         // Verifica se o usuário já existe
-        var userExists = await _userManager.FindByNameAsync(registerDTO.Username);
+        var userExists = await _userManager.FindByNameAsync(registerDTO.Name);
 
         // Retorna erro se o usuário já existir
         if (userExists != null)
@@ -281,13 +285,17 @@ using System.Security.Claims;
             });
         }
 
+        // Criar um UserName aleatório com base no nome
+        string randomUserName = GenerateRandomUserName(registerDTO.Name);
+
 
         // Cria uma nova instância de Owner e salva no DB com os dados fornecidos
         Owner user = new()
         {
             Email = registerDTO.Email,
             SecurityStamp = Guid.NewGuid().ToString(),
-            UserName = registerDTO.Username,
+            Name = registerDTO.Name,
+            UserName = randomUserName,
             PhoneNumber = registerDTO.PhoneNumber,
             PhoneNumberConfirmed = false,
             BirthDate = registerDTO.BirthDate
@@ -458,8 +466,21 @@ using System.Security.Claims;
         }
 
 
-        
+    private static string GenerateRandomUserName(string name)
+    {
+        // Remover espaços em branco e converter para minúsculas
+        string formattedName = name.Replace(" ", "").ToLower();
 
+        // Gerar uma parte aleatória com 4 dígitos
+        Random random = new Random();
+        int randomNumber = random.Next(0, 9999999); // Números de 0 a 9999
 
+        // Combinação do nome formatado com o número aleatório
+        string randomUserName = formattedName + randomNumber;
+
+        return randomUserName;
     }
+
+
+}
 

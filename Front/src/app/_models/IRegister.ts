@@ -1,5 +1,5 @@
 export interface IRegister {
-  username: string;
+  name: string;
   email: string;
   birthDate: Date | string ;
   phoneNumber: string;
