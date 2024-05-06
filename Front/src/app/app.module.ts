@@ -46,6 +46,12 @@ import { NotificationsCardComponent } from './_components/notifications-card/not
 import {MatSliderModule} from '@angular/material/slider';
 import { RangeSliderFilterComponent } from './_components/range-slider-filter/range-slider-filter.component';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatCardModule} from '@angular/material/card';
+import { PriceFilterComponent } from './_components/price-filter/price-filter.component';
+import { FormsModule } from '@angular/forms';
+
+
+
 
 
 @NgModule({
@@ -68,7 +74,7 @@ import {MatRadioModule} from '@angular/material/radio';
     StudentCompleteProfileComponent,
     NotificationsCardComponent,
     RangeSliderFilterComponent,
-
+    PriceFilterComponent
 
   ],
   imports: [
@@ -96,6 +102,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatMenuModule,
     MatSliderModule,
     MatRadioModule,
+    MatCardModule,
+    FormsModule,
+    
   ],
   providers: [
     provideClientHydration(),

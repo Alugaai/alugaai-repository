@@ -72,6 +72,17 @@ app-auto-complete {
   justify-content: end;
 }
 
+.test{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.map-filter-wrapper{
+  position: relative;
+  width: fit-content;
+  width: 100%;
+}
 
 
 

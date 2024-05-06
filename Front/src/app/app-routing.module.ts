@@ -13,6 +13,7 @@ import { StudentCompleteProfileComponent } from './complete-profile/student-comp
 import { authGuard } from './_guards/auth.guard';
 import { NotificationsCardComponent } from './_components/notifications-card/notifications-card.component';
 import { RangeSliderFilterComponent } from './_components/range-slider-filter/range-slider-filter.component';
+import { PriceFilterComponent } from './_components/price-filter/price-filter.component';
 
 
 
@@ -72,8 +73,8 @@ const routes: Routes = [
     component: StudentCompleteProfileComponent
   },
   {
-    path: 'rangeslider',
-    component: RangeSliderFilterComponent
+    path: 'pricefilter',
+    component: PriceFilterComponent
   },
 
 ];

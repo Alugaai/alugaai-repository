@@ -1,0 +1,111 @@
+.example-h2 {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .example-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+  }
+  
+  .example-margin {
+    margin: 8px;
+  }
+  
+  .example-width {
+    max-width: 180px;
+    width: 100%;
+  }
+  
+  .mat-mdc-slider {
+    max-width: 300px;
+    width: 99%;
+  }
+
+  .example-name-label{
+    padding-top: 0px;
+  }
+  
+  .mat-mdc-card {
+    border-radius: var(--mdc-elevated-card-container-shape);
+    background-color: var(--mdc-elevated-card-container-color);
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--mdc-elevated-card-container-color);
+    box-shadow: none;
+}
+  
+::ng-deep .mat-mdc-menu-panel{
+    overflow: hidden !important;
+}
+  .example-result-card h2 {
+    margin: 0 8px;
+  }
+
+  ::ng-deep .mdc-slider__input, .ng-valid, .ng-dirty, .ng-touched{
+    padding: 0 !important;
+  }
+  
+  .example-label-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 284px;
+  }
+  
+ 
+
+  //my styles
+
+  ::ng-deep html{
+    --mdc-slider-handle-color: #F79009;
+    --mdc-slider-focus-handle-color: #F79009;
+    --mdc-slider-hover-handle-color: #F79009;
+    --mdc-slider-active-track-color: #F79009;
+    --mdc-slider-inactive-track-color: #F79009;
+    --mdc-slider-with-tick-marks-inactive-container-color: #F79009;
+    --mdc-slider-with-tick-marks-active-container-color: white;
+    --mdc-slider-disabled-active-track-color: #000;
+    --mdc-slider-disabled-handle-color: #000;
+    --mdc-slider-disabled-inactive-track-color: #000;
+    --mdc-slider-label-container-color: #000;
+    --mdc-slider-label-label-text-color: #fff;
+    --mdc-slider-with-overlap-handle-outline-color: #fff;
+    --mdc-slider-with-tick-marks-disabled-container-color: #000;
+    --mdc-slider-handle-elevation: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    --mat-slider-ripple-color: #F79009;
+    --mat-slider-hover-state-layer-color: rgba(63, 81, 181, 0.05);
+    --mat-slider-focus-state-layer-color: rgba(63, 81, 181, 0.2);
+    --mat-slider-value-indicator-opacity: 0.6;
+}
+
+
+
+::ng-deep mat-menu{
+    padding: 0 !important;
+}
+.filter-external-wrapper{
+    padding: 20px;
+}
+p{
+    padding: 0 !important;
+}
+.price-filter-holder{
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    height: 42px;
+    width: 92px;
+    border-radius: 20px;
+}
+
+.price-and-apply-wrapper{
+    display: flex;
+    justify-content: space-between;
+
+}

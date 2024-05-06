@@ -17,6 +17,8 @@ mat-slider {
     width: 300px;
   }
 
+  //my styles
+
 ::ng-deep html{
     --mdc-slider-handle-color: #F79009;
     --mdc-slider-focus-handle-color: #F79009;
@@ -40,3 +42,4 @@ mat-slider {
     --mat-slider-focus-state-layer-color: rgba(63, 81, 181, 0.2);
     --mat-slider-value-indicator-opacity: 0.6;
 }
+
