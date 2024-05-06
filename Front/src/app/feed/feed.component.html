@@ -45,11 +45,13 @@
       >
       </pagination>
     </div>
-   
   </div>
   <div class="map-filter-wrapper">
-    <app-price-filter class="test"></app-price-filter>
+    <app-price-filter
+      style="cursor: pointer"
+      (applyFilter)="onApplyFilter($event)"
+      class="test"
+    ></app-price-filter>
     <div #gmapContainer id="map"></div>
   </div>
- 
 </div>

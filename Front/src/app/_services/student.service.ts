@@ -31,7 +31,6 @@ export class StudentService {
     if (filterStudent.pageSize)
       params = params.append('pageSize', filterStudent.pageSize);
 
-    console.log('Params', params);
 
     return this.http
       .get<any>(this.baseUrl + 'students', {
@@ -40,7 +39,6 @@ export class StudentService {
       })
       .pipe(
         map((response) => {
-          console.log(response);
           if (response.body) {
             this.paginatedResult.result = response.body;
           }
@@ -48,7 +46,6 @@ export class StudentService {
           if (pagination) {
             this.paginatedResult.pagination = JSON.parse(pagination);
           }
-          console.log('Pagination', this.paginatedResult);
           return this.paginatedResult;
         })
       );
@@ -57,7 +54,6 @@ export class StudentService {
   connect(id: string) {
     return this.http.put(this.baseUrl + 'students/' + id, {}).pipe(
       map((response) => {
-        console.log(response);
         return response;
       })
     );

@@ -50,7 +50,6 @@ export class UniversitarioRegisterComponent implements OnInit {
       if (this.student) {
         this.authService.registerStudent(this.student).subscribe({
           next: (response: any) => {
-            console.log(response);
             this.toastr.success('Estudante criado com sucesso!');
             this.router.navigate(['/entrar']);
           },

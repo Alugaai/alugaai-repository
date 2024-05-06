@@ -52,7 +52,6 @@ export class AnuncianteRegisterComponent {
       if (this.anunciante) {
         this.authService.registerOwner(this.anunciante).subscribe({
           next: (response: any) => {
-            console.log(response);
             this.toastr.success('Anunciante criado com sucesso!');
             this.router.navigate(['/entrar']);
           },

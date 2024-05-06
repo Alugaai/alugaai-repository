@@ -38,7 +38,6 @@ export class PropertyService {
       })
       .pipe(
         map((response) => {
-          console.log(response);
           if (response.body) {
             this.paginatedResult.result = response.body;
           }
@@ -46,7 +45,6 @@ export class PropertyService {
           if (pagination) {
             this.paginatedResult.pagination = JSON.parse(pagination);
           }
-          console.log(this.paginatedResult);
           return this.paginatedResult;
         })
       );

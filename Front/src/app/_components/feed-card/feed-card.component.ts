@@ -47,7 +47,6 @@ export class FeedCardComponent implements OnInit{
     if (this.userLogged) {
       this.studentService.connect(this.student!.id).subscribe({
         next: (response) => {
-          console.log(response);
           this.componentUpdate.triggerConnectUpdate(); // Dispara a atualização no FeedComponent
         },
       });

@@ -42,7 +42,6 @@ export class NotificationService {
       .post<any>(`${this.baseUrl}students/${notificationId}`, acceptConnection)
       .pipe(
         map((response) => {
-          console.log(response.message);
           return response;
         })
       );

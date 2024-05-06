@@ -25,7 +25,6 @@ export class CollegeService {
   getCollegeById(id: number) {
     return this.http.get(`${this.baseUrl}colleges/${id}`).pipe(
       map((response) => {
-        console.log(response);
         return response as ICollegeResponse;
       })
     );

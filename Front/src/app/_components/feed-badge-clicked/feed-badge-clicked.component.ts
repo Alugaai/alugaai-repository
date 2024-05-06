@@ -43,7 +43,6 @@ export class FeedBadgeClickedComponent implements OnInit{
   propertyDetails() {
     if (this.isProperty) {
       this.propertyService.findPropertyDetailsById(this.building.id).subscribe((response) => {
-        console.log(response);
         this.propertyForDetails = response;
       });
     }
@@ -52,7 +51,6 @@ export class FeedBadgeClickedComponent implements OnInit{
   collegeDetails() {
     if (!this.isProperty) {
       this.collegeService.getCollegeById(this.building.id).subscribe((response) => {
-        console.log(response);
         this.collegeForDetails = response;
       });
     }

@@ -56,7 +56,6 @@ export class NotificationsCardComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.notification = response;
-          console.log(this.notification);
         },
       });
   }
@@ -69,7 +68,6 @@ export class NotificationsCardComponent implements OnInit {
       })
       .subscribe({
         next: (response) => {
-          console.log(response);
           // Comunicação com o serviço de atualização de notificações
           this.notificationUpdateService.triggerConnectUpdate();
 
@@ -79,7 +77,6 @@ export class NotificationsCardComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.log(error);
         },
       });
   }

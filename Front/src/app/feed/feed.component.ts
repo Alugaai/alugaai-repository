@@ -21,10 +21,11 @@ import { IStudent } from '../_models/IStudent';
 import { ILocationFilterCity } from '../_models/ILocationFilterCity';
 import { IAges } from '../_components/range-slider-filter/range-slider-filter.component';
 import { IStudentsWhoInvitationsConnections } from '../_models/IStudentsWhoInvitationsConnections';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { ComponentUpdateService } from '../_services/component-update.service';
 import { AuthService } from '../_services/auth.service';
 import { IUserDetails } from '../_models/IUserDetails';
+import { IFilterProperty } from '../_models/IFilterProperty';
 
 @Component({
   selector: 'app-feed',
@@ -54,6 +55,8 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
     pageNumber: 1,
     pageSize: this.pageSize,
   };
+
+  filterProperty?: IFilterProperty;
 
   userLogged: boolean = false;
 
@@ -302,7 +305,6 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   ngAfterViewInit() {
     this.mapInitializer();
     this.filterStudent();
-    console.log(this.students);
   }
 
   // filtrar pedidos de conexão
@@ -313,7 +315,6 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
         this.studentsWhoInvitationsConnections = response.result;
       },
       error: (error) => {
-        console.log(error);
       },
     });
   }
@@ -329,7 +330,7 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
       this.mapContainer?.nativeElement,
       this.mapOptions
     );
-    this.filterProperty();
+    this.filterPropertyMethod();
     this.getColleges();
   }
 
@@ -353,43 +354,58 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  // Função para filtrar os preços
+  onApplyFilter(filterValues: {min: number, max: number}) {
+    if (filterValues.max == 0) {
+      this.filterProperty = {
+        minPrice: filterValues.min,
+      };
+      this.filterPropertyMethod();
+    }
+    this.filterProperty = { maxPrice: filterValues.max, minPrice: filterValues.min, };
+    this.filterPropertyMethod();
+    this.mapInitializer();
+  }
+
   // Função para filtrar as proriedades
-  filterProperty() {
-    this.propertyService.filterProperty().subscribe({
-      next: (response) => {
-        if (response.result) {
-          this.markersProperty = response.result;
-          this.markersProperty.forEach((property) => {
-            if (!property.options) {
-              property.options = {} as google.maps.MarkerOptions;
-            }
-            property.options.label = {
-              text: 'R$' + property.price.toString() + ',00',
-              color: '#FFFFFF',
-              fontFamily: 'Inter',
-              fontWeight: 'bold',
-            };
-            property.options.icon = '../../assets/images/iconProperty.svg';
+  filterPropertyMethod() {
+      this.propertyService.filterProperty(this.filterProperty).subscribe({
+        next: (response) => {
+          if (response.result) {
+            this.markersProperty = response.result;
+            this.markersProperty.forEach((property) => {
+              if (!property.options) {
+                property.options = {} as google.maps.MarkerOptions;
+              }
+              property.options.label = {
+                text: 'R$' + property.price.toString() + ',00',
+                color: '#FFFFFF',
+                fontFamily: 'Inter',
+                fontWeight: 'bold',
+              };
+              property.options.icon = '../../assets/images/iconProperty.svg';
 
-            // Criar um novo marcador para cada propriedade
-            const newMarker = new google.maps.Marker({
-              position: {
-                lat: property.position.lat,
-                lng: property.position.lng,
-              },
-              map: this.map,
-              icon: property.options.icon,
-              label: property.options.label,
-            });
+              // Criar um novo marcador para cada propriedade
+              const newMarker = new google.maps.Marker({
+                position: {
+                  lat: property.position.lat,
+                  lng: property.position.lng,
+                },
+                map: this.map,
+                icon: property.options.icon,
+                label: property.options.label,
+              });
 
-            // Adicionar um listener de clique para abrir o modal
-            newMarker.addListener('click', () => {
-              this.markerClickHandler(property);
+              // Adicionar um listener de clique para abrir o modal
+              newMarker.addListener('click', () => {
+                this.markerClickHandler(property);
+              });
             });
-          });
-        }
-      },
-    });
+          }
+          this.markersProperty = [];
+        },
+      });
+
   }
 
   getColleges() {
@@ -449,7 +465,6 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
         }
       },
       error: (error) => {
-        console.log(error);
       },
     });
   }

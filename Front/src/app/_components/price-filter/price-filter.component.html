@@ -1,34 +1,40 @@
 <!-- filter.component.html -->
 <div class="filter-external-wrapper">
-    <div class="price-filter-holder" [matMenuTriggerFor]="menu">
-      <p>Preço</p>
-      <mat-icon style="font-size: 16px; width: 16px; height: 16px;">expand_more</mat-icon>
-    </div>
+  <div class="price-filter-holder" [matMenuTriggerFor]="menu">
+    <p>Preço</p>
+    <mat-icon style="font-size: 16px; width: 16px; height: 16px"
+      >expand_more</mat-icon
+    >
   </div>
-  
-  <mat-menu #menu="matMenu">
-    <div class="div-size" style="width: 300px;"></div>
-    <mat-card class="example-result-card" (click)="$event.stopPropagation()">
-      <mat-card-content>
-        <div class="example-label-container">
-          <label id="example-name-label" class="example-name-label">R$ 0</label>
-          <label class="example-value-label">R$ {{slider.value}}</label>
-        </div>
-        <mat-slider
-            class="example-margin"
-            [disabled]="disabled"
-            [max]="max"
-            [min]="min"
-            [step]="step"
-            [discrete]="thumbLabel"
-            [showTickMarks]="showTicks">
-          <input matSliderThumb [(ngModel)]="value" #slider>
-        </mat-slider>
-        <div class="price-and-apply-wrapper">
-            <p>Até: <span style="font-weight: 600;">R$ {{max}}</span></p>
-            <p style="color:var(--primary-orange-color)">Aplicar</p>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </mat-menu>
-  
+</div>
+
+<mat-menu #menu="matMenu">
+  <div class="div-size" style="width: 300px"></div>
+  <mat-card class="example-result-card" (click)="$event.stopPropagation()">
+    <mat-card-content>
+      <div class="example-label-container">
+        <label id="example-name-label" class="example-name-label">R$ 0</label>
+        <label class="example-value-label">R$ {{ slider.value }}</label>
+      </div>
+      <mat-slider
+        class="example-margin"
+        [disabled]="disabled"
+        [max]="max"
+        [min]="min"
+        [step]="step"
+        [discrete]="thumbLabel"
+        [showTickMarks]="showTicks"
+      >
+        <input matSliderThumb [(ngModel)]="value" #slider />
+      </mat-slider>
+      <div class="price-and-apply-wrapper">
+        <p>
+          Até: <span style="font-weight: 600">R$ {{ max }}</span>
+        </p>
+        <button style="color: var(--primary-orange-color)" (click)="apply()">
+          Aplicar
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-menu>

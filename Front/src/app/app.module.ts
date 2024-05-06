@@ -104,7 +104,7 @@ import { FormsModule } from '@angular/forms';
     MatRadioModule,
     MatCardModule,
     FormsModule,
-    
+
   ],
   providers: [
     provideClientHydration(),

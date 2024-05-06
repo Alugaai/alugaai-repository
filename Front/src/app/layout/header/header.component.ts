@@ -97,7 +97,6 @@ export class HeaderComponent implements OnInit {
         this.startImage();
       },
       error: (error) => {
-        console.log(error);
       },
     });
   }
@@ -118,7 +117,6 @@ export class HeaderComponent implements OnInit {
         this.notificationCounter = response;
       },
       error: (error) => {
-        console.log(error);
       },
     });
   }
@@ -130,7 +128,6 @@ export class HeaderComponent implements OnInit {
         this.countNotifications();
       },
       error: (error) => {
-        console.log(error);
       },
     });
   }
