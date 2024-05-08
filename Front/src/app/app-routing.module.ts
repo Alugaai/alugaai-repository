@@ -14,6 +14,7 @@ import { authGuard } from './_guards/auth.guard';
 import { NotificationsCardComponent } from './_components/notifications-card/notifications-card.component';
 import { RangeSliderFilterComponent } from './_components/range-slider-filter/range-slider-filter.component';
 import { PriceFilterComponent } from './_components/price-filter/price-filter.component';
+import { FeedPropertyBadgeComponent } from './_components/feed-property-badge/feed-property-badge.component';
 
 
 
@@ -75,6 +76,10 @@ const routes: Routes = [
   {
     path: 'pricefilter',
     component: PriceFilterComponent
+  },
+  {
+    path: 'propertybadge',
+    component: FeedPropertyBadgeComponent
   },
 
 ];

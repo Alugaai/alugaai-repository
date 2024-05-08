@@ -84,5 +84,12 @@ app-auto-complete {
   width: 100%;
 }
 
+::ng-deep .mat-mdc-dialog-surface, .mdc-dialog__surface{
+  width: fit-content !important;
+  min-width: fit-content !important;
+  overflow: hidden !important;
+  z-index: 999;
+}
+
 
 

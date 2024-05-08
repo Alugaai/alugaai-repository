@@ -1,43 +1,47 @@
 <div class="wrapper">
   <div class="img-property-container">
-    <img
-      class="img-property"
-      *ngFor="let image of buildingImages"
-      [src]="image"
-      alt=""
-    />
+    <div class="left-arrow"><mat-icon>chevron_left</mat-icon></div>
+    <div class="right-arrow"><mat-icon>chevron_right</mat-icon></div>
+        <img class="img-property" src="../../../assets/images/imageProperty1.png" alt="">
+    <img class="img-property" src="../../../assets/images/Person image.png" alt="">
+    <!--<img class="img-property" *ngFor="let image of buildingImages" [src]="image" alt="" /> -->
   </div>
-  <div class="top-row">
-    <div class="img-user-container">
-      <img
-        *ngIf="ownerImage; else defaultImage"
-        class="image"
-        [src]="ownerImage"
-        alt=""
-        style="width: 80px; height: auto; border-radius: 50%"
-      />
-      <ng-template #defaultImage>
-        <img
-          class="image"
-          src="../../../assets/images/unloadeduser.jpg"
-          alt=""
-          style="width: 80px; height: auto; border-radius: 50%"
-        />
-      </ng-template>
-    </div>
-    <div class="inside-row-holder">
-      <div class="first-row">
-        <div class="user-information">
-          <h1 calss="base-color">{{ building?.owner?.name }}</h1>
-          <h2 class="grey-color">- Proprietário</h2>
+  <div class="top-chip-holder">
+    <div class="top-row">
+      <div class="img-user-container">
+        <img *ngIf="ownerImage; else defaultImage" class="image" [src]="ownerImage" alt=""
+          style="width: 80px; height: auto; border-radius: 50%" />
+        <ng-template #defaultImage>
+          <img class="image" src="../../../assets/images/unloadeduser.jpg" alt=""
+            style="width: 80px; height: auto; border-radius: 50%" />
+        </ng-template>
+      </div>
+      <div class="inside-row-holder">
+        <div class="first-row">
+          <div class="user-information">
+            <h1 class="base-color">{{ building?.owner?.name }}</h1>
+            <h2 class="grey-color" style="font-size: 14px;">- Proprietário</h2>
+          </div>
         </div>
       </div>
     </div>
+    <div class="chip-holder">
+      <mat-chip-set>
+        <mat-chip> 
+          <div class="align" style="display: flex; align-items: center;">
+            <mat-icon style="width: 10px; height: 10px; font-size: 10px; color: var(--primary-orange-color); margin-right: 3px;"><span class="material-symbols-outlined">
+              circle
+              </span></mat-icon>Quartos: {{ building?.bedrooms }} 
+          </div>
+        
+        </mat-chip>
+        <mat-chip>Banheiros: {{ building?.bathrooms }}</mat-chip>
+        <mat-chip>Quartos: {{ building?.bedrooms }} </mat-chip>
+        <mat-chip>Banheiros: {{ building?.bathrooms }}</mat-chip>
+        <mat-chip>Quartos: {{ building?.bedrooms }} </mat-chip>
+        <mat-chip>Banheiros: {{ building?.bathrooms }}</mat-chip>
+      </mat-chip-set>
+    </div>
   </div>
-  <div class="chip-holder">
-    <mat-chip-set>
-      <mat-chip>Quartos: {{ building?.bedrooms }} </mat-chip>
-      <mat-chip>Banheiros: {{ building?.bathrooms }}</mat-chip>
-    </mat-chip-set>
-  </div>
+ 
 </div>
