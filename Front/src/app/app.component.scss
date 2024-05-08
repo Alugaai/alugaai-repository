@@ -5,3 +5,8 @@
     flex-grow: 1;
     box-sizing: border-box;
 }
+
+::ng-deep .mat-mdc-standard-chip {
+    
+    --mdc-chip-elevated-container-color: #F2F4F7 !important;
+}
