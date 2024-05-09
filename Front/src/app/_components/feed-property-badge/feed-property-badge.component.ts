@@ -20,6 +20,7 @@ export class FeedPropertyBadgeComponent implements OnChanges {
   buildingImages: SafeUrl[] = [];
   ownerImage: SafeUrl = '';
   base64: string = 'data:image/png;base64,';
+  currentImageIndex: number = 0;
 
   ngOnChanges() {
     this.startImage();
@@ -50,6 +51,23 @@ export class FeedPropertyBadgeComponent implements OnChanges {
   }
 
   //image carousel related--------
+
+  next() {
+    this.currentImageIndex =
+      (this.currentImageIndex + 2) % this.buildingImages.length;
+  }
+
+  prev() {
+    this.currentImageIndex =
+      (this.currentImageIndex - 2 + this.buildingImages.length) %
+      this.buildingImages.length;
+  }
+
+  visibleImages(): SafeUrl[] {
+    const index1 = this.currentImageIndex % this.buildingImages.length;
+    const index2 = (this.currentImageIndex + 1) % this.buildingImages.length;
+    return [this.buildingImages[index1], this.buildingImages[index2]];
+  }
 
   startImage() {
     if (this.building?.owner?.image) {

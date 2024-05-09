@@ -1,11 +1,25 @@
 <div class="wrapper">
   <div class="img-property-container">
+<<<<<<< Updated upstream
     <div class="left-arrow" (click)="prev()"><mat-icon>chevron_left</mat-icon></div>
     <div class="right-arrow" (click)="next()"><mat-icon>chevron_right</mat-icon></div>
     <img class="img-property" *ngFor="let image of visibleImages()" [src]="image.src" alt="{{ image.alt }}">
    <!-- <img class="img-property" src="../../../assets/images/imageProperty3.png" alt="">
     <img class="img-property" src="../../../assets/images/imageProperty4.png" alt="">
     <img class="img-property" *ngFor="let image of buildingImages" [src]="image" alt="" />-->
+=======
+    <div class="left-arrow" (click)="prev()">
+      <mat-icon>chevron_left</mat-icon>
+    </div>
+    <div class="right-arrow" (click)="next()">
+      <mat-icon>chevron_right</mat-icon>
+    </div>
+    <img
+      class="img-property"
+      *ngFor="let image of visibleImages()"
+      [src]="image"
+    />
+>>>>>>> Stashed changes
   </div>
   <div class="top-chip-holder">
     <div class="top-row">
