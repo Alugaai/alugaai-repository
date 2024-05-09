@@ -54,4 +54,5 @@ export class FeedPropertyBadgeComponent implements OnChanges {
       });
     }
   }
+
 }
