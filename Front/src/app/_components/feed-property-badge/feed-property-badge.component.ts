@@ -2,12 +2,6 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { IFindPropertyDetailsById } from '../../_models/IFindPropertyDetailsById';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
-interface Image {
-  src: string;
-  alt: string;
-  index: number;
-}
-
 @Component({
   selector: 'app-feed-property-badge',
   templateUrl: './feed-property-badge.component.html',
@@ -25,32 +19,7 @@ export class FeedPropertyBadgeComponent implements OnChanges {
   ngOnChanges() {
     this.startImage();
   }
-  //image carousel related------
-  images = [
-    { src: '../../../assets/images/imageProperty1.png', alt: 'Image 1', index: 0 },
-    { src: '../../../assets/images/imageProperty2.png', alt: 'Image 2', index: 1 },
-    { src: '../../../assets/images/imageProperty3.png', alt: 'Image 2', index: 2 },
-    { src: '../../../assets/images/imageProperty4.png', alt: 'Image 2', index: 3 },
-  ];
-  currentImageIndex: number = 0;
 
- 
-
-  next() {
-    this.currentImageIndex = (this.currentImageIndex + 2) % this.images.length;
-  }
-
-  prev() {
-    this.currentImageIndex = (this.currentImageIndex - 2 + this.images.length) % this.images.length;
-  }
-
-  visibleImages(): Image[] {
-    const index1 = this.currentImageIndex % this.images.length;
-    const index2 = (this.currentImageIndex + 1) % this.images.length;
-    return [this.images[index1], this.images[index2]];
-  }
-
-  //image carousel related--------
 
   next() {
     this.currentImageIndex =

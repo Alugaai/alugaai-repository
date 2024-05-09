@@ -31,7 +31,6 @@ a {
 }
 
 .img-property-container {
-<<<<<<< Updated upstream
     display: grid;
     grid-template-columns: 1fr 1fr;
     /* Two columns with equal width */
@@ -39,30 +38,14 @@ a {
     height: fit-content;
     max-height: 163px;
     position: relative;
-=======
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* Two columns with equal width */
-  grid-gap: 5px;
-  height: fit-content;
-  max-height: 163px;
-  position: relative;
->>>>>>> Stashed changes
 
 }
 
 .img-property {
-<<<<<<< Updated upstream
-    object-fit: cover;
-    height: inherit;
-    max-height: inherit;
-    width: 100%;
-=======
   object-fit: cover;
   height: inherit;
   max-height: 138.5px;
   width: 100%;
->>>>>>> Stashed changes
 
 }
 
@@ -127,30 +110,6 @@ a {
 
 //carousel
 .left-arrow {
-<<<<<<< Updated upstream
-    position: absolute;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 25px;
-    height: 25px;
-    left: 1%;
-    top: 50%;
-    border-radius: 100%;
-    background-color: white;
-    z-index: 1000;
-}
-
-.right-arrow {
-    position: absolute;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 25px;
-    height: 25px;
-    right: 1%;
-    top: 50%;
-    border-radius: 100%;
-    background-color: white;
-    z-index: 1000;
-}
-=======
   position: absolute;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 25px;
@@ -173,4 +132,3 @@ a {
   background-color: white;
   z-index: 1000;
 }
->>>>>>> Stashed changes

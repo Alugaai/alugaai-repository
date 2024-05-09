@@ -1,13 +1,5 @@
 <div class="wrapper">
   <div class="img-property-container">
-<<<<<<< Updated upstream
-    <div class="left-arrow" (click)="prev()"><mat-icon>chevron_left</mat-icon></div>
-    <div class="right-arrow" (click)="next()"><mat-icon>chevron_right</mat-icon></div>
-    <img class="img-property" *ngFor="let image of visibleImages()" [src]="image.src" alt="{{ image.alt }}">
-   <!-- <img class="img-property" src="../../../assets/images/imageProperty3.png" alt="">
-    <img class="img-property" src="../../../assets/images/imageProperty4.png" alt="">
-    <img class="img-property" *ngFor="let image of buildingImages" [src]="image" alt="" />-->
-=======
     <div class="left-arrow" (click)="prev()">
       <mat-icon>chevron_left</mat-icon>
     </div>
@@ -19,16 +11,24 @@
       *ngFor="let image of visibleImages()"
       [src]="image"
     />
->>>>>>> Stashed changes
   </div>
   <div class="top-chip-holder">
     <div class="top-row">
       <div class="img-user-container">
-        <img  *ngIf="ownerImage; else defaultImage" class="image" [src]="ownerImage" alt=""
-          style="width: 80px; height: auto; border-radius: 50%" />
+        <img
+          *ngIf="ownerImage; else defaultImage"
+          class="image"
+          [src]="ownerImage"
+          alt=""
+          style="width: 80px; height: auto; border-radius: 50%"
+        />
         <ng-template #defaultImage>
-          <img class="image" src="../../../assets/images/unloadeduser.jpg" alt=""
-            style="width: 80px; height: auto; border-radius: 50%" />
+          <img
+            class="image"
+            src="../../../assets/images/unloadeduser.jpg"
+            alt=""
+            style="width: 80px; height: auto; border-radius: 50%"
+          />
         </ng-template>
       </div>
       <div class="inside-row-holder">
@@ -44,20 +44,20 @@
       <mat-chip-set>
         <mat-chip>
           <div class="align" style="display: flex; align-items: center">
-            <mat-icon style="
+            <mat-icon
+              style="
                 width: 10px;
                 height: 10px;
                 font-size: 10px;
                 color: var(--primary-orange-color);
                 margin-right: 3px;
-              "><span class="material-symbols-outlined"> circle </span></mat-icon>Quartos: {{ building?.bedrooms }}
+              "
+              ><span class="material-symbols-outlined"> circle </span></mat-icon
+            >
           </div>
         </mat-chip>
         <mat-chip>Banheiros: {{ building?.bathrooms }}</mat-chip>
         <mat-chip>Quartos: {{ building?.bedrooms }} </mat-chip>
-        <mat-chip>Banheiros: {{ building?.bathrooms }}</mat-chip>
-        <mat-chip>Quartos: {{ building?.bedrooms }} </mat-chip>
-        <mat-chip>Banheiros: {{ building?.bathrooms }}</mat-chip>
       </mat-chip-set>
     </div>
   </div>
