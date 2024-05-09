@@ -50,6 +50,11 @@ namespace BackEndASP.Services
                 .AsNoTracking()
                 .SingleOrDefaultAsync(p => p.Id == id) ?? throw new ArgumentException("Resource not found");
 
+            List<Image> selectedImages = entity.Images
+                .Take(4)  // Seleciona apenas as primeiras 4 imagens
+                .ToList();
+
+            entity.Images = selectedImages;
 
             return new FindPropertyDetailsByIdDTO(entity);
         }
