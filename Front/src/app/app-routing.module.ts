@@ -21,7 +21,7 @@ import { FeedPropertyBadgeComponent } from './_components/feed-property-badge/fe
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent,
+    component: HomeComponent, 
   },
   {
     path: 'notifications',
