@@ -15,6 +15,7 @@ import { NotificationsCardComponent } from './_components/notifications-card/not
 import { RangeSliderFilterComponent } from './_components/range-slider-filter/range-slider-filter.component';
 import { PriceFilterComponent } from './_components/price-filter/price-filter.component';
 import { FeedPropertyBadgeComponent } from './_components/feed-property-badge/feed-property-badge.component';
+import { PropertyPageComponent } from './_components/property-page/property-page.component';
 
 
 
@@ -80,6 +81,10 @@ const routes: Routes = [
   {
     path: 'propertybadge',
     component: FeedPropertyBadgeComponent
+  },
+  {
+    path: 'propertypage',
+    component: PropertyPageComponent
   },
 
 ];

@@ -49,6 +49,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
 import { PriceFilterComponent } from './_components/price-filter/price-filter.component';
 import { FormsModule } from '@angular/forms';
+import { PropertyPageComponent } from './_components/property-page/property-page.component';
 
 
 
@@ -74,7 +75,8 @@ import { FormsModule } from '@angular/forms';
     StudentCompleteProfileComponent,
     NotificationsCardComponent,
     RangeSliderFilterComponent,
-    PriceFilterComponent
+    PriceFilterComponent,
+    PropertyPageComponent
 
   ],
   imports: [
