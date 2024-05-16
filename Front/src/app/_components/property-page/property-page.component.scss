@@ -11,14 +11,16 @@ h1,h2,h3, p{
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
     height: fit-content;
-    max-height: 448px;
+    max-height: 512px;
     position: relative;
+    aspect-ratio: 16 / 9;
 }
 
 .img-property {
+    
     object-fit: cover;
     height: inherit;
-    max-height: 448px;
+    max-height: 512px;
     width: 50vw;
 }
 
