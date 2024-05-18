@@ -13,7 +13,6 @@ h1,h2,h3, p{
     height: fit-content;
     max-height: 512px;
     position: relative;
-    aspect-ratio: 16 / 9;
 }
 
 .img-property {
@@ -25,25 +24,23 @@ h1,h2,h3, p{
 }
 
 /* Arrows */
-.left-arrow, .right-arrow {
+.arrow-holder{
+    width: calc(100vw - 17px);
+    top: 45%;
     position: absolute;
+    display: flex;
+    justify-content: space-between;
+}
+.left-arrow, .right-arrow {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 81px;
     height: 81px;
-    top: 45%;
     border-radius: 100%;
     background-color: white;
     z-index: 1000;
     cursor: pointer;
 }
 
-.left-arrow {
-    left: 1%;
-}
-
-.right-arrow {
-    right: 1%;
-}
 
 .left-arrow:hover, .right-arrow:hover .arrow-icon {
     color: var(--primary-orange-color);
@@ -54,6 +51,12 @@ h1,h2,h3, p{
     font-size: 81px;
     width: 81px;
     height: 81px;
+}
+.left-arrow{
+    margin-left: 10px;
+}
+.right-arrow{
+    margin-right: 10px;
 }
 
 /* Parte de baixo */

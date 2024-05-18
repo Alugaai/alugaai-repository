@@ -14,14 +14,14 @@
 .white{
   color: white;
 }
-.mat-mdc-standard-chip {
+::ng-deep .mat-mdc-standard-chip {
   --mdc-chip-disabled-label-text-color: #ffffff;
-  --mdc-chip-elevated-container-color: #F79009;
+  --mdc-chip-elevated-container-color: #F79009 !important;
   --mdc-chip-label-text-color: #ffffff;
 }
 
 
-.mat-primary{
---mdc-filled-text-field-focus-active-indicator-color: #F79009;
+::ng-deep .mat-primary{
+--mdc-filled-text-field-focus-active-indicator-color: #F79009 !important;
 --mdc-filled-text-field-focus-label-text-color: #F79009 !important;
 }
