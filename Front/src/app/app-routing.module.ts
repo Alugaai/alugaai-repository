@@ -24,34 +24,10 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent, 
   },
-  {
-    path: 'notifications',
-    component: NotificationsCardComponent,
-  },
-  {
-    path: 'autocomplete',
-    component: AutoCompleteComponent,
-  },
-
-  {
-    path: 'card',
-    component: FeedCardComponent,
-  },
+ 
   {
     path: 'faculdades',
     component: FeedComponent,
-  },
-  {
-    path: 'universitarios',
-    component: HomeComponent,
-  },
-  {
-    path: 'destaque-se',
-    component: HomeComponent,
-  },
-  {
-    path: 'anuncie',
-    component: HomeComponent,
   },
   {
     path: 'entrar',
@@ -77,10 +53,6 @@ const routes: Routes = [
   {
     path: 'pricefilter',
     component: PriceFilterComponent
-  },
-  {
-    path: 'propertybadge',
-    component: FeedPropertyBadgeComponent
   },
   {
     path: 'propertypage',
