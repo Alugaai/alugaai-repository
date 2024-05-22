@@ -21,7 +21,8 @@ width: 50%;
 height: 300px;
 text-align: center;
 font-size: 40px;
-gap: 10px}
+gap: 10px;
+}
 
 .item-1{
 align-items: center;
@@ -31,7 +32,7 @@ justify-content: center;
 padding: 70px 0px 20px;
 position: relative;
 left: 70px;
-width: 1200px;}
+width: 500px;}
 
 .Item1-2{
 padding: 0px 0px 0px;
@@ -52,8 +53,7 @@ transition: 0.4s;
 .BotaoHome:hover{
   background-color: #FFEAD5;
   border: 2px solid #FD853A;
-  color:#FD853A;
-  
+  color:#FD853A; 
 }
 
 .home-img{
@@ -548,7 +548,7 @@ img {
 .div-anuncie {
   background-color: #FFEAD5;
   width: 900px;
-  height: 400px;
+  height: 500px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -585,7 +585,6 @@ transition: 0.4s;}
   border: 2px solid #FD853A;
   color:#FD853A;
 }    
-              
 
 .BotaoAnuncie {
   padding: 10px 18px 10px 18px;
