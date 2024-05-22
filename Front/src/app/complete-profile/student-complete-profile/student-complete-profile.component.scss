@@ -42,11 +42,23 @@ main {
 
                     .div-dados {
                         width: 410px;
-                        height: fit-content;
+                        height: 490px;
                         border: 1px solid #D0D5DD;
                         border-radius: 11px;
                         padding: 20px;
-
+                        .mat-mdc-radio-button.mat-accent {
+                            --mdc-radio-disabled-selected-icon-color: black;
+                            --mdc-radio-disabled-unselected-icon-color: black;
+                            --mdc-radio-unselected-hover-icon-color: #212121;
+                            --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+                            --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+                            --mdc-radio-selected-focus-icon-color: #FD853A;
+                            --mdc-radio-selected-hover-icon-color: #FD853A;
+                            --mdc-radio-selected-icon-color: #FD853A;
+                            --mdc-radio-selected-pressed-icon-color: #FD853A;
+                            --mat-radio-ripple-color: black;
+                            --mat-radio-checked-ripple-color: #FD853A;
+                            --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);}
                         .input-t {
                             width: 350px;
                             padding: 8px 8px 8px 8px;
@@ -78,8 +90,14 @@ main {
                                 border-radius: 8px;
                                 background-color: #FD853A;
                                 color: white;
+                                transition: 0.4s;
                             }
 
+                            .btn-orange:hover{
+                                color: #FD853A;
+                                background-color: #fff;
+                                border: 2px solid #FD853A;
+                            }
 
 
                         }
@@ -128,6 +146,13 @@ main {
                             border: none;
                             background-color: #FD853A;
                             color: white;
+                            transition: 0.4s;
+                        }
+
+                        .btn-foto:hover{
+                            color: #FD853A;
+                            background-color: #fff;
+                            border: 2px solid #FD853A;
                         }
 
                         .btn-foto:before {
@@ -161,12 +186,18 @@ main {
                             display: flex;
                             align-items: center;
 
-                            .btn-senha {
-                                padding: 10px 15px;
+                            .botaoSenha {
+                                padding: 10px 30px;
                                 border: none;
                                 border-radius: 8px;
                                 background-color: #FD853A;
                                 color: white;
+                                transition: 0.4s;
+                            }
+                            .botaoSenha:hover{
+                                color: #FD853A;
+                                background-color: #fff;
+                                border: 2px solid #FD853A;
                             }
 
                         }

@@ -12,46 +12,25 @@
               <h2>Dados da conta</h2>
               <br />
               <p><b>Nome completo</b></p>
-              <input type="text" class="input-t" placeholder="Seu Nome" />
+              <input type="text" class="input-t" placeholder="Seu nome"/>
               <br /><br />
               <p><b>E-mail</b></p>
-              <input type="text" class="input-t" placeholder="Seu telefone" />
+              <input type="text" class="input-t" placeholder="Seu email"/>
               <br /><br />
               <p><b>Telefone</b></p>
-              <input type="text" class="input-t" placeholder="Seu telefone" />
+              <input type="text" class="input-t" placeholder="Seu telefone"/>
               <br />
               <br />
               <br />
               <p style="margin: 0px"><b class="inter-font">Gênero</b></p>
 
-              <div class="div-radio">
-                <input
-                  type="radio"
-                  id="Masculino"
-                  name="Gen"
-                  value="Masculino"
-                />
-                <label class="inter-font" for="Masculino">Masculino</label
-                ><br />
-                <input
-                  class="inter-font"
-                  type="radio"
-                  id="Feminino"
-                  name="Gen"
-                  value="Feminino"
-                />
-                <label class="inter-font" for="Feminino">Feminino</label><br />
-                <input
-                  class="inter-font"
-                  type="radio"
-                  id="Outros"
-                  name="Gen"
-                  value="Outros"
-                />
-                <label class="inter-font" for="Outros">Outros</label
-                ><br /><br />
-              </div>
-              <br />
+              <mat-radio-group>
+                <mat-radio-button value="Masculino" name="Gen" id="Masculino" class="botaoGen">Masculino</mat-radio-button>
+                <mat-radio-button value="Feminino" name="Gen" id="Feminino" class="botaoGen">Feminino</mat-radio-button>
+                <mat-radio-button value="Outros" name="Gen" id="Outros" class="botaoGen">Outros</mat-radio-button>
+              </mat-radio-group>
+            
+              <br/><br/>
               <div class="div-tipo">
                 <input
                   type="submit"
@@ -90,30 +69,15 @@
               </p>
             </div>
             <div class="div-btn-senha">
-              <button class="btn-senha">Alterar senha</button>
+              <button class="botaoSenha">Alterar senha</button>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <br />
-    <hr />
-    <br /><br />
-
-    <section class="sec-2">
-      <div class="div-pers">
-        <h1>Personalidade</h1>
-        <p>
-          Destaque sua personalidade de forma autêntica, pois ela será exibida
-          como seus <span>interesses</span> no <span>feed.</span>
-        </p>
-      </div>
-      <img src="../../../assets/images/profile-student/search.png" alt="" />
-    </section>
-    <br />
-    <section class="div-save">
-      <button class="btn-save">Salvar personalidade</button>
-    </section>
+    <br/>
+    <hr/>
+    <br/>
   </div>
 </main>
 <div class="back"></div>
