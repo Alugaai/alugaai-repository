@@ -61,6 +61,11 @@ a{
     margin-right: 10px;
     display: flex;
     align-items: center;
+
+    h3:hover{
+        color: var(--primary-orange-color);
+        cursor: pointer;
+    }
 }
 .user-information{
     display: flex;
@@ -77,6 +82,7 @@ a{
     flex: 1;
 }
 .button{
+    border-radius: 10px;
     border: none;
     margin-top: 20px;
     display: flex;
@@ -87,6 +93,8 @@ a{
     justify-content: center;
     width: 100%;
 }
+
+
 
 
 

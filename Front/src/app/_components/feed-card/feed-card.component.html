@@ -1,20 +1,11 @@
 <div class="wrapper">
   <div class="top-row">
     <div class="img-container">
-      <img
-        *ngIf="userImage; else defaultImage"
-        class="image"
-        [src]="userImage"
-        alt=""
-        style="width: 80px; height: auto; border-radius: 50%"
-      />
+      <img *ngIf="userImage; else defaultImage" class="image" [src]="userImage" alt=""
+        style="width: 80px; height: auto; border-radius: 50%" />
       <ng-template #defaultImage>
-        <img
-          class="image"
-          src="../../../assets/images/unloadeduser.jpg"
-          alt=""
-          style="width: 80px; height: auto; border-radius: 50%"
-        />
+        <img class="image" src="../../../assets/images/unloadeduser.jpg" alt=""
+          style="width: 80px; height: auto; border-radius: 50%" />
       </ng-template>
     </div>
     <div class="inside-row-holder">
@@ -27,7 +18,7 @@
           </h2>
         </div>
         <div class="perfil">
-          <h3>Ver perfil</h3>
+          <h3 class="ver-perfil">Ver perfil</h3>
         </div>
       </div>
       <div class="second-row">
@@ -41,6 +32,6 @@
     </mat-chip-set>
   </div>
   <div *ngIf="userLogged">
-    <button class="button"(click)="connect()">Conectar</button>
+    <button class="button" (click)="connect()">Conectar</button>
   </div>
 </div>

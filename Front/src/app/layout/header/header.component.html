@@ -2,56 +2,19 @@
   <div class="nav-container">
     <div class="logo-primary-nav-holder">
       <div class="logo-div">
-        <img
-          src="../../../assets/images/Logo.png"
-          class="logo-image"
-          alt="logo image"
-          routerLink=""
-        />
+        <img src="../../../assets/images/Logo.png" class="logo-image" alt="logo image" routerLink="home" />
       </div>
-      <a class="bold nav-font-size" routerLink="home" routerLinkActive="active"
-        >Home</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="faculdades"
-        routerLinkActive="active"
-        >Faculdades</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="universitarios"
-        routerLinkActive="active"
-        >Universitários</a
-      >
-      <a
-        class="bold nav-font-size"
-        routerLink="destaque-se"
-        routerLinkActive="active"
-        >Destaque-se</a
-      >
+      <a class="bold nav-font-size" routerLink="home" routerLinkActive="active">Home</a>
+      <a class="bold nav-font-size" routerLink="faculdades" routerLinkActive="active">Faculdades</a>
     </div>
     <div class="secundary-nav">
-      <a
-        class="bold nav-font-size"
-        routerLink="entrar"
-        *ngIf="userLogged == false || userRole.includes('Admin')"
-        >Entrar</a
-      >
-      <a
-        class="bold nav-font-size register-button"
-        routerLink="registrar"
-        *ngIf="userLogged == false || userRole.includes('Admin')"
-        >Registrar-se</a
-      >
-      <a
-        class="nav-font-size anuncie-button"
-        routerLink="anuncie"
-        *ngIf="
+      <a class="bold nav-font-size" routerLink="entrar"
+        *ngIf="userLogged == false || userRole.includes('Admin')">Entrar</a>
+      <a class="bold nav-font-size register-button" routerLink="registrar"
+        *ngIf="userLogged == false || userRole.includes('Admin')">Registrar-se</a>
+      <a class="nav-font-size anuncie-button" routerLink="anuncie" *ngIf="
           userRole && (userRole.includes('Owner') || userRole.includes('Admin'))
-        "
-        >Anuncie</a
-      >
+        ">Anuncie</a>
 
       <div *ngIf="userLogged" class="menu-holder">
         <div class="row-profile">
@@ -60,10 +23,7 @@
           </button>
           <mat-menu #menu="matMenu">
             <!-- Add menu items here -->
-            <div
-              class="menu-stop-propagation"
-              (click)="$event.stopPropagation()"
-            >
+            <div class="menu-stop-propagation" (click)="$event.stopPropagation()">
               <div style="width: 240px"></div>
               <div class="menu-user-information-container">
                 <p class="gray-color">Nome: {{ userDetails?.name }}</p>
@@ -88,38 +48,20 @@
             </div>
           </mat-menu>
           <button class="menu-button" [matMenuTriggerFor]="menuNotification">
-            <mat-icon
-              *ngIf="notificationCounter != 0"
-              matBadge="{{ notificationCounter }}"
-              matBadgeSize="small"
-              matBadgePosition="after"
-              matBadgeColor="warn"
-              [matBadgeHidden]="badgeHidden"
-              (click)="toggleBadgeVisibility()"
-              >notifications</mat-icon
-            >
+            <mat-icon *ngIf="notificationCounter != 0" matBadge="{{ notificationCounter }}" matBadgeSize="small"
+              matBadgePosition="after" matBadgeColor="warn" [matBadgeHidden]="badgeHidden"
+              (click)="toggleBadgeVisibility()">notifications</mat-icon>
           </button>
           <!-- menu notification-->
           <mat-menu #menuNotification="matMenu">
             <div class="card-holder" (opened)="onMenuOpened()">
-              <app-notifications-card
-                *ngFor="let student of studentsWhoInvitationsConnections"
-                [studentsWhoInvitationsConnections]="student"
-              ></app-notifications-card>
+              <app-notifications-card *ngFor="let student of studentsWhoInvitationsConnections"
+                [studentsWhoInvitationsConnections]="student"></app-notifications-card>
             </div>
           </mat-menu>
-          <img
-            *ngIf="userImage; else defaultImage"
-            class="image"
-            [src]="userImage"
-            alt=""
-          />
+          <img *ngIf="userImage; else defaultImage" class="image" [src]="userImage" alt="" />
           <ng-template #defaultImage>
-            <img
-              class="image"
-              src="../../../assets/images/unloadeduser.jpg"
-              alt=""
-            />
+            <img class="image" src="../../../assets/images/unloadeduser.jpg" alt="" />
           </ng-template>
         </div>
       </div>
