@@ -50,6 +50,7 @@ import {MatCardModule} from '@angular/material/card';
 import { PriceFilterComponent } from './_components/price-filter/price-filter.component';
 import { FormsModule } from '@angular/forms';
 import { PropertyPageComponent } from './_components/property-page/property-page.component';
+import { OwnerCompleteProfileComponent } from './owner-complete-profile/owner-complete-profile.component';
 
 
 
@@ -76,7 +77,8 @@ import { PropertyPageComponent } from './_components/property-page/property-page
     NotificationsCardComponent,
     RangeSliderFilterComponent,
     PriceFilterComponent,
-    PropertyPageComponent
+    PropertyPageComponent,
+    OwnerCompleteProfileComponent
 
   ],
   imports: [
