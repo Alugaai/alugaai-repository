@@ -40,9 +40,8 @@ gap: 10px;
 margin: 20px;}
 
 .BotaoHome{
-border: 0px;
+border: 1px;
 border-radius: 8px;
-padding: 7px 80px;
 background-color: #FD853A;
 color: white;
 font-size: 16px;
@@ -52,7 +51,7 @@ transition: 0.4s;
 
 .BotaoHome:hover{
   background-color: #FFEAD5;
-  border: 2px solid #FD853A;
+  border: 1px solid #FD853A;
   color:#FD853A; 
 }
 
@@ -179,8 +178,7 @@ color: #475467;
 line-height: 1.5;}
 
 .BotaoInscreva{
-border: 0px;
-padding: 14px;
+border: 1px solid #FD853A;
 border-radius: 8px;
 font-size: 15px;
 background-color: #FD853A;
@@ -189,7 +187,7 @@ transition: 0.4s;}
 
 .BotaoInscreva:hover{
   background-color: #FFEAD5;
-  border: 2px solid #FD853A;
+  border: 1px solid #FD853A;
   color:#FD853A;
 }            
           
@@ -573,7 +571,7 @@ h1 {
 
 .BotaoAnuncie{
 padding: 10px 18px 10px 18px;
-border: 0px;
+border: 1px solid #FD853A;
 border-radius: 8px;
 background-color: #FD853A;
 color: white;
@@ -582,18 +580,10 @@ transition: 0.4s;}
 
 .BotaoAnuncie:hover{
   background-color: #FFEAD5;
-  border: 2px solid #FD853A;
+  border: 1px solid #FD853A;
   color:#FD853A;
 }    
 
-.BotaoAnuncie {
-  padding: 10px 18px 10px 18px;
-  border: 0px;
-  border-radius: 8px;
-  background-color: #FD853A;
-  color: white;
-  font-size: 16px;
-  transition: 0.3s;
-}
+
 
 
