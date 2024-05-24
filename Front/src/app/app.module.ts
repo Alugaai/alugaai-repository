@@ -50,7 +50,7 @@ import {MatCardModule} from '@angular/material/card';
 import { PriceFilterComponent } from './_components/price-filter/price-filter.component';
 import { FormsModule } from '@angular/forms';
 import { PropertyPageComponent } from './_components/property-page/property-page.component';
-import { OwnerCompleteProfileComponent } from './owner-complete-profile/owner-complete-profile.component';
+import { OwnerCompleteProfileComponent } from './complete-profile/owner-complete-profile/owner-complete-profile.component';
 
 
 
@@ -78,8 +78,7 @@ import { OwnerCompleteProfileComponent } from './owner-complete-profile/owner-co
     RangeSliderFilterComponent,
     PriceFilterComponent,
     PropertyPageComponent,
-    OwnerCompleteProfileComponent
-
+    OwnerCompleteProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,6 +107,7 @@ import { OwnerCompleteProfileComponent } from './owner-complete-profile/owner-co
     MatRadioModule,
     MatCardModule,
     FormsModule,
+    
 
   ],
   providers: [
