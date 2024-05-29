@@ -2,6 +2,8 @@
 overflow: hidden;
 font-family: "Inter", sans-serif;}
 
+
+
 .FirstFont{
 font-family: "Inter", sans-serif;
 font-size: 48px;
@@ -22,6 +24,9 @@ height: 300px;
 text-align: center;
 font-size: 40px;
 gap: 10px;
+  h1{
+    text-wrap: nowrap;
+  }
 }
 
 .item-1{
