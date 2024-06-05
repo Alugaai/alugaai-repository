@@ -9,6 +9,12 @@ font-family: "Inter", sans-serif;
 font-size: 48px;
 font-weight: 600;}
 
+.item *{
+  text-wrap: nowrap;
+}
+
+
+
 .main-1-sec{
 width: 100%;
 height: 400px;
@@ -57,11 +63,9 @@ transition: 0.4s;
 .BotaoHome:hover{
   background-color: #FFEAD5;
   border: 1px solid #FD853A;
-  color:#FD853A; 
+  color:#FD853A;
 }
 
-.home-img{
-float: right;}
 
 .main-2-sec{
 font-family: "Inter", sans-serif;}
@@ -158,7 +162,7 @@ border-bottom-left-radius: 8px;
 border-top-right-radius: 8px;
 border-bottom-right-radius: 8px;
 margin-left: 30px;}
-          
+
 .DivSub1-2{
 width: 480px;
 height: 320px;
@@ -171,12 +175,12 @@ line-height: 1.0;
 font-family: "Inter", sans-serif;}
 
 .espacamento{line-height: 1.3;}
-                  
+
 .NovaFont{font-size: 14px;}
 
 span{
 color: #FD853A;}
-              
+
 .Texto{
 font-size: 20px;
 color: #475467;
@@ -194,8 +198,8 @@ transition: 0.4s;}
   background-color: #FFEAD5;
   border: 1px solid #FD853A;
   color:#FD853A;
-}            
-          
+}
+
 .div-sub-1-3{
 border-top-right-radius: 8px;
 border-bottom-right-radius: 8px;
@@ -275,9 +279,6 @@ font-size: 14px;
   align-items: center;
 }
 
-.home-img {
-  float: right;
-}
 
 .main-2-sec {
   font-family: "Inter", sans-serif;
@@ -587,7 +588,7 @@ transition: 0.4s;}
   background-color: #FFEAD5;
   border: 1px solid #FD853A;
   color:#FD853A;
-}    
+}
 
 
 
