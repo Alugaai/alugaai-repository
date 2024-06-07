@@ -41,7 +41,7 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   lat = -23.4709;
   lng = -47.4851;
 
-  pageSize: number = 1;
+  pageSize: number = 2;
   pagination?: IPagination;
 
   students: Array<IStudent> = [];
@@ -314,8 +314,7 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
       next: (response) => {
         this.studentsWhoInvitationsConnections = response.result;
       },
-      error: (error) => {
-      },
+      error: (error) => {},
     });
   }
   isStudentInInvitationsConnections(studentId: string): boolean {
@@ -355,57 +354,59 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   // Função para filtrar os preços
-  onApplyFilter(filterValues: {min: number, max: number}) {
+  onApplyFilter(filterValues: { min: number; max: number }) {
     if (filterValues.max == 0) {
       this.filterProperty = {
         minPrice: filterValues.min,
       };
       this.filterPropertyMethod();
     }
-    this.filterProperty = { maxPrice: filterValues.max, minPrice: filterValues.min, };
+    this.filterProperty = {
+      maxPrice: filterValues.max,
+      minPrice: filterValues.min,
+    };
     this.filterPropertyMethod();
     this.mapInitializer();
   }
 
   // Função para filtrar as proriedades
   filterPropertyMethod() {
-      this.propertyService.filterProperty(this.filterProperty).subscribe({
-        next: (response) => {
-          if (response.result) {
-            this.markersProperty = response.result;
-            this.markersProperty.forEach((property) => {
-              if (!property.options) {
-                property.options = {} as google.maps.MarkerOptions;
-              }
-              property.options.label = {
-                text: 'R$' + property.price.toString() + ',00',
-                color: '#FFFFFF',
-                fontFamily: 'Inter',
-                fontWeight: 'bold',
-              };
-              property.options.icon = '../../assets/images/iconProperty.svg';
+    this.propertyService.filterProperty(this.filterProperty).subscribe({
+      next: (response) => {
+        if (response.result) {
+          this.markersProperty = response.result;
+          this.markersProperty.forEach((property) => {
+            if (!property.options) {
+              property.options = {} as google.maps.MarkerOptions;
+            }
+            property.options.label = {
+              text: 'R$' + property.price.toString() + ',00',
+              color: '#FFFFFF',
+              fontFamily: 'Inter',
+              fontWeight: 'bold',
+            };
+            property.options.icon = '../../assets/images/iconProperty.svg';
 
-              // Criar um novo marcador para cada propriedade
-              const newMarker = new google.maps.Marker({
-                position: {
-                  lat: property.position.lat,
-                  lng: property.position.lng,
-                },
-                map: this.map,
-                icon: property.options.icon,
-                label: property.options.label,
-              });
-
-              // Adicionar um listener de clique para abrir o modal
-              newMarker.addListener('click', () => {
-                this.markerClickHandler(property);
-              });
+            // Criar um novo marcador para cada propriedade
+            const newMarker = new google.maps.Marker({
+              position: {
+                lat: property.position.lat,
+                lng: property.position.lng,
+              },
+              map: this.map,
+              icon: property.options.icon,
+              label: property.options.label,
             });
-          }
-          this.markersProperty = [];
-        },
-      });
 
+            // Adicionar um listener de clique para abrir o modal
+            newMarker.addListener('click', () => {
+              this.markerClickHandler(property);
+            });
+          });
+        }
+        this.markersProperty = [];
+      },
+    });
   }
 
   getColleges() {
@@ -464,8 +465,7 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
           this.pagination = response.pagination;
         }
       },
-      error: (error) => {
-      },
+      error: (error) => {},
     });
   }
 
