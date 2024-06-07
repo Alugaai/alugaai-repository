@@ -1,0 +1,107 @@
+<div class="backgroun-wrapper">
+  <div class="background-1"></div>
+  <img class="background-image" src="../../../assets/images/mainRegisterBackgroundImage.png" alt="" />
+</div>
+<div class="wrapper">
+  <div class="cadastrar-wrapper">
+    <div class="header-wrapper">
+      <img class="icon" src="../../../assets/images/registerIcon.png" alt="" />
+      <h1>Registre-se para se conectar!</h1>
+      <p>
+        Faça parte da nossa comunidade e conecte-se com seu novo colega de
+        aluguel.
+      </p>
+    </div>
+    <div class="form-wrapper">
+      <form [formGroup]="userForm">
+        <div>
+          <br>
+          <label for="fullname">Nome Completo:</label><br />
+          <input class="form-input" type="text" placeholder="Fernando Soares" formControlName="name" [class.is-invalid]="
+              userForm.get('name')?.errors && userForm.get('name')?.touched
+            " />
+          <div *ngIf="userForm.get('name')?.hasError('required')" class="invalid-feedback">
+            O nome é obrigatório
+          </div>
+          <div *ngIf="userForm.get('name')?.hasError('maxlength')" class="invalid-feedback">
+            O nome deve ter no máximo 250 caracteres
+          </div>
+        </div>
+        <br>
+
+        <div>
+          <label for="email">Email:</label><br />
+          <input class="form-input" type="email" id="email" placeholder="exemplo@gmail.com" formControlName="email"
+            [class.is-invalid]="
+              userForm.get('email')?.errors && userForm.get('email')?.touched
+            " />
+          <div *ngIf="userForm.get('email')?.hasError('required')" class="invalid-feedback">
+            O email é obrigatório
+          </div>
+          <div *ngIf="userForm.get('email')?.hasError('email')" class="invalid-feedback">
+            O campo não é um email válido
+          </div>
+          <br /><br />
+        </div>
+
+        <div>
+          <label for="password">Senha:</label><br />
+          <input class="form-input" type="password" id="password" formControlName="password" placeholder="********"
+            [class.is-invalid]="
+              userForm.get('password')?.errors &&
+              userForm.get('password')?.touched
+            " />
+          <div *ngIf="userForm.get('password')?.hasError('required')" class="invalid-feedback">
+            A senha é obrigatória
+          </div>
+          <div *ngIf="userForm.get('password')?.hasError('minlength')" class="invalid-feedback">
+            A senha precisa ter no mínimo 8 caracteres
+          </div>
+
+          <br /><br />
+        </div>
+        <div>
+          <label for="dob">Data de Nascimento:</label><br />
+          <input class="form-input" type="date" id="dob" placeholder="22/10/2001" formControlName="birthDate"
+            [class.is-invalid]="
+              userForm.get('birthDate')?.errors &&
+              userForm.get('birthDate')?.touched
+            " />
+          <div *ngIf="userForm.get('birthDate')?.hasError('required')" class="invalid-feedback">
+            A data de nascimento é obrigatória
+          </div>
+          <br /><br />
+        </div>
+        <div>
+          <label for="phone">Telefone:</label><br />
+          <input class="form-input" type="tel" id="phone" formControlName="phoneNumber" mask="(00) 00000-0000"
+            placeholder="(00) 00000-0000" [class.is-invalid]="
+              userForm.get('phoneNumber')?.errors &&
+              userForm.get('phoneNumber')?.touched
+            " />
+          <div *ngIf="userForm.get('phoneNumber')?.hasError('required')" class="invalid-feedback">
+            O número de telefone é obrigatório
+          </div>
+          <div *ngIf="userForm.get('phoneNumber')?.hasError('minlength')" class="invalid-feedback">
+            O telefone deve ter no máximo 11 caracteres
+          </div>
+          <div *ngIf="userForm.get('phoneNumber')?.hasError('maxlength')" class="invalid-feedback">
+            O telefone deve ter no mínimo 11 caracteres
+          </div>
+          <br /><br />
+        </div>
+        <div class="button-wrapper">
+          <button class="submit-button" [disabled]="!userForm.valid" (click)="register()">
+            Cadastre-se
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="outside-content">
+    <h2 class="gray-text">
+      “Com protocolos avançados de criptografia e autenticação, garantimos a
+      integridade das informações pessoais e acadêmicas.”
+    </h2>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+p{
+    margin: 0;
+}
+.idade-row{
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+.filter-wrapper{
+    width: fit-content;
+    flex-direction: column;
+    display: flex;
+}
+
+
+mat-slider {
+    width: 300px;
+  }
+
+  //my styles
+
+::ng-deep html{
+    --mdc-slider-handle-color: #F79009;
+    --mdc-slider-focus-handle-color: #F79009;
+    --mdc-slider-hover-handle-color: #F79009;
+    --mdc-slider-active-track-color: #F79009;
+    --mdc-slider-inactive-track-color: #F79009;
+    --mdc-slider-with-tick-marks-inactive-container-color: #F79009;
+    --mdc-slider-with-tick-marks-active-container-color: white;
+    --mdc-slider-disabled-active-track-color: #000;
+    --mdc-slider-disabled-handle-color: #000;
+    --mdc-slider-disabled-inactive-track-color: #000;
+    --mdc-slider-label-container-color: #000;
+    --mdc-slider-label-label-text-color: #fff;
+    --mdc-slider-with-overlap-handle-outline-color: #fff;
+    --mdc-slider-with-tick-marks-disabled-container-color: #000;
+    --mdc-slider-handle-elevation: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    --mat-slider-ripple-color: #F79009;
+    --mat-slider-hover-state-layer-color: rgba(63, 81, 181, 0.05);
+    --mat-slider-focus-state-layer-color: rgba(63, 81, 181, 0.2);
+    --mat-slider-value-indicator-opacity: 0.6;
+}
+

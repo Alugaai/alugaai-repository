@@ -1,0 +1,19 @@
+.wrapper{
+    height: auto;
+    padding: 0px;
+    width: 100%;
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+
+::ng-deep .mat-mdc-standard-chip {
+    
+    --mdc-chip-elevated-container-color: #F2F4F7 !important;
+}
+
+app-header{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+}

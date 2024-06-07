@@ -1,0 +1,37 @@
+<div class="wrapper">
+  <div class="top-row">
+    <div class="img-container">
+      <img *ngIf="userImage; else defaultImage" class="image" [src]="userImage" alt=""
+        style="width: 80px; height: auto; border-radius: 50%" />
+      <ng-template #defaultImage>
+        <img class="image" src="../../../assets/images/unloadeduser.jpg" alt=""
+          style="width: 80px; height: auto; border-radius: 50%" />
+      </ng-template>
+    </div>
+    <div class="inside-row-holder">
+      <div class="first-row">
+        <!-- Tudo isso vai vim do banco ex: {{aluno.name}}-->
+        <div class="user-information">
+          <h1 calss="base-color">{{ student?.name }}</h1>
+          <h2 class="grey-color">
+            {{ student?.age }} - {{ student?.college }}
+          </h2>
+        </div>
+        <div class="perfil">
+          <h3 class="ver-perfil">Ver perfil</h3>
+        </div>
+      </div>
+      <div class="second-row">
+        <h3>Informações básicas e estilo de vida</h3>
+      </div>
+    </div>
+  </div>
+  <div class="chip-holder">
+    <mat-chip-set>
+      <mat-chip *ngFor="let hobbie of student?.hobbies">{{ hobbie }}</mat-chip>
+    </mat-chip-set>
+  </div>
+  <div *ngIf="userLogged">
+    <button class="button" (click)="connect()">Conectar</button>
+  </div>
+</div>

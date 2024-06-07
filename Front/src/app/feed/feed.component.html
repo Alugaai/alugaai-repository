@@ -1,0 +1,57 @@
+<div class="body">
+  <div class="esquerda">
+    <div class="filter-holder">
+      <div class="search-container">
+        <app-auto-complete
+          (interessesChange)="onInteressesChange($event)"
+        ></app-auto-complete>
+      </div>
+      <div class="rangeSlider-Autocomplete-row">
+        <div class="range-slider">
+          <app-range-slider-filter
+            (ageValue)="onAgeChangeFilter($event)"
+          ></app-range-slider-filter>
+        </div>
+
+        <div class="autocomplete-place">
+          <app-place-autocomplete
+            (initialLocationFilter)="onInitialLocationFilter($event)"
+          ></app-place-autocomplete>
+        </div>
+      </div>
+      <div class="button-wrapper">
+        <button (click)="filterStudent()" class="search-button">Filtrar</button>
+      </div>
+    </div>
+    <div class="feed-card">
+      <ng-container *ngFor="let student of students">
+        <app-feed-card
+          *ngIf="!isStudentInInvitationsConnections(student.id)"
+          [student]="student"
+        ></app-feed-card>
+      </ng-container>
+    </div>
+    <div class="d-flex justify-content-center">
+      <pagination
+        [boundaryLinks]="true"
+        [totalItems]="pagination?.totalItems!"
+        [itemsPerPage]="pagination?.itemsPerPage!"
+        [maxSize]="10"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="&laquo;"
+        lastText="&raquo;"
+      >
+      </pagination>
+    </div>
+  </div>
+  <div class="map-filter-wrapper">
+    <app-price-filter
+      style="cursor: pointer"
+      (applyFilter)="onApplyFilter($event)"
+      class="test"
+    ></app-price-filter>
+    <div #gmapContainer id="map"></div>
+  </div>
+</div>

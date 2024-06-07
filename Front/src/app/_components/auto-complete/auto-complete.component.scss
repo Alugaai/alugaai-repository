@@ -1,0 +1,27 @@
+
+.mat-mdc-form-field-subscript-wrapper{
+  display: none !important;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align::before {
+  display: none !important;
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+.white{
+  color: white;
+}
+::ng-deep .mat-mdc-standard-chip {
+  --mdc-chip-disabled-label-text-color: #ffffff;
+  --mdc-chip-elevated-container-color: #F79009 !important;
+  --mdc-chip-label-text-color: #ffffff;
+}
+
+
+::ng-deep .mat-primary{
+--mdc-filled-text-field-focus-active-indicator-color: #F79009 !important;
+--mdc-filled-text-field-focus-label-text-color: #F79009 !important;
+}

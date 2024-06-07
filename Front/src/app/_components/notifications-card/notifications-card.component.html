@@ -1,0 +1,58 @@
+<div class="wrapper" (click)="$event.stopPropagation()">
+  <div class="top-row">
+    <div class="img-container">
+      <img
+        *ngIf="userImage; else defaultImage"
+        class="image"
+        [src]="userImage"
+        alt=""
+        style="width: 80px; height: auto; border-radius: 50%"
+      />
+      <ng-template #defaultImage>
+        <img
+          class="image"
+          src="../../../assets/images/unloadeduser.jpg"
+          alt=""
+          style="width: 40px; height: auto; border-radius: 50%"
+        />
+      </ng-template>
+    </div>
+    <div class="inside-row-holder">
+      <div class="first-row">
+        <!-- Tudo isso vai vim do banco ex: {{aluno.name}}-->
+        <div class="user-information">
+          <h3 class="grey-color">
+            {{ studentsWhoInvitationsConnections?.name | uppercase }}
+          </h3>
+          <h3 class="base-color">
+            - {{ studentsWhoInvitationsConnections?.college | uppercase }}
+          </h3>
+        </div>
+      </div>
+      <div class="second-row">
+        <h3 style="margin: 0px; margin-top: -10px" class="base-color">
+          Quer se conectar com você!
+        </h3>
+        <div class="button-holder">
+          <button
+            class="button-aceitar"
+            style="font-size: 12px; border: none"
+            (click)="acceptOrRescue(true)"
+          >
+            Aceitar
+          </button>
+
+          <div class="button-rejeitar">
+            <button
+              class="button-aceitar"
+              style="font-size: 12px; border: none"
+              (click)="acceptOrRescue(false)"
+            >
+              Recusar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
