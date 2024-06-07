@@ -36,7 +36,9 @@ export class FeedComponent implements AfterViewInit, OnInit, OnDestroy {
   markersProperty: IResponseProperty[] = [];
   markersCollege: ICollegeResponse[] = [];
   studentsWhoInvitationsConnections: Array<IStudentsWhoInvitationsConnections> =
-    [];
+    [
+
+    ];
 
   lat = -23.4709;
   lng = -47.4851;
